@@ -1,0 +1,127 @@
+apiVersion: cli.kyverno.io/v1alpha1
+kind: Test
+metadata:
+  name: lab-admission-tests
+policies:
+- ../policies/lab-host-isolation.yaml
+- ../policies/lab-resource-budget.yaml
+- ../policies/lab-image-registries.yaml
+- ../policies/lab-image-tags.yaml
+- ../policies/lab-no-default-token.yaml
+resources:
+- resources.yaml
+results:
+- policy: lab-host-isolation
+  rule: no-privileged
+  resources:
+  - good
+  kind: Pod
+  result: pass
+- policy: lab-host-isolation
+  rule: no-privileged
+  resources:
+  - bad-no-privileged
+  kind: Pod
+  result: fail
+- policy: lab-host-isolation
+  rule: no-hostpath
+  resources:
+  - good
+  kind: Pod
+  result: pass
+- policy: lab-host-isolation
+  rule: no-hostpath
+  resources:
+  - bad-no-hostpath
+  kind: Pod
+  result: fail
+- policy: lab-host-isolation
+  rule: no-hostnetwork
+  resources:
+  - good
+  kind: Pod
+  result: pass
+- policy: lab-host-isolation
+  rule: no-hostnetwork
+  resources:
+  - bad-no-hostnetwork
+  kind: Pod
+  result: fail
+- policy: lab-resource-budget
+  rule: requests-limits
+  resources:
+  - good
+  kind: Pod
+  result: pass
+- policy: lab-resource-budget
+  rule: requests-limits
+  resources:
+  - bad-requests-limits
+  kind: Pod
+  result: fail
+- policy: lab-image-registries
+  rule: registries
+  resources:
+  - good
+  kind: Pod
+  result: pass
+- policy: lab-image-registries
+  rule: registries
+  resources:
+  - bad-registries
+  kind: Pod
+  result: fail
+- policy: lab-image-tags
+  rule: no-latest-or-implicit
+  resources:
+  - good
+  kind: Pod
+  result: pass
+- policy: lab-image-tags
+  rule: no-latest-or-implicit
+  resources:
+  - bad-no-latest-or-implicit
+  kind: Pod
+  result: fail
+- policy: lab-no-default-token
+  rule: no-automount
+  resources:
+  - good
+  kind: Pod
+  result: pass
+- policy: lab-no-default-token
+  rule: no-automount
+  resources:
+  - bad-no-automount
+  kind: Pod
+  result: fail
+- policy: lab-host-isolation
+  rule: no-privileged
+  resources:
+  - bad-initcontainers
+  kind: Pod
+  result: fail
+- policy: lab-host-isolation
+  rule: no-privileged
+  resources:
+  - bad-ephemeralcontainers
+  kind: Pod
+  result: fail
+- policy: lab-image-tags
+  rule: no-latest-or-implicit
+  resources:
+  - bad-implicit
+  kind: Pod
+  result: fail
+- policy: lab-image-tags
+  rule: no-latest-or-implicit
+  resources:
+  - bad-latest-digest
+  kind: Pod
+  result: fail
+- policy: lab-host-isolation
+  rule: no-privileged
+  resources:
+  - exempt-privileged
+  kind: Pod
+  result: skip

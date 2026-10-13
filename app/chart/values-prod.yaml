@@ -1,0 +1,7 @@
+buildRevision: 0c49a685f92a236975b031a1b1de7258dc27cce5
+certificateIssuer: lab-ca
+environment: prod
+host: orders-prod.192.168.150.200.sslip.io
+image:
+  digest: sha256:c8ca54a5ff3ffe83b2a7b78f157cb8ac0b035e255b70bd23c4cbdabcfaa7f7d1
+  repository: zot.192.168.150.200.sslip.io/lab/demo-app

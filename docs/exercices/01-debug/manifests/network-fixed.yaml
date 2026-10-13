@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: server-ingress
+  namespace: ex-debug
+spec:
+  podSelector:
+    matchLabels:
+      app: debug-server
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: debug-client
+    ports:
+    - protocol: TCP
+      port: 8080

@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+image.tar
+image.digest
+trivy.json
+image-oci/
+.ci-bin/
+.ci-auth/

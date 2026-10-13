@@ -1,0 +1,132 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: zot
+  namespace: zot
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zot-config
+  namespace: zot
+data:
+  config.json: '{"distSpecVersion": "1.1.0", "storage": {"rootDirectory": "/var/lib/zot"},
+    "http": {"address": "0.0.0.0", "port": "5000", "auth": {"htpasswd": {"path": "/etc/zot-auth/htpasswd"}}},
+    "log": {"level": "info"}}'
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zot
+  namespace: zot
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: zot
+  template:
+    metadata:
+      labels:
+        app: zot
+    spec:
+      containers:
+      - name: zot
+        image: ghcr.io/project-zot/zot:v2.1.22
+        args:
+        - serve
+        - /etc/zot/config.json
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 300m
+            memory: 192Mi
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/zot
+        - name: config
+          mountPath: /etc/zot
+          readOnly: true
+        - name: auth
+          mountPath: /etc/zot-auth
+          readOnly: true
+        readinessProbe:
+          tcpSocket:
+            port: 5000
+          initialDelaySeconds: 5
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: zot
+      - name: config
+        configMap:
+          name: zot-config
+      - name: auth
+        secret:
+          secretName: zot-auth
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+        runAsGroup: 1000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zot
+  namespace: zot
+spec:
+  selector:
+    app: zot
+  ports:
+  - port: 5000
+    targetPort: 5000
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: zot
+  namespace: zot
+spec:
+  secretName: zot-tls
+  dnsNames:
+  - zot.192.168.150.200.sslip.io
+  duration: 24h
+  renewBefore: 8h
+  issuerRef:
+    name: lab-acme
+    kind: ClusterIssuer
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: zot
+  namespace: zot
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - zot.192.168.150.200.sslip.io
+    secretName: zot-tls
+  rules:
+  - host: zot.192.168.150.200.sslip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: zot
+            port:
+              number: 5000

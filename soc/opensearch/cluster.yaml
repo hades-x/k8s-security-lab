@@ -1,0 +1,113 @@
+apiVersion: opensearch.org/v1
+kind: OpenSearchCluster
+metadata:
+  name: soc
+  namespace: opensearch
+spec:
+  general:
+    serviceName: soc
+    version: 3.9.0
+    image: opensearchproject/opensearch:3.9.0@sha256:adfa61f85025d06b4aeb562e7e74fde7e31c437039c93c3862c17e9acebd6c7c
+    httpPort: 9200
+    setVMMaxMapCount: false
+    additionalConfig:
+      node.store.allow_mmap: 'false'
+      plugins.security.restapi.roles_enabled: '["all_access", "security_rest_api_access"]'
+  security:
+    config:
+      adminCredentialsSecret:
+        name: soc-admin-credentials
+      updateJob:
+        resources:
+          requests:
+            memory: 256Mi
+            cpu: 100m
+          limits:
+            memory: 512Mi
+            cpu: 500m
+        tolerations: &id001
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule
+        - key: node-role.kubernetes.io/master
+          operator: Exists
+          effect: NoSchedule
+    tls:
+      transport:
+        generate: true
+        perNode: true
+      http:
+        generate: true
+        customFQDN: soc.opensearch.svc.cluster.local
+  initHelper:
+    image: docker.io/library/busybox:1.37.0@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e
+    resources:
+      requests:
+        memory: 32Mi
+        cpu: 25m
+      limits:
+        memory: 64Mi
+        cpu: 100m
+  bootstrap:
+    resources:
+      requests:
+        memory: 2Gi
+        cpu: 250m
+      limits:
+        memory: 2Gi
+        cpu: 1000m
+    jvm: -Xms1g -Xmx1g
+    storageClass: local-path
+    diskSize: 2Gi
+    tolerations: *id001
+  nodePools:
+  - component: nodes
+    replicas: 3
+    roles:
+    - cluster_manager
+    - data
+    - ingest
+    diskSize: 20Gi
+    persistence:
+      pvc:
+        storageClass: local-path
+        accessModes:
+        - ReadWriteOnce
+    resources:
+      requests:
+        memory: 2Gi
+        cpu: 250m
+      limits:
+        memory: 2Gi
+        cpu: 1500m
+    jvm: -Xms1g -Xmx1g
+    tolerations: *id001
+    labels:
+      soc.lab/role: opensearch-node
+    affinity:
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchLabels:
+              soc.lab/role: opensearch-node
+          topologyKey: kubernetes.io/hostname
+  dashboards:
+    enable: true
+    replicas: 1
+    version: 3.9.0
+    image: opensearchproject/opensearch-dashboards:3.9.0@sha256:4bdb8ded547ce7f4c379a10261f1b4aad58726900c215be570a7d1fe86f2a7d8
+    opensearchCredentialsSecret:
+      name: soc-dashboards-credentials
+    resources:
+      requests:
+        memory: 512Mi
+        cpu: 100m
+      limits:
+        memory: 768Mi
+        cpu: 500m
+    tolerations: *id001
+    additionalConfig:
+      server.host: 0.0.0.0
+      opensearch_security.cookie.secure: 'false'
+    tls:
+      enable: false

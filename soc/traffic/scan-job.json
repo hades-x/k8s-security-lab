@@ -1,0 +1,59 @@
+{
+  "apiVersion": "batch/v1",
+  "kind": "Job",
+  "metadata": {
+    "name": "lab-scan",
+    "namespace": "soc-traffic"
+  },
+  "spec": {
+    "backoffLimit": 0,
+    "activeDeadlineSeconds": 120,
+    "ttlSecondsAfterFinished": 300,
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "lab-scan"
+        }
+      },
+      "spec": {
+        "automountServiceAccountToken": false,
+        "restartPolicy": "Never",
+        "containers": [
+          {
+            "name": "scan",
+            "image": "docker.io/library/alpine:3.22.2@sha256:4b7ce07002c69e8f3d704a9c5d6fd3053be500b7f1c69fc0d80990c2ad8dd412",
+            "command": [
+              "sh",
+              "-ec",
+              "apk add --no-cache nmap=7.97-r0; exec nmap -sT -Pn --max-retries 0 --max-rate 20 -p 2000-2019 \"$TARGET\""
+            ],
+            "env": [
+              {
+                "name": "TARGET",
+                "value": "192.168.150.22"
+              }
+            ],
+            "resources": {
+              "requests": {
+                "cpu": "50m",
+                "memory": "32Mi"
+              },
+              "limits": {
+                "cpu": "250m",
+                "memory": "128Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "capabilities": {
+                "drop": [
+                  "ALL"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

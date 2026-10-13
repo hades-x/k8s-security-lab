@@ -1,0 +1,4 @@
+gateway-api=v1.6.3
+https://%{KUBERNETES_API}%/static/charts/traefik-40.1.5+up40.1.0.tgz
+
+rancher/mirrored-library-traefik:3.7.13

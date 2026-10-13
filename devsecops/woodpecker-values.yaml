@@ -1,0 +1,93 @@
+server:
+  image:
+    tag: v3.19.0
+  env:
+    WOODPECKER_ADMIN: lab-admin
+    WOODPECKER_HOST: https://ci.192.168.150.200.sslip.io
+    WOODPECKER_FORGEJO: 'true'
+    WOODPECKER_FORGEJO_URL: https://forgejo.192.168.150.200.sslip.io
+    WOODPECKER_OPEN: 'false'
+    SSL_CERT_FILE: /etc/ssl/certs/lab-root.pem
+  extraSecretNamesForEnvFrom:
+  - woodpecker-forgejo
+  - woodpecker-grpc
+  extraVolumes:
+  - name: lab-root
+    configMap:
+      name: lab-root-ca
+  extraVolumeMounts:
+  - name: lab-root
+    mountPath: /etc/ssl/certs/lab-root.pem
+    subPath: root_ca.crt
+    readOnly: true
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
+  persistentVolume:
+    size: 1Gi
+    storageClass: local-path
+  securityContext: &id001
+    runAsUser: 1000
+    runAsGroup: 1000
+    runAsNonRoot: true
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+    seccompProfile:
+      type: RuntimeDefault
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    annotations:
+      cert-manager.io/cluster-issuer: lab-acme
+    hosts:
+    - host: ci.192.168.150.200.sslip.io
+      paths:
+      - path: /
+        pathType: Prefix
+    tls:
+    - secretName: ci-tls
+      hosts:
+      - ci.192.168.150.200.sslip.io
+agent:
+  replicaCount: 1
+  image:
+    tag: v3.19.0
+  env:
+    WOODPECKER_SERVER: woodpecker-server:9000
+    WOODPECKER_BACKEND: kubernetes
+    WOODPECKER_BACKEND_K8S_NAMESPACE: ci
+    WOODPECKER_BACKEND_K8S_STORAGE_CLASS: local-path
+    WOODPECKER_BACKEND_K8S_STORAGE_RWX: 'false'
+    WOODPECKER_BACKEND_K8S_VOLUME_SIZE: 2Gi
+    WOODPECKER_BACKEND_K8S_PERMISSION_INIT_IMAGE: busybox:1.37.0-musl
+    WOODPECKER_MAX_WORKFLOWS: '1'
+    WOODPECKER_BACKEND_K8S_SECCTX_NONROOT: 'false'
+    SSL_CERT_FILE: /etc/ssl/certs/lab-root.pem
+    WOODPECKER_BACKEND_K8S_POD_NODE_SELECTOR: 'kubernetes.io/hostname: lab-a1'
+  extraVolumes:
+  - name: lab-root
+    configMap:
+      name: lab-root-ca
+  extraVolumeMounts:
+  - name: lab-root
+    mountPath: /etc/ssl/certs/lab-root.pem
+    subPath: root_ca.crt
+    readOnly: true
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 300m
+      memory: 128Mi
+  securityContext: *id001
+  persistence:
+    enabled: true
+    size: 1Gi
+    storageClass: local-path

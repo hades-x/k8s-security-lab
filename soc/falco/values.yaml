@@ -1,0 +1,53 @@
+image:
+  tag: 0.45.0@sha256:788f1129c542171813083d4afc61b16730a47dde8c23d9c39370acef996349b6
+driver:
+  kind: modern_ebpf
+  modernEbpf:
+    leastPrivileged: true
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: '1'
+    memory: 512Mi
+tolerations:
+- operator: Exists
+falcosidekick:
+  enabled: false
+falcoctl:
+  artifact:
+    install:
+      enabled: false
+    follow:
+      enabled: false
+falco:
+  # Avoid node UID-0 inotify exhaustion; apply rule changes by rollout instead.
+  watch_config_files: false
+  json_output: true
+  json_include_output_property: true
+  rules_files:
+  - /etc/falco/rules.d
+  http_output:
+    enabled: true
+    url: http://falcosidekick.falco.svc:2801/
+customRules:
+  lab-rules.yaml: "- rule: Lab Shell In Container\n  desc: Synthetic shell executed\
+    \ in a lab container\n  condition: evt.type in (execve, execveat) and evt.dir=<\
+    \ and container.id != host\n    and proc.name in (sh, bash, dash, ash)\n  output:\
+    \ Lab shell in container (proc=%proc.name container=%container.id user=%user.name)\n\
+    \    cmdline=%proc.cmdline\n  priority: NOTICE\n  tags:\n  - lab\n  - T1609\n\
+    - rule: Lab ServiceAccount Token Read\n  desc: Unexpected cat/head reading a projected\
+    \ token; token content is not logged\n  condition: evt.type in (open, openat,\
+    \ openat2) and evt.dir=< and container.id !=\n    host and proc.name in (cat,\
+    \ head, dd) and fd.name endswith /var/run/secrets/kubernetes.io/serviceaccount/token\n\
+    \  output: Lab serviceaccount token read (proc=%proc.name file=%fd.name container=%container.id)\n\
+    \  priority: WARNING\n  tags:\n  - lab\n  - T1552.007\n- rule: Lab Sensitive Mount\n\
+    \  desc: A mount syscall inside a container; no escape is attempted by the trigger\n\
+    \  condition: evt.type=mount and evt.dir=< and container.id != host\n  output:\
+    \ Lab container mount attempt (proc=%proc.name container=%container.id result=%evt.res)\n\
+    \  priority: WARNING\n  tags:\n  - lab\n  - T1611\n- rule: Lab C2 Outbound\n \
+    \ desc: Outbound attempt to synthetic C2 node IP\n  condition: evt.type=connect\
+    \ and evt.dir=< and container.id != host and fd.rip=192.168.150.22\n  output:\
+    \ Lab C2 connection (proc=%proc.name container=%container.id remote=%fd.rip)\n\
+    \  priority: WARNING\n  tags:\n  - lab\n  - T1071.001\n"

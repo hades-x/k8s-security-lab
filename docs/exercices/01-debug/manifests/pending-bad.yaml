@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pending
+  namespace: ex-debug
+  labels:
+    exercise: phase-f
+spec:
+  automountServiceAccountToken: false
+  restartPolicy: Always
+  terminationGracePeriodSeconds: 2
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    runAsGroup: 1000
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+  - name: main
+    image: docker.io/library/busybox:1.37.0@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e
+    imagePullPolicy: IfNotPresent
+    command:
+    - sh
+    - -c
+    - echo scheduled; sleep 480
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop:
+        - ALL
+    resources:
+      requests:
+        cpu: '1000'
+        memory: 1Ti
+      limits:
+        cpu: '1000'
+        memory: 1Ti
+    volumeMounts:
+    - name: tmp
+      mountPath: /tmp
+  volumes:
+  - name: tmp
+    emptyDir:
+      sizeLimit: 4Mi

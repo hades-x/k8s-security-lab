@@ -1,0 +1,19 @@
+title: High Entropy DNS Notice
+id: b48d22c0-af46-590a-93b8-4c7295b9a54b
+status: experimental
+description: Lab-only detection. Validate false positives and mappings before non-lab
+  use.
+author: K8S-LAB preparation
+date: '2026-10-13'
+tags:
+- attack.t1568.002
+logsource:
+  product: zeek
+  service: notice
+detection:
+  selection:
+    note: Lab::High_Entropy_DNS
+  condition: selection
+falsepositives:
+- Legitimate lab administration or synthetic traffic.
+level: medium

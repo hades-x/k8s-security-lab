@@ -1,0 +1,23 @@
+title: Kubernetes Container Administrative Exec
+id: 02d849bb-cc43-5db2-9a4b-650d9b2793dd
+status: experimental
+description: Lab-only detection. Validate false positives and mappings before non-lab
+  use.
+author: K8S-LAB preparation
+date: '2026-10-13'
+tags:
+- attack.t1609
+logsource:
+  product: kubernetes
+  service: audit
+detection:
+  selection:
+    verb:
+    - create
+    - get
+    objectRef.subresource: exec
+    objectRef.namespace: soc-detection
+  condition: selection
+falsepositives:
+- Legitimate lab administration or synthetic traffic.
+level: medium

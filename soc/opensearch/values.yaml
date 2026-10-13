@@ -1,0 +1,26 @@
+fullnameOverride: soc-opensearch-operator
+legacyAPI:
+  enabled: false
+webhook:
+  enabled: false
+  certManager:
+    enabled: false
+manager:
+  image:
+    tag: 3.0.0@sha256:99d4fb8144cd3555dcf0c2f5a9f89b310c43293227f2244e0aad05f7343d10d9
+    pullPolicy: IfNotPresent
+  watchNamespace: opensearch
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 100m
+    limits:
+      memory: 512Mi
+      cpu: 500m
+tolerations:
+- key: node-role.kubernetes.io/control-plane
+  operator: Exists
+  effect: NoSchedule
+- key: node-role.kubernetes.io/master
+  operator: Exists
+  effect: NoSchedule

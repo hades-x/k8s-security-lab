@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lifecycle
+  namespace: ex-lifecycle
+spec:
+  replicas: 2
+  revisionHistoryLimit: 4
+  progressDeadlineSeconds: 30
+  minReadySeconds: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: lifecycle
+  template:
+    metadata:
+      labels:
+        app: lifecycle
+        exercise: phase-f-lifecycle-server
+    spec:
+      automountServiceAccountToken: false
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 2
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: main
+        image: docker.io/library/busybox:1.37.0@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e
+        imagePullPolicy: IfNotPresent
+        command:
+        - sh
+        - -c
+        - mkdir -p /tmp/www; printf "%s\n" "$VERSION" >/tmp/www/index.html; exec httpd
+          -f -p 8080 -h /tmp/www
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        resources:
+          requests:
+            cpu: 10m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        env:
+        - name: VERSION
+          value: v2
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          periodSeconds: 2
+          timeoutSeconds: 1
+          failureThreshold: 1
+      volumes:
+      - name: tmp
+        emptyDir:
+          sizeLimit: 4Mi
+      nodeSelector:
+        kubernetes.io/hostname: lab-a2

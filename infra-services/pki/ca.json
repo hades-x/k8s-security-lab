@@ -1,0 +1,35 @@
+{
+  "root": "/home/step/certs/root_ca.crt",
+  "crt": "/home/step/certs/intermediate_ca.crt",
+  "key": "/home/step/secrets/intermediate_ca_key",
+  "address": ":9000",
+  "dnsNames": [
+    "step-ca.pki.svc.cluster.local",
+    "step-ca.pki.svc",
+    "step-ca.192.168.150.200.sslip.io"
+  ],
+  "db": {
+    "type": "badgerv2",
+    "dataSource": "/home/step/db"
+  },
+  "logger": {
+    "format": "json"
+  },
+  "authority": {
+    "claims": {
+      "minTLSCertDuration": "5m",
+      "maxTLSCertDuration": "24h",
+      "defaultTLSCertDuration": "24h"
+    },
+    "provisioners": [
+      {
+        "type": "ACME",
+        "name": "acme",
+        "forceCN": true,
+        "claims": {
+          "maxTLSCertDuration": "24h"
+        }
+      }
+    ]
+  }
+}

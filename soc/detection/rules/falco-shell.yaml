@@ -1,0 +1,19 @@
+title: Shell Executed In A Container
+id: 4c51fd33-3a75-5859-92c1-74f4d5b70fd0
+status: experimental
+description: Lab-only detection. Validate false positives and mappings before non-lab
+  use.
+author: K8S-LAB preparation
+date: '2026-10-13'
+tags:
+- attack.t1609
+logsource:
+  product: falco
+  service: syscall
+detection:
+  selection:
+    rule: Lab Shell In Container
+  condition: selection
+falsepositives:
+- Legitimate lab administration or synthetic traffic.
+level: medium

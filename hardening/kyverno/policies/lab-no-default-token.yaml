@@ -1,0 +1,33 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: lab-no-default-token
+  annotations:
+    pod-policies.kyverno.io/autogen-controllers: none
+spec:
+  validationFailureAction: Audit
+  background: true
+  rules:
+  - name: no-automount
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - demo
+          - dev
+          - staging
+          - prod
+          - scen-*
+    validate:
+      message: Default service-account Pods must explicitly disable token automount;
+        named API clients are audited through RBAC
+      pattern:
+        spec:
+          automountServiceAccountToken: false
+    preconditions:
+      all:
+      - key: '{{ request.object.spec.serviceAccountName || ''default'' }}'
+        operator: Equals
+        value: default

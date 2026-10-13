@@ -1,0 +1,21 @@
+title: Kubernetes Pod Deployment In Detection Lab
+id: 4080aaab-6c84-55eb-bb6b-6ad231c6447c
+status: experimental
+description: Lab-only detection. Validate false positives and mappings before non-lab
+  use.
+author: K8S-LAB preparation
+date: '2026-10-13'
+tags:
+- attack.t1610
+logsource:
+  product: kubernetes
+  service: audit
+detection:
+  selection:
+    verb: create
+    objectRef.resource: pods
+    objectRef.namespace: soc-detection
+  condition: selection
+falsepositives:
+- Legitimate lab administration or synthetic traffic.
+level: medium

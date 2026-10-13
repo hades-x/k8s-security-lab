@@ -1,0 +1,1 @@
+(verb:(create OR get)) AND objectRef.subresource:exec AND objectRef.namespace:soc\-detection

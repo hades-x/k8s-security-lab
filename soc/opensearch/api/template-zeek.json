@@ -1,0 +1,66 @@
+{
+  "index_patterns": [
+    "zeek-*"
+  ],
+  "priority": 200,
+  "template": {
+    "settings": {
+      "number_of_shards": 1,
+      "number_of_replicas": 1
+    },
+    "mappings": {
+      "dynamic_templates": [
+        {
+          "strings_as_keywords": {
+            "match_mapping_type": "string",
+            "mapping": {
+              "type": "keyword",
+              "ignore_above": 2048
+            }
+          }
+        }
+      ],
+      "properties": {
+        "ts": {
+          "type": "date",
+          "format": "epoch_second"
+        },
+        "@timestamp": {
+          "type": "date"
+        },
+        "id": {
+          "properties": {
+            "orig_h": {
+              "type": "ip"
+            },
+            "resp_h": {
+              "type": "ip"
+            },
+            "orig_p": {
+              "type": "integer"
+            },
+            "resp_p": {
+              "type": "integer"
+            }
+          }
+        },
+        "zeek_id": {
+          "type": "keyword"
+        },
+        "uid": {
+          "type": "keyword"
+        },
+        "node": {
+          "type": "keyword"
+        },
+        "sensor": {
+          "type": "keyword"
+        },
+        "log_type": {
+          "type": "keyword"
+        }
+      },
+      "date_detection": false
+    }
+  }
+}

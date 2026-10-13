@@ -1,0 +1,21 @@
+title: Cluster Role Binding Creation In Lab
+id: 6af9f34c-e49e-5e53-9e87-022c6bc4e03a
+status: experimental
+description: Lab-only detection. Validate false positives and mappings before non-lab
+  use.
+author: K8S-LAB preparation
+date: '2026-10-13'
+tags:
+- attack.t1098
+logsource:
+  product: kubernetes
+  service: audit
+detection:
+  selection:
+    verb: create
+    objectRef.resource: clusterrolebindings
+    objectRef.name: lab-inert-admin-binding
+  condition: selection
+falsepositives:
+- Legitimate lab administration or synthetic traffic.
+level: medium

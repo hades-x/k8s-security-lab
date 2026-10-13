@@ -1,0 +1,68 @@
+targetNamespaces: prod
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+operator:
+  replicas: 0
+  scanJobsConcurrentLimit: 1
+  scanNodeCollectorLimit: 1
+  scanJobTimeout: 10m
+  scanJobTTL: 30m
+  vulnerabilityScannerEnabled: true
+  configAuditScannerEnabled: false
+  rbacAssessmentScannerEnabled: false
+  infraAssessmentScannerEnabled: false
+  clusterComplianceEnabled: false
+  sbomGenerationEnabled: false
+  exposedSecretScannerEnabled: false
+  accessGlobalSecretsAndServiceAccount: false
+  privateRegistryScanSecretsNames:
+    trivy-system: trivy-zot-credentials
+trivy:
+  image:
+    registry: ghcr.io
+    repository: aquasecurity/trivy
+    tag: 0.75.0
+  slow: true
+  timeout: 10m0s
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+  dbRegistry: ghcr.io
+  dbRepository: aquasecurity/trivy-db
+  javaDbRegistry: ghcr.io
+  javaDbRepository: aquasecurity/trivy-java-db
+nodeSelector:
+  kubernetes.io/hostname: lab-a1
+trivyOperator:
+  scanJobNodeSelector:
+    kubernetes.io/hostname: lab-a1
+  scanJobCustomVolumes:
+  - &id001
+    name: lab-root-ca
+    configMap:
+      name: lab-root-ca
+  scanJobCustomVolumesMount:
+  - &id002
+    name: lab-root-ca
+    mountPath: /etc/ssl/certs/lab-root-ca.crt
+    subPath: root_ca.crt
+    readOnly: true
+targetWorkloads: replicaset
+volumes:
+- name: cache-policies
+  emptyDir: {}
+- *id001
+volumeMounts:
+- name: cache-policies
+  mountPath: /tmp
+  readOnly: false
+- *id002

@@ -1,0 +1,22 @@
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "term": {
+            "rule": "Lab Sensitive Mount"
+          }
+        },
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "now-5m",
+              "lte": "now"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

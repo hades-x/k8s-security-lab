@@ -1,0 +1,161 @@
+{{- range $role := list "orders-api" "orders-worker" "web" }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $role }}
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels: {app: {{ $role }}}
+  template:
+    metadata:
+      labels: {app: {{ $role }}, app.kubernetes.io/part-of: demo-app}
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        seccompProfile: {type: RuntimeDefault}
+      containers:
+      - name: {{ $role }}
+        image: "{{ $.Values.image.repository }}@{{ $.Values.image.digest }}"
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities: {drop: [ALL]}
+        resources:
+          requests: {cpu: 25m, memory: 32Mi}
+          limits: {cpu: 250m, memory: 96Mi}
+        ports: [{containerPort: 8080, name: http}]
+        startupProbe:
+          httpGet: {path: /healthz, port: http}
+          periodSeconds: 5
+          failureThreshold: 90
+        readinessProbe:
+          httpGet: {path: /healthz, port: http}
+          periodSeconds: 5
+        livenessProbe:
+          tcpSocket: {port: http}
+          periodSeconds: 20
+        env:
+        - {name: ROLE, value: {{ $role }}}
+        - {name: ENVIRONMENT, value: {{ $.Values.environment }}}
+        - {name: PGHOST, value: demo-db-rw}
+        - {name: PGDATABASE, value: app}
+        - {name: PGUSER, value: app}
+        - {name: PGSSLMODE, value: require}
+        - name: PGPASSWORD
+          valueFrom:
+            secretKeyRef: {name: demo-db-app, key: password}
+        - {name: KAFKA_BOOTSTRAP, value: soc-kafka-bootstrap.kafka.svc.cluster.local:9093}
+        - name: KAFKA_PASSWORD
+          valueFrom:
+            secretKeyRef: {name: demo-kafka, key: password}
+        - {name: VALKEY_HOST, value: valkey}
+        - {name: API_URL, value: "http://orders-api:8080"}
+        volumeMounts:
+        - {name: kafka-ca, mountPath: /var/run/kafka, readOnly: true}
+        - {name: tmp, mountPath: /tmp}
+      volumes:
+      - name: kafka-ca
+        secret: {secretName: demo-kafka-ca}
+      - {name: tmp, emptyDir: {sizeLimit: 16Mi}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $role }}
+spec:
+  selector: {app: {{ $role }}}
+  ports: [{port: 8080, targetPort: http, name: http}]
+---
+{{- end }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: valkey
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector:
+    matchLabels: {app: valkey}
+  template:
+    metadata:
+      labels: {app: valkey, app.kubernetes.io/part-of: demo-app}
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        seccompProfile: {type: RuntimeDefault}
+      containers:
+      - name: valkey
+        image: {{ .Values.valkeyImage | quote }}
+        command: [valkey-server]
+        args: ["--save", "", "--appendonly", "no", "--maxmemory", "32mb", "--maxmemory-policy", "allkeys-lru"]
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities: {drop: [ALL]}
+        resources:
+          requests: {cpu: 25m, memory: 24Mi}
+          limits: {cpu: 200m, memory: 64Mi}
+        ports: [{containerPort: 6379, name: redis}]
+        readinessProbe:
+          exec: {command: [valkey-cli, ping]}
+          periodSeconds: 5
+        volumeMounts: [{name: data, mountPath: /data}]
+      volumes: [{name: data, emptyDir: {sizeLimit: 64Mi}}]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: valkey
+spec:
+  selector: {app: valkey}
+  ports: [{port: 6379, name: redis}]
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: demo-db
+spec:
+  instances: 1
+  imageName: {{ .Values.postgresImage | quote }}
+  enableSuperuserAccess: false
+  bootstrap:
+    initdb: {database: app, owner: app}
+  storage: {size: 1Gi, storageClass: local-path}
+  resources:
+    requests: {cpu: 50m, memory: 96Mi}
+    limits: {cpu: 400m, memory: 256Mi}
+  postgresql:
+    parameters:
+      shared_buffers: 32MB
+      max_connections: "30"
+      wal_buffers: 4MB
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: orders
+  annotations:
+    cert-manager.io/cluster-issuer: {{ .Values.certificateIssuer | default "lab-acme" }}
+spec:
+  ingressClassName: traefik
+  tls:
+  - secretName: orders-tls
+    hosts: [{{ .Values.host | quote }}]
+  rules:
+  - host: {{ .Values.host | quote }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web
+            port: {number: 8080}

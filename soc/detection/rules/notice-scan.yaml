@@ -1,0 +1,19 @@
+title: Multiple Destination Ports Within One Minute
+id: b3d2c60a-8459-55c7-9064-96e479245734
+status: experimental
+description: Lab-only detection. Validate false positives and mappings before non-lab
+  use.
+author: K8S-LAB preparation
+date: '2026-10-13'
+tags:
+- attack.t1046
+logsource:
+  product: zeek
+  service: notice
+detection:
+  selection:
+    note: Lab::Port_Scan
+  condition: selection
+falsepositives:
+- Legitimate lab administration or synthetic traffic.
+level: medium

@@ -1,0 +1,22 @@
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "regexp": {
+            "query": ".*[a-z0-9]{50,}\\..*"
+          }
+        },
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "now-5m",
+              "lte": "now"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

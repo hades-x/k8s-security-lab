@@ -1,0 +1,32 @@
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "term": {
+            "verb": "create"
+          }
+        },
+        {
+          "term": {
+            "objectRef.resource": "clusterrolebindings"
+          }
+        },
+        {
+          "term": {
+            "objectRef.name": "lab-inert-admin-binding"
+          }
+        },
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "now-5m",
+              "lte": "now"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

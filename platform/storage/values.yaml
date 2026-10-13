@@ -1,0 +1,25 @@
+persistence:
+  defaultClass: false
+  defaultClassReplicaCount: 2
+  defaultDataLocality: best-effort
+defaultSettings:
+  defaultReplicaCount: 2
+  defaultDataPath: /var/lib/longhorn
+  guaranteedInstanceManagerCPU: 5
+  storageReservedPercentageForDefaultDisk: 10
+  upgradeChecker: false
+  allowCollectingLonghornUsageMetrics: false
+  v1DataEngine: true
+  v2DataEngine: false
+  systemManagedCSIComponentsResourceLimits: '{"cpu":"1","memory":"512Mi"}'
+longhornUI:
+  replicas: 1
+longhornManager:
+  resources:
+    requests: {cpu: 100m, memory: 128Mi}
+    limits: {cpu: '1', memory: 512Mi}
+csi:
+  attacherReplicaCount: 1
+  provisionerReplicaCount: 1
+  resizerReplicaCount: 1
+  snapshotterReplicaCount: 1

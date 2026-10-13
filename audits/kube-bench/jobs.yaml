@@ -1,0 +1,135 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kube-bench-server
+  namespace: audits
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 600
+  ttlSecondsAfterFinished: 86400
+  template:
+    metadata:
+      labels:
+        app: kube-bench
+        lab.k8s/role: server
+    spec:
+      automountServiceAccountToken: false
+      hostPID: true
+      nodeSelector:
+        kubernetes.io/hostname: lab-s3
+      tolerations:
+      - operator: Exists
+      restartPolicy: Never
+      containers:
+      - name: kube-bench
+        image: docker.io/aquasec/kube-bench:v0.16.0@sha256:75506f222d1eb6ce2a751a5533bdc0a3b54c898e2e49e7751d0ee22cfb862679
+        command:
+        - kube-bench
+        - run
+        - --benchmark
+        - k3s-cis-1.9
+        - --targets
+        - master,node,etcd,controlplane,policies
+        - --json
+        securityContext:
+          runAsUser: 0
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        volumeMounts:
+        - name: k3s
+          mountPath: /var/lib/rancher/k3s
+          readOnly: true
+        - name: etc-rancher
+          mountPath: /etc/rancher
+          readOnly: true
+        - name: systemd
+          mountPath: /etc/systemd
+          readOnly: true
+      volumes:
+      - name: k3s
+        hostPath:
+          path: /var/lib/rancher/k3s
+          type: Directory
+      - name: etc-rancher
+        hostPath:
+          path: /etc/rancher
+          type: Directory
+      - name: systemd
+        hostPath:
+          path: /etc/systemd
+          type: Directory
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kube-bench-agent
+  namespace: audits
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 600
+  ttlSecondsAfterFinished: 86400
+  template:
+    metadata:
+      labels:
+        app: kube-bench
+        lab.k8s/role: agent
+    spec:
+      automountServiceAccountToken: false
+      hostPID: true
+      nodeSelector:
+        kubernetes.io/hostname: lab-a1
+      tolerations:
+      - operator: Exists
+      restartPolicy: Never
+      containers:
+      - name: kube-bench
+        image: docker.io/aquasec/kube-bench:v0.16.0@sha256:75506f222d1eb6ce2a751a5533bdc0a3b54c898e2e49e7751d0ee22cfb862679
+        command:
+        - kube-bench
+        - run
+        - --benchmark
+        - k3s-cis-1.9
+        - --targets
+        - node
+        - --json
+        securityContext:
+          runAsUser: 0
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        volumeMounts:
+        - name: k3s
+          mountPath: /var/lib/rancher/k3s
+          readOnly: true
+        - name: etc-rancher
+          mountPath: /etc/rancher
+          readOnly: true
+        - name: systemd
+          mountPath: /etc/systemd
+          readOnly: true
+      volumes:
+      - name: k3s
+        hostPath:
+          path: /var/lib/rancher/k3s
+          type: Directory
+      - name: etc-rancher
+        hostPath:
+          path: /etc/rancher
+          type: Directory
+      - name: systemd
+        hostPath:
+          path: /etc/systemd
+          type: Directory

@@ -1,0 +1,42 @@
+kubeProxyReplacement: true
+k8sServiceHost: 192.168.150.10
+k8sServicePort: 6443
+routingMode: native
+ipv4NativeRoutingCIDR: 10.42.0.0/16
+autoDirectNodeRoutes: true
+ipam:
+  mode: kubernetes
+bpf:
+  masquerade: true
+hubble:
+  enabled: true
+  relay:
+    enabled: true
+    resources:
+      requests: {cpu: 50m, memory: 64Mi}
+      limits: {cpu: 500m, memory: 256Mi}
+  ui:
+    enabled: true
+    backend:
+      resources:
+        requests: {cpu: 25m, memory: 32Mi}
+        limits: {cpu: 250m, memory: 128Mi}
+    frontend:
+      resources:
+        requests: {cpu: 25m, memory: 32Mi}
+        limits: {cpu: 250m, memory: 128Mi}
+l2announcements:
+  enabled: true
+externalIPs:
+  enabled: true
+k8sClientRateLimit:
+  qps: 50
+  burst: 100
+operator:
+  replicas: 2
+  resources:
+    requests: {cpu: 100m, memory: 128Mi}
+    limits: {cpu: '1', memory: 512Mi}
+resources:
+  requests: {cpu: 200m, memory: 256Mi}
+  limits: {cpu: '2', memory: 1Gi}

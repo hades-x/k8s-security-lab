@@ -1,0 +1,40 @@
+{
+  "index_patterns": [
+    "falco-*"
+  ],
+  "priority": 200,
+  "template": {
+    "settings": {
+      "number_of_shards": 1,
+      "number_of_replicas": 1
+    },
+    "mappings": {
+      "dynamic_templates": [
+        {
+          "strings_as_keywords": {
+            "match_mapping_type": "string",
+            "mapping": {
+              "type": "keyword",
+              "ignore_above": 2048
+            }
+          }
+        }
+      ],
+      "properties": {
+        "@timestamp": {
+          "type": "date"
+        },
+        "time": {
+          "type": "date"
+        },
+        "rule": {
+          "type": "keyword"
+        },
+        "priority": {
+          "type": "keyword"
+        }
+      },
+      "date_detection": false
+    }
+  }
+}

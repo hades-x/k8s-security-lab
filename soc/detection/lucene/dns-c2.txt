@@ -1,0 +1,1 @@
+query:*.evil\-c2.lab.test

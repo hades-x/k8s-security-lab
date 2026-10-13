@@ -1,0 +1,19 @@
+title: Synthetic HTTP Beacon User Agent
+id: 47ca0771-3620-5def-a70f-381a1484d676
+status: experimental
+description: Lab-only detection. Validate false positives and mappings before non-lab
+  use.
+author: K8S-LAB preparation
+date: '2026-10-13'
+tags:
+- attack.t1071.001
+logsource:
+  product: zeek
+  service: http
+detection:
+  selection:
+    user_agent: LabBeacon/1.0
+  condition: selection
+falsepositives:
+- Legitimate lab administration or synthetic traffic.
+level: medium

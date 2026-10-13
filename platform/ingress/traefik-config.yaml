@@ -1,0 +1,24 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: traefik
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    deployment:
+      replicas: 2
+    resources:
+      requests: {cpu: 100m, memory: 128Mi}
+      limits: {cpu: '1', memory: 512Mi}
+    service:
+      type: LoadBalancer
+      annotations:
+        lbipam.cilium.io/ips: 192.168.150.200
+      spec:
+        loadBalancerIP: 192.168.150.200
+        externalTrafficPolicy: Cluster
+    providers:
+      kubernetesGateway:
+        enabled: true
+    gateway:
+      enabled: false

@@ -1,0 +1,49 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: lab-resource-budget
+  annotations:
+    pod-policies.kyverno.io/autogen-controllers: none
+spec:
+  validationFailureAction: Audit
+  background: true
+  rules:
+  - name: requests-limits
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - demo
+          - dev
+          - staging
+          - prod
+          - scen-*
+    validate:
+      message: CPU and memory requests and limits are mandatory
+      pattern:
+        spec:
+          containers:
+          - name: '*'
+            resources: &id001
+              requests:
+                cpu: ?*
+                memory: ?*
+              limits:
+                cpu: ?*
+                memory: ?*
+          =(initContainers):
+          - name: '*'
+            resources: *id001
+    exclude:
+      any:
+      - resources:
+          namespaces:
+          - kube-system
+          - longhorn-system
+          - cilium
+          - soc-sensors
+          - falco
+          - audits
+          - scenario-s3-audit

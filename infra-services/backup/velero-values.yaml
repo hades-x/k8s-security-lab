@@ -1,0 +1,88 @@
+image:
+  tag: v1.18.2
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 300m
+    memory: 384Mi
+credentials:
+  existingSecret: velero-s3
+  useSecret: true
+initContainers:
+- name: aws-plugin
+  image: docker.io/velero/velero-plugin-for-aws:v1.14.4
+  resources:
+    requests:
+      cpu: 50m
+      memory: 16Mi
+    limits:
+      cpu: 300m
+      memory: 96Mi
+  volumeMounts:
+  - mountPath: /target
+    name: plugins
+configuration:
+  uploaderType: kopia
+  defaultVolumesToFsBackup: true
+  backupStorageLocation:
+  - name: default
+    provider: aws
+    bucket: velero
+    default: true
+    config:
+      region: garage
+      s3ForcePathStyle: 'true'
+      s3Url: http://garage.s3.svc.cluster.local:3900
+      checksumAlgorithm: ''
+  volumeSnapshotLocation: []
+  extraEnvVars:
+  - name: AWS_REQUEST_CHECKSUM_CALCULATION
+    value: when_required
+  - name: AWS_RESPONSE_CHECKSUM_VALIDATION
+    value: when_required
+  repositoryMaintenanceJob:
+    repositoryConfigData:
+      global:
+        podResources:
+          cpuRequest: 50m
+          cpuLimit: 300m
+          memoryRequest: 64Mi
+          memoryLimit: 192Mi
+        keepLatestMaintenanceJobs: 1
+snapshotsEnabled: false
+deployNodeAgent: true
+nodeAgent:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 32Mi
+    limits:
+      cpu: 300m
+      memory: 64Mi
+  podVolumePath: /var/lib/kubelet/pods
+  tolerations:
+  - operator: Exists
+  containerSecurityContext:
+    privileged: true
+  extraArgs:
+  - --node-agent-configmap=node-agent-config
+kubectl:
+  image:
+    repository: registry.k8s.io/kubectl
+    tag: v1.35.0
+  resources:
+    requests:
+      cpu: 50m
+      memory: 16Mi
+    limits:
+      cpu: 300m
+      memory: 48Mi
+upgradeJobResources:
+  requests:
+    cpu: 50m
+    memory: 16Mi
+  limits:
+    cpu: 300m
+    memory: 48Mi

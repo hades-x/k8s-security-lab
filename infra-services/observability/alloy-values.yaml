@@ -1,0 +1,39 @@
+controller:
+  type: daemonset
+  tolerations:
+  - operator: Exists
+alloy:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 48Mi
+    limits:
+      cpu: 300m
+      memory: 96Mi
+  enableReporting: false
+  extraEnv:
+  - name: NODE_NAME
+    valueFrom:
+      fieldRef:
+        fieldPath: spec.nodeName
+  configMap:
+    content: "logging { level = \"info\" }\ndiscovery.kubernetes \"pods\" {\n  role\
+      \ = \"pod\"\n  selectors {\n    role = \"pod\"\n    field = \"spec.nodeName=\"\
+      \ + sys.env(\"NODE_NAME\")\n  }\n}\ndiscovery.relabel \"pod_logs\" {\n  targets\
+      \ = discovery.kubernetes.pods.targets\n  rule {\n    source_labels = [\"__meta_kubernetes_namespace\"\
+      ]\n    target_label = \"namespace\"\n  }\n  rule {\n    source_labels = [\"\
+      __meta_kubernetes_pod_name\"]\n    target_label = \"pod\"\n  }\n  rule {\n \
+      \   source_labels = [\"__meta_kubernetes_pod_container_name\"]\n    target_label\
+      \ = \"container\"\n  }\n  rule {\n    target_label = \"job\"\n    replacement\
+      \ = \"kubernetes-pods\"\n  }\n}\nloki.source.kubernetes \"pods\" {\n  targets\
+      \ = discovery.relabel.pod_logs.output\n  forward_to = [loki.write.local.receiver]\n\
+      }\nloki.write \"local\" {\n  endpoint { url = \"http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push\"\
+      \ }\n}\n"
+configReloader:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 8Mi
+    limits:
+      cpu: 100m
+      memory: 24Mi

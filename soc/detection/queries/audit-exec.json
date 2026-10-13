@@ -1,0 +1,32 @@
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "terms": {
+            "verb": ["create", "get"]
+          }
+        },
+        {
+          "term": {
+            "objectRef.subresource": "exec"
+          }
+        },
+        {
+          "term": {
+            "objectRef.namespace": "soc-detection"
+          }
+        },
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "now-5m",
+              "lte": "now"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

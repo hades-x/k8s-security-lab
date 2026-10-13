@@ -1,0 +1,13 @@
+{
+  "zot": {
+    "version": "v2.1.22",
+    "url": "https://github.com/project-zot/zot/releases/tag/v2.1.22"
+  },
+  "crane": {
+    "version": "v0.22.1",
+    "asset": "go-containerregistry_Linux_x86_64.tar.gz",
+    "sha256": "0ab7a1d6932a213aed964ce97666c3077fe691c8606413674a8b3e0b9ec4cda0",
+    "binary_sha256": "8e75c326adb43b053cfd78b9b987663f8f4fe4557f4d3915905643f25c730992",
+    "url": "https://github.com/google/go-containerregistry/releases/tag/v0.22.1"
+  }
+}

@@ -1,0 +1,28 @@
+fullnameOverride: step-ca
+bootstrap:
+  enabled: false
+  configmaps: false
+  secrets: false
+inject:
+  enabled: false
+existingSecrets:
+  enabled: true
+  ca: true
+image:
+  tag: 0.30.2@sha256:a2b17872915c193259b75a5474c398326f41bd199f0842093e52cf4182bc8270
+  repository: docker.io/smallstep/step-ca
+ca:
+  db:
+    enabled: true
+    persistent: true
+    size: 1Gi
+    storageClass: local-path
+  ssh:
+    enabled: false
+resources:
+  requests:
+    cpu: 50m
+    memory: 96Mi
+  limits:
+    cpu: 300m
+    memory: 192Mi

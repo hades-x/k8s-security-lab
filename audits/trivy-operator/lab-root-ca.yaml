@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lab-root-ca
+  namespace: trivy-system
+data:
+  root_ca.crt: 'REGENERATE_LAB_TRUST_MATERIAL
+
+    '

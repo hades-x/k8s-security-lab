@@ -1,0 +1,12 @@
+# P6 merges this ON THE LAB NODES ONLY; never on lab controller or real homelab nodes.
+mirrors:
+  "zot.192.168.150.200.sslip.io":
+    endpoint:
+      - "https://zot.192.168.150.200.sslip.io"
+configs:
+  "zot.192.168.150.200.sslip.io":
+    auth:
+      username: lab
+      password: ${LAB_REGISTRY_PASSWORD}
+    tls:
+      ca_file: /var/lib/rancher/k3s/lab-root-ca.crt

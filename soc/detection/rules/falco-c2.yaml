@@ -1,0 +1,19 @@
+title: Container Connects To Synthetic C2 Node
+id: 3ff40d46-3063-5e4b-b9e4-a7a494516de9
+status: experimental
+description: Lab-only detection. Validate false positives and mappings before non-lab
+  use.
+author: K8S-LAB preparation
+date: '2026-10-13'
+tags:
+- attack.t1071.001
+logsource:
+  product: falco
+  service: syscall
+detection:
+  selection:
+    rule: Lab C2 Outbound
+  condition: selection
+falsepositives:
+- Legitimate lab administration or synthetic traffic.
+level: medium

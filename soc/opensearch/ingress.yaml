@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: soc-dashboards
+  namespace: opensearch
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: dashboards.192.168.150.200.sslip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: soc-dashboards
+            port:
+              number: 5601

@@ -1,0 +1,19 @@
+title: Long DNS Query Notice
+id: 8c9963b2-f768-511e-9964-66bbab3809ae
+status: experimental
+description: Lab-only detection. Validate false positives and mappings before non-lab
+  use.
+author: K8S-LAB preparation
+date: '2026-10-13'
+tags:
+- attack.t1048.003
+logsource:
+  product: zeek
+  service: notice
+detection:
+  selection:
+    note: Lab::Long_DNS_Query
+  condition: selection
+falsepositives:
+- Legitimate lab administration or synthetic traffic.
+level: medium

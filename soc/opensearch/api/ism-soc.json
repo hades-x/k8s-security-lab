@@ -1,0 +1,51 @@
+{
+  "policy": {
+    "description": "SOC lab: hot 1 day, retained until deletion at 3 days (index age).",
+    "default_state": "hot",
+    "states": [
+      {
+        "name": "hot",
+        "actions": [],
+        "transitions": [
+          {
+            "state_name": "retained",
+            "conditions": {
+              "min_index_age": "1d"
+            }
+          }
+        ]
+      },
+      {
+        "name": "retained",
+        "actions": [],
+        "transitions": [
+          {
+            "state_name": "delete",
+            "conditions": {
+              "min_index_age": "3d"
+            }
+          }
+        ]
+      },
+      {
+        "name": "delete",
+        "actions": [
+          {
+            "delete": {}
+          }
+        ],
+        "transitions": []
+      }
+    ],
+    "ism_template": [
+      {
+        "index_patterns": [
+          "zeek-*",
+          "audit-k8s-*",
+          "falco-*"
+        ],
+        "priority": 200
+      }
+    ]
+  }
+}

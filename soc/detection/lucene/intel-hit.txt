@@ -1,0 +1,1 @@
+seen.indicator:(ioc.evil\-c2.lab.test OR 192.168.150.22)

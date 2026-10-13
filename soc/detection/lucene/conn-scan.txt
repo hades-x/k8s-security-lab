@@ -1,0 +1,1 @@
+id.resp_p:>=2000 AND id.resp_p:<=2019 AND proto:tcp AND (conn_state:(REJ OR S0))

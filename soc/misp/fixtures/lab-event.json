@@ -1,0 +1,31 @@
+{
+  "Event": {
+    "info": "K8S-LAB synthetic IoCs",
+    "Attribute": [
+      {
+        "type": "domain",
+        "value": "ioc.evil-c2.lab.test",
+        "to_ids": true,
+        "comment": "Synthetic lab-only IoC"
+      },
+      {
+        "type": "ip-dst",
+        "value": "192.168.150.22",
+        "to_ids": true,
+        "comment": "Synthetic lab-only IoC"
+      },
+      {
+        "type": "domain",
+        "value": "other-c2.lab.test",
+        "to_ids": true,
+        "comment": "Synthetic lab-only IoC"
+      },
+      {
+        "type": "url",
+        "value": "http://ioc.evil-c2.lab.test/heartbeat",
+        "to_ids": true,
+        "comment": "Synthetic lab-only IoC"
+      }
+    ]
+  }
+}

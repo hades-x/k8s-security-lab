@@ -1,0 +1,31 @@
+{
+  "garage": {
+    "version": "v2.4.1",
+    "image": "docker.io/dxflrs/garage:v2.4.1@sha256:9c96caa2612d3411acc5b0e6701fb238dbfba33e533a6d7d3d811a4b12d0d020",
+    "source": "https://hub.docker.com/v2/repositories/dxflrs/garage/tags?name=v"
+  },
+  "velero": {
+    "repo": "https://vmware-tanzu.github.io/helm-charts",
+    "chart": "velero",
+    "version": "12.2.1",
+    "appVersion": "1.18.2",
+    "package": "evidence/p3-prep/charts/velero-12.2.1.tgz",
+    "sha256": "fe4acd70a0123c369e7af7064457b4ffdddebee413e2bb01976a4fe07c471773"
+  },
+  "velero-plugin": {
+    "version": "v1.14.4",
+    "url": "https://github.com/velero-io/velero-plugin-for-aws/releases/tag/v1.14.4"
+  },
+  "renderedImages": {
+    "docker.io/velero/velero-plugin-for-aws:v1.14.4": {
+      "digest": "sha256:c85a7fa803569e3128c33e4f5766f84ab156c8d171c9f1dd2715581d45ce98fa",
+      "source": "https://registry-1.docker.io/v2/velero/velero-plugin-for-aws/manifests/v1.14.4",
+      "mediaType": "application/vnd.oci.image.index.v1+json"
+    },
+    "docker.io/velero/velero:v1.18.2": {
+      "digest": "sha256:37396519f399536e5f01427d723565ae69294ec3fb5625cf1c87c09eaa9de16b",
+      "source": "https://registry-1.docker.io/v2/velero/velero/manifests/v1.18.2",
+      "mediaType": "application/vnd.docker.distribution.manifest.list.v2+json"
+    }
+  }
+}

@@ -1,0 +1,74 @@
+admissionController:
+  replicas: 1
+  container:
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 500m
+        memory: 512Mi
+  initContainer:
+    resources:
+      requests:
+        cpu: 10m
+        memory: 64Mi
+      limits:
+        cpu: 100m
+        memory: 256Mi
+backgroundController:
+  enabled: true
+  replicas: 1
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
+reportsController:
+  enabled: true
+  replicas: 1
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
+cleanupController:
+  enabled: false
+labPolicy:
+  registries:
+  - zot.192.168.150.200.sslip.io/*
+  - zot.zot.svc/*
+  - docker.io/library/*
+  - docker.io/nicolaka/netshoot:*
+  - ghcr.io/*
+  - quay.io/*
+  - registry.k8s.io/*
+  exemptNamespaces:
+  - kube-system
+  - longhorn-system
+  - cilium
+  - soc-sensors
+  - falco
+  - audits
+  - scenario-s3-audit
+  applicationNamespaces:
+  - dev
+  - staging
+  - prod
+  - demo
+  - scenario-s1
+  - scenario-s2
+  - scenario-target
+  - scenario-s3
+  - scenario-s4
+  - scenario-s5
+  mode: Audit
+global:
+  caCertificates:
+    data: 'REGENERATE_LAB_TRUST_MATERIAL
+
+      '

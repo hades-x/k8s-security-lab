@@ -1,0 +1,429 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: misp
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: misp-db
+  namespace: misp
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: misp-data
+  namespace: misp
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: misp-cache
+  namespace: misp
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: misp-db
+  namespace: misp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: misp-db
+  template:
+    metadata:
+      labels:
+        app: misp-db
+    spec:
+      containers:
+      - name: mariadb
+        image: docker.io/library/mariadb:11.8.6@sha256:78a5047d3ba33975f183f183c2464cc7f1eab13ec8667e57cc9a5821d6da7577
+        args:
+        - --innodb-buffer-pool-size=128M
+        - --innodb-log-file-size=64M
+        - --max-connections=40
+        env:
+        - name: MYSQL_USER
+          value: misp
+        - name: MYSQL_DATABASE
+          value: misp
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: misp-credentials
+              key: MYSQL_PASSWORD
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: misp-credentials
+              key: MYSQL_ROOT_PASSWORD
+        ports:
+        - containerPort: 3306
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: '1'
+            memory: 512Mi
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/mysql
+        startupProbe:
+          tcpSocket:
+            port: 3306
+          failureThreshold: 60
+          periodSeconds: 5
+        readinessProbe:
+          tcpSocket:
+            port: 3306
+          periodSeconds: 10
+      automountServiceAccountToken: false
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: misp-db
+  strategy:
+    type: Recreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: misp-db
+  namespace: misp
+spec:
+  selector:
+    app: misp-db
+  ports:
+  - port: 3306
+    targetPort: 3306
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: misp-cache
+  namespace: misp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: misp-cache
+  template:
+    metadata:
+      labels:
+        app: misp-cache
+    spec:
+      containers:
+      - name: valkey
+        image: docker.io/valkey/valkey:9.1.2@sha256:418652cfb58ef879d4978c33553735d7147016032d5aefaa14c828e611eb9dfd
+        command:
+        - sh
+        - -ec
+        - exec valkey-server --requirepass "$REDIS_PASSWORD" --maxmemory 64mb --maxmemory-policy
+          allkeys-lru --appendonly yes
+        env:
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: misp-credentials
+              key: REDIS_PASSWORD
+        resources:
+          requests:
+            cpu: 20m
+            memory: 64Mi
+          limits:
+            cpu: '1'
+            memory: 128Mi
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        readinessProbe:
+          tcpSocket:
+            port: 6379
+      automountServiceAccountToken: false
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: misp-cache
+  strategy:
+    type: Recreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: misp-cache
+  namespace: misp
+spec:
+  selector:
+    app: misp-cache
+  ports:
+  - port: 6379
+    targetPort: 6379
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: misp-core
+  namespace: misp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: misp-core
+  template:
+    metadata:
+      labels:
+        app: misp-core
+    spec:
+      containers:
+      - name: misp-core
+        image: ghcr.io/misp/misp-docker/misp-core:v2.5.50@sha256:739e67f21564b8f34ff9541d70e1b622f85042e9765f22a487738c8f3b61edee
+        env:
+        - name: BASE_URL
+          value: http://misp.192.168.150.200.sslip.io
+        - name: MYSQL_HOST
+          value: misp-db
+        - name: MYSQL_DATABASE
+          value: misp
+        - name: MYSQL_USER
+          value: misp
+        - name: REDIS_HOST
+          value: misp-cache
+        - name: ADMIN_EMAIL
+          value: admin@lab.test
+        - name: ADMIN_ORG
+          value: K8S-LAB
+        - name: ADMIN_ORG_UUID
+          value: d71286c1-5fbf-5452-941d-9195c54f4c17
+        - name: PHP_FCGI_CHILDREN
+          value: '2'
+        - name: PHP_FCGI_START_SERVERS
+          value: '1'
+        - name: PHP_FCGI_SPARE_SERVERS
+          value: '1'
+        - name: PHP_SESSION_COOKIE_SECURE
+          value: 'false'
+        - name: PHP_LISTEN_FPM
+          value: 'true'
+        - name: FASTCGI_LISTEN_STATUS
+          value: 0.0.0.0:9003
+        - name: ENABLE_DB_SETTINGS
+          value: 'true'
+        - name: AUTOCONF_GPG
+          value: 'false'
+        - name: AUTOGEN_ADMIN_KEY
+          value: 'false'
+        - name: TZ
+          value: UTC
+        - name: COMPOSE_PROFILES
+          value: ''
+        - name: ADMIN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: misp-credentials
+              key: ADMIN_PASSWORD
+        - name: ADMIN_KEY
+          valueFrom:
+            secretKeyRef:
+              name: misp-credentials
+              key: ADMIN_KEY
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: misp-credentials
+              key: MYSQL_PASSWORD
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: misp-credentials
+              key: REDIS_PASSWORD
+        - name: DISABLE_PRINTING_PLAINTEXT_CREDENTIALS
+          value: 'true'
+        - name: WORKERS
+          value: '1'
+        - name: NUM_WORKERS_DEFAULT
+          value: '1'
+        - name: NUM_WORKERS_PRIO
+          value: '0'
+        - name: NUM_WORKERS_EMAIL
+          value: '0'
+        - name: NUM_WORKERS_UPDATE
+          value: '1'
+        - name: NUM_WORKERS_CACHE
+          value: '0'
+        - name: PHP_MEMORY_LIMIT
+          value: 256M
+        - name: DISABLE_CA_REFRESH
+          value: 'true'
+        resources:
+          requests:
+            cpu: 200m
+            memory: 768Mi
+          limits:
+            cpu: '1'
+            memory: 1280Mi
+        volumeMounts:
+        - name: data
+          mountPath: /var/www/MISP/app/Config
+          subPath: config
+        - name: data
+          mountPath: /var/www/MISP/app/files
+          subPath: files
+        - name: data
+          mountPath: /var/www/MISP/.gnupg
+          subPath: gnupg
+        - name: logs
+          mountPath: /var/www/MISP/app/tmp/logs
+        startupProbe:
+          tcpSocket:
+            port: 9002
+          periodSeconds: 10
+          failureThreshold: 90
+        readinessProbe:
+          tcpSocket:
+            port: 9002
+          periodSeconds: 10
+      automountServiceAccountToken: false
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: misp-data
+      - name: logs
+        emptyDir:
+          sizeLimit: 512Mi
+  strategy:
+    type: Recreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: misp-core
+  namespace: misp
+spec:
+  selector:
+    app: misp-core
+  ports:
+  - port: 9002
+    targetPort: 9002
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: misp
+  namespace: misp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: misp
+  template:
+    metadata:
+      labels:
+        app: misp
+    spec:
+      containers:
+      - name: nginx
+        image: ghcr.io/misp/misp-docker/misp-nginx:v2.5.50@sha256:6c74fe480195bf05fc8c99a687e46dc32e199316a6e826a1f986a74895e1251b
+        env:
+        - name: BASE_URL
+          value: http://misp.192.168.150.200.sslip.io
+        - name: FASTCGI_LISTEN
+          value: misp-core:9002
+        - name: TZ
+          value: UTC
+        - name: DISABLE_IPV6
+          value: 'true'
+        resources:
+          requests:
+            cpu: 20m
+            memory: 32Mi
+          limits:
+            cpu: '1'
+            memory: 128Mi
+        securityContext:
+          runAsUser: 101
+          runAsNonRoot: true
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: conf
+          mountPath: /etc/nginx/conf.d
+        - name: cache
+          mountPath: /var/cache/nginx
+        - name: tmp
+          mountPath: /tmp
+        readinessProbe:
+          httpGet:
+            path: /users/login
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+      automountServiceAccountToken: false
+      volumes:
+      - name: conf
+        emptyDir: {}
+      - name: cache
+        emptyDir: {}
+      - name: tmp
+        emptyDir: {}
+      securityContext:
+        fsGroup: 101
+        fsGroupChangePolicy: OnRootMismatch
+  strategy:
+    type: Recreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: misp
+  namespace: misp
+spec:
+  selector:
+    app: misp
+  ports:
+  - port: 8080
+    targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: misp
+  namespace: misp
+spec:
+  ingressClassName: traefik
+  rules:
+  - host: misp.192.168.150.200.sslip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: misp
+            port:
+              number: 8080

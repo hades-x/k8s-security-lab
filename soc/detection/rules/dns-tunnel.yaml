@@ -1,0 +1,19 @@
+title: Long DNS Labels Consistent With Tunneling
+id: bc43ff37-5cc3-58d9-9777-8a4aee0b20aa
+status: experimental
+description: Lab-only detection. Validate false positives and mappings before non-lab
+  use.
+author: K8S-LAB preparation
+date: '2026-10-13'
+tags:
+- attack.t1572
+logsource:
+  product: zeek
+  service: dns
+detection:
+  selection:
+    query|re: .*[a-z0-9]{50,}\..*
+  condition: selection
+falsepositives:
+- CDN and tracking domains can have long labels.
+level: medium

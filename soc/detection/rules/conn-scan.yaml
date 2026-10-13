@@ -1,0 +1,24 @@
+title: Synthetic Scan Connection Candidate
+id: 1f650655-4d3a-5350-a609-a425f0f89ff1
+status: experimental
+description: Lab-only detection. Validate false positives and mappings before non-lab
+  use.
+author: K8S-LAB preparation
+date: '2026-10-13'
+tags:
+- attack.t1046
+logsource:
+  product: zeek
+  service: conn
+detection:
+  selection:
+    id.resp_p|gte: 2000
+    id.resp_p|lte: 2019
+    proto: tcp
+    conn_state:
+    - REJ
+    - S0
+  condition: selection
+falsepositives:
+- Applications legitimately using ports 2000-2019; aggregation is necessary.
+level: medium

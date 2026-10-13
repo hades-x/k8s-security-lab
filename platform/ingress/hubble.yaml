@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hubble
+  namespace: kube-system
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: hubble.192.168.150.200.sslip.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service: {name: hubble-ui, port: {number: 80}}

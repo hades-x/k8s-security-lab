@@ -1,0 +1,171 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: soc-traffic
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lab-web
+  namespace: soc-traffic
+spec:
+  selector:
+    app: lab-web
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+  - name: dns
+    port: 53
+    targetPort: 8053
+    protocol: UDP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lab-web
+  namespace: soc-traffic
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lab-web
+  template:
+    metadata:
+      labels:
+        app: lab-web
+    spec:
+      containers:
+      - name: traffic
+        image: docker.io/library/python:3.13.9-alpine3.22@sha256:e5fa639e49b85986c4481e28faa2564b45aa8021413f31026c3856e5911618b1
+        command:
+        - python3
+        - /scripts/live.py
+        env:
+        - name: ROLE
+          value: server
+        - name: BEACON
+          value: 'false'
+        resources:
+          requests:
+            cpu: 10m
+            memory: 32Mi
+          limits:
+            cpu: '1'
+            memory: 96Mi
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1000
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: scripts
+          mountPath: /scripts
+          readOnly: true
+      automountServiceAccountToken: false
+      volumes:
+      - name: scripts
+        configMap:
+          name: traffic-scripts
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: normal-traffic
+  namespace: soc-traffic
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: normal-traffic
+  template:
+    metadata:
+      labels:
+        app: normal-traffic
+    spec:
+      containers:
+      - name: traffic
+        image: docker.io/library/python:3.13.9-alpine3.22@sha256:e5fa639e49b85986c4481e28faa2564b45aa8021413f31026c3856e5911618b1
+        command:
+        - python3
+        - /scripts/live.py
+        env:
+        - name: ROLE
+          value: client
+        - name: BEACON
+          value: 'false'
+        resources:
+          requests:
+            cpu: 10m
+            memory: 32Mi
+          limits:
+            cpu: '1'
+            memory: 96Mi
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1000
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: scripts
+          mountPath: /scripts
+          readOnly: true
+      automountServiceAccountToken: false
+      volumes:
+      - name: scripts
+        configMap:
+          name: traffic-scripts
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: beacon-traffic
+  namespace: soc-traffic
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: beacon-traffic
+  template:
+    metadata:
+      labels:
+        app: beacon-traffic
+    spec:
+      containers:
+      - name: traffic
+        image: docker.io/library/python:3.13.9-alpine3.22@sha256:e5fa639e49b85986c4481e28faa2564b45aa8021413f31026c3856e5911618b1
+        command:
+        - python3
+        - /scripts/live.py
+        env:
+        - name: ROLE
+          value: client
+        - name: BEACON
+          value: 'true'
+        resources:
+          requests:
+            cpu: 10m
+            memory: 32Mi
+          limits:
+            cpu: '1'
+            memory: 96Mi
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1000
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: scripts
+          mountPath: /scripts
+          readOnly: true
+      automountServiceAccountToken: false
+      volumes:
+      - name: scripts
+        configMap:
+          name: traffic-scripts

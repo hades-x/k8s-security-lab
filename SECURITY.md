@@ -1,0 +1,11 @@
+# Security and safety scope
+
+This repository is a disposable learning lab, not a supported production security platform. Do not deploy it with real data or expose lab HTTP endpoints to untrusted networks. Network generation and detection rehearsals must stay inside infrastructure you own and expressly authorize.
+
+Before executing runtime code, read [operator prerequisites](tools/DEPENDENCIES.md), component documentation and exercise FICHEs. Scenario automation, all exercise run/cleanup paths and the native detector importer are unconditionally disabled pending ownership/API-safety adaptation; no runtime authorization variable enables them. `make ci` is offline; `LAB_ALLOW_RUNTIME=yes` authorizes reviewed runtime scripts but does not eliminate their side effects. Privileged sensors/audit jobs, VM provisioning, cordon/uncordon, snapshot operations and destructive fixture restores require separate scope review. Unsafe disk cache additionally requires `LAB_ALLOW_UNSAFE_DISK_CACHE=yes`; its original durability risk is not a recommended production configuration.
+
+Never submit passwords, tokens, kubeconfigs, private keys, snapshots, raw logs or private infrastructure details in issues or pull requests. Rotate an exposed credential first; deleting a file does not revoke a credential or remove repository history. Report vulnerabilities through a private maintainer contact or private repository security channel where available; no monitored response SLA or configured reporting address is promised.
+
+Run `make audit` before any publication. It scans all candidate files, including gitignored/untracked content, for forbidden artifacts, known secret patterns, embedded trust roots, selected private identities, bounded nested base64 encodings and local Markdown links. Synthetic negative fixtures verify these rules. Passing this heuristic scan is not proof that no secrets exist: use independent review, especially for new formats or generated data.
+
+Original trust roots/signing keys are not distributed. Generate new trust, keep keys private and render templates explicitly. See [limitations](docs/limitations.md) for unresolved security and operational gaps, including unfixed-CRITICAL scan exclusions and lab-only SOC/identity compromises.

@@ -1,0 +1,19 @@
+title: Container Mount Attempt
+id: f120ab58-0130-5e7f-baa6-10c9721c4284
+status: experimental
+description: Lab-only detection. Validate false positives and mappings before non-lab
+  use.
+author: K8S-LAB preparation
+date: '2026-10-13'
+tags:
+- attack.t1611
+logsource:
+  product: falco
+  service: syscall
+detection:
+  selection:
+    rule: Lab Sensitive Mount
+  condition: selection
+falsepositives:
+- Legitimate lab administration or synthetic traffic.
+level: medium

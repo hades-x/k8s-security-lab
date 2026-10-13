@@ -1,0 +1,5 @@
+global:
+  caCertificates:
+    data: 'REGENERATE_LAB_TRUST_MATERIAL
+
+      '

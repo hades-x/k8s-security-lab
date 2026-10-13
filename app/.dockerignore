@@ -1,0 +1,9 @@
+.git
+chart
+tests
+ci
+__pycache__
+.woodpecker.yaml
+image-oci/
+.ci-bin/
+.ci-auth/

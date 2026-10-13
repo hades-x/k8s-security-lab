@@ -1,0 +1,44 @@
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  labels:
+    strimzi.io/cluster: soc
+  name: demo-orders
+  namespace: kafka
+spec:
+  config:
+    min.insync.replicas: 2
+    retention.ms: 86400000
+  partitions: 1
+  replicas: 3
+---
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaUser
+metadata:
+  labels:
+    strimzi.io/cluster: soc
+  name: demo-app
+  namespace: kafka
+spec:
+  authentication:
+    type: scram-sha-512
+  authorization:
+    acls:
+    - host: '*'
+      operations:
+      - Read
+      - Write
+      - Describe
+      resource:
+        name: demo-orders
+        patternType: literal
+        type: topic
+    - host: '*'
+      operations:
+      - Read
+      - Describe
+      resource:
+        name: demo-app-
+        patternType: prefix
+        type: group
+    type: simple

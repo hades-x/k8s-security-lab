@@ -1,0 +1,3504 @@
+{
+  "source_snapshot": "6491141",
+  "scope": "authored implementation directories only; no source history or raw evidence",
+  "files": [
+    {
+      "source": "app/.dockerignore",
+      "disposition": "copied",
+      "source_sha256": "ba5b29dcd43dc1f7bcca908853bf7c419c2183b20497f9246c891a453f905874",
+      "candidate_sha256": "ba5b29dcd43dc1f7bcca908853bf7c419c2183b20497f9246c891a453f905874"
+    },
+    {
+      "source": "app/.gitignore",
+      "disposition": "copied",
+      "source_sha256": "ab9b60f4d6a8640f516ae83d3f4473217b14e76248d7b743679e2296895c79a5",
+      "candidate_sha256": "ab9b60f4d6a8640f516ae83d3f4473217b14e76248d7b743679e2296895c79a5"
+    },
+    {
+      "source": "app/.woodpecker.yaml",
+      "disposition": "copied",
+      "source_sha256": "06ccd7b61ec91ab48f369064041df7ea45a738ef76a2c0a6aa3bff3ad13553f5",
+      "candidate_sha256": "06ccd7b61ec91ab48f369064041df7ea45a738ef76a2c0a6aa3bff3ad13553f5"
+    },
+    {
+      "source": "app/Dockerfile",
+      "disposition": "copied",
+      "source_sha256": "88657eedbee2d171421c8ffb03035e14525b6f5d7778f70c2ba9b80a16a9b4d1",
+      "candidate_sha256": "88657eedbee2d171421c8ffb03035e14525b6f5d7778f70c2ba9b80a16a9b4d1"
+    },
+    {
+      "source": "app/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "f0d75b8b3d9097db219c713a00e37787336e5aefa984c96658f4934d8db80510",
+      "candidate_sha256": "fdbee8c884f3deb44a8ff94af3b885fd86014c24ab71f85005fc1916326f4217"
+    },
+    {
+      "source": "app/chart/Chart.yaml",
+      "disposition": "copied",
+      "source_sha256": "3fcc92293727b3c991c6c87ee00676f2a322735ff92add7cddf4ba528078a00e",
+      "candidate_sha256": "3fcc92293727b3c991c6c87ee00676f2a322735ff92add7cddf4ba528078a00e"
+    },
+    {
+      "source": "app/chart/templates/workloads.yaml",
+      "disposition": "copied",
+      "source_sha256": "d42c0e96e36716c9ce849a0d402e8024501206a6e51fdba82551cfae4446212f",
+      "candidate_sha256": "d42c0e96e36716c9ce849a0d402e8024501206a6e51fdba82551cfae4446212f"
+    },
+    {
+      "source": "app/chart/values-dev.yaml",
+      "disposition": "copied",
+      "source_sha256": "ff28b84f476a932c490651f1b52db8009b7e6c677e555514bdd81a8a62e385bd",
+      "candidate_sha256": "ff28b84f476a932c490651f1b52db8009b7e6c677e555514bdd81a8a62e385bd"
+    },
+    {
+      "source": "app/chart/values-prod.yaml",
+      "disposition": "copied",
+      "source_sha256": "49aacb8d2d3d6aa538d5e59921f0126bfbf29e45a751869ecd9293bd1d2560e6",
+      "candidate_sha256": "49aacb8d2d3d6aa538d5e59921f0126bfbf29e45a751869ecd9293bd1d2560e6"
+    },
+    {
+      "source": "app/chart/values-staging.yaml",
+      "disposition": "copied",
+      "source_sha256": "2d29acfd695bbad1d0497dec5f9b9f2b80d13a93a3304610ccf0bd350cdc20b0",
+      "candidate_sha256": "2d29acfd695bbad1d0497dec5f9b9f2b80d13a93a3304610ccf0bd350cdc20b0"
+    },
+    {
+      "source": "app/chart/values.yaml",
+      "disposition": "copied",
+      "source_sha256": "8ac49de86e34cd48801a01cf86f8d8b7fab1b69341e16a7b3b185dd2c1b8ffc9",
+      "candidate_sha256": "8ac49de86e34cd48801a01cf86f8d8b7fab1b69341e16a7b3b185dd2c1b8ffc9"
+    },
+    {
+      "source": "app/ci/cosign.pub",
+      "disposition": "excluded",
+      "source_sha256": "c2b7c20561e9e16fddb25be49c6593aa22820dd99e13518292251f177b5424da",
+      "candidate_sha256": null
+    },
+    {
+      "source": "app/ci/publish.sh",
+      "disposition": "sanitized",
+      "source_sha256": "e0b1066d94a407f9ba1546b88a49b7953c302508cf8cc1b7bc5565354c145177",
+      "candidate_sha256": "55fc8348c40d3885299bd4ec48c164ccd4bf93e7cb55083cc6e20613427e22f6"
+    },
+    {
+      "source": "app/ci/tools.py",
+      "disposition": "sanitized",
+      "source_sha256": "066c65da9d729e13e083ee0f15853c4514e593c7850d98563e643898882effc2",
+      "candidate_sha256": "0e943ac02089d292e4d73c59291e12b2bc945d571bbaa17ea400c72fc3f361fc"
+    },
+    {
+      "source": "app/ci/update-gitops.py",
+      "disposition": "sanitized",
+      "source_sha256": "7a264968afc1da2ed4f378a611cbcd69a443c8c3b0c5ec35f06ad34ccca5d1a4",
+      "candidate_sha256": "0367a434596c3853c3ae2c1976f876158ffe745dbae84fcc1bd375b36703503d"
+    },
+    {
+      "source": "app/domain.py",
+      "disposition": "copied",
+      "source_sha256": "b8ee6fc1130c7c27c08413d5483438cde1917e2ada1968766d481fcebb012db9",
+      "candidate_sha256": "b8ee6fc1130c7c27c08413d5483438cde1917e2ada1968766d481fcebb012db9"
+    },
+    {
+      "source": "app/requirements.txt",
+      "disposition": "copied",
+      "source_sha256": "da630c9a3658444e75baf89fcf1047f708532ca5904b0dd8df929c46df3452a6",
+      "candidate_sha256": "da630c9a3658444e75baf89fcf1047f708532ca5904b0dd8df929c46df3452a6"
+    },
+    {
+      "source": "app/services.py",
+      "disposition": "copied",
+      "source_sha256": "14f8b4af42a04c1bf2d30436701f34add8299cb43e52331fd40cd88c6f8d0bc4",
+      "candidate_sha256": "14f8b4af42a04c1bf2d30436701f34add8299cb43e52331fd40cd88c6f8d0bc4"
+    },
+    {
+      "source": "app/tests/test_orders.py",
+      "disposition": "copied",
+      "source_sha256": "8e19c463f563eb239d46fa9081bd34813653cc4fde3f1d3faca70b601f9d664a",
+      "candidate_sha256": "8e19c463f563eb239d46fa9081bd34813653cc4fde3f1d3faca70b601f9d664a"
+    },
+    {
+      "source": "audits/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "0f4a3bdcdb4bb4f6279c7e98dcc1fe1b270066c33ff8281a295feba72317a4c5",
+      "candidate_sha256": "3cf3c5a809a0a9543253c60009ca3e36fa958b38addcc93314c3ed17c482c279"
+    },
+    {
+      "source": "audits/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "6a9a5b25297041ad462a20c79876d31a8c72127606c870d3e6cad2fef68a7736",
+      "candidate_sha256": "6a9a5b25297041ad462a20c79876d31a8c72127606c870d3e6cad2fef68a7736"
+    },
+    {
+      "source": "audits/collect-safe.py",
+      "disposition": "sanitized",
+      "source_sha256": "ba314bb452c2df180f9134bec60fbbc370f533d1d029d0f5022dfd765371b7b0",
+      "candidate_sha256": "e245b29f52bf61702b2810e257699ddd635959ecddad673b81042d8521fac28f"
+    },
+    {
+      "source": "audits/compare.py",
+      "disposition": "sanitized",
+      "source_sha256": "53e962d281200901ab649dbce4b6c80242eb55a3ca7f626f3c266ddea9ba3653",
+      "candidate_sha256": "0874ab3f50f7610feb76372bbdc3cd8f04a3856a5701c0ebaedc2c8f26501f91"
+    },
+    {
+      "source": "audits/compare.sh",
+      "disposition": "sanitized",
+      "source_sha256": "c2f0c89d7270ea0aa1f0ac1e6c78008a6da2e33e4e8cee28bd3c8c3da60e8a5a",
+      "candidate_sha256": "1863dc9b0268d7af70f1d9958348d57fd24a8aef332b8bc9b05ae8d085854a75"
+    },
+    {
+      "source": "audits/fix-live.py",
+      "disposition": "sanitized",
+      "source_sha256": "3210c15ab6445880441ef42724989ffe79f6706ddde22a63c41b645e3ac5f2fb",
+      "candidate_sha256": "e9dac4fc735b507ee6e6e76acac83fd3b1d49a4305c62276aee82a92b3427e13"
+    },
+    {
+      "source": "audits/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "79c4b6524065621813af4f06b231cd1a474e52066e13171bebc1eb8f47de6ae9",
+      "candidate_sha256": "44ae02113b52d69738c623e436f12bbe579b05e528d7f41222a162237a447b19"
+    },
+    {
+      "source": "audits/kube-bench/jobs.yaml",
+      "disposition": "sanitized",
+      "source_sha256": "02ff38e1e0b300f4916658311c36384c5537b47f64853648ff5b905e20f2d37f",
+      "candidate_sha256": "1820ec82db275c79345c4acac1237bdaa84d9fc52723ea336782351f9e4b6fff"
+    },
+    {
+      "source": "audits/kubescape/cache/cis-v1.12.0.json",
+      "disposition": "excluded",
+      "source_sha256": "b7c6fa96658c305e149580275e80011741be0d95ab7efce9583e72b7af7e6b0f",
+      "candidate_sha256": null
+    },
+    {
+      "source": "audits/kubescape/cache/mitre.json",
+      "disposition": "excluded",
+      "source_sha256": "5cfbdda361a2f8c1c3b4193ad9b9c30c4508381d5ef13f338ee61486000f4559",
+      "candidate_sha256": null
+    },
+    {
+      "source": "audits/kubescape/cache/nsa.json",
+      "disposition": "excluded",
+      "source_sha256": "009548fa2b93927c4ec858e488505f955b871445dc5f9546d56832d3cdc072ae",
+      "candidate_sha256": null
+    },
+    {
+      "source": "audits/run-after.sh",
+      "disposition": "sanitized",
+      "source_sha256": "0e214e3a0fde501dca7bbdcc1f67ea4a3068901cc9ceec9cd78109cd609e34bb",
+      "candidate_sha256": "5f55834e7e59e475832d79ad12f75c7abcbe06e49b4f253489a8bb55432ab8ba"
+    },
+    {
+      "source": "audits/run-before.sh",
+      "disposition": "sanitized",
+      "source_sha256": "902416a40dbecd7dd6323bbaa228091b4491901bf712da0b6223325d27390592",
+      "candidate_sha256": "0cb22349a8f81ac085b3191e33fd6eba115f7ff8c2a253a4c28b6679f86a518a"
+    },
+    {
+      "source": "audits/run.sh",
+      "disposition": "sanitized",
+      "source_sha256": "7f3331535294346efa0314140f8cb6f073db9c71a4564844914ed17b7ce754b4",
+      "candidate_sha256": "2f22de0d19354502cd5630bdf15638503aa1854d098c336b92cc1d0b5bcef101"
+    },
+    {
+      "source": "audits/summarize.py",
+      "disposition": "sanitized",
+      "source_sha256": "9fbe2027708f21a9b31f40480da418ff48b8959d50c7f9365873716babbb7a78",
+      "candidate_sha256": "d5ccb3d671c90b8690dd917d8d0640f0cbabf2fcc35f44690dbe919d83da5899"
+    },
+    {
+      "source": "audits/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "ee6cfac41d9cfb217fdc88f946067dc13f3a52f02185c0e53ade03716773d882",
+      "candidate_sha256": "5f13e8c3ddbd946b775094ce666548ebb101228708d357f23453ceeb972c1860"
+    },
+    {
+      "source": "audits/trivy-operator/lab-root-ca.yaml",
+      "disposition": "sanitized",
+      "source_sha256": "7a84f2ae0c77693bac2fc4f12a76c53be5a638bfea33ff39659543a0e8a16b18",
+      "candidate_sha256": "6b65bfcfc695aa90447b3ff515634298566686a76a4e1a3c5964a10cbbaef43f"
+    },
+    {
+      "source": "audits/trivy-operator/resourcequota.yaml",
+      "disposition": "copied",
+      "source_sha256": "61912b49cd969038cdf809cd88856dfd52dec4b16527037408b7d59290fb672d",
+      "candidate_sha256": "61912b49cd969038cdf809cd88856dfd52dec4b16527037408b7d59290fb672d"
+    },
+    {
+      "source": "audits/trivy-operator/values.yaml",
+      "disposition": "sanitized",
+      "source_sha256": "1573e9125d22fd3b0c4bb9288b9d09fd17afa0c219426618ccd5cc725761a0b4",
+      "candidate_sha256": "aaf7e0ebbf090f00d30802c4d5a4dd4618d851e3db3b64b0bb6d70950e9fb4e3"
+    },
+    {
+      "source": "devsecops/COORDINATION.md",
+      "disposition": "excluded",
+      "source_sha256": "ec7dbb590368a1de79ebffa6cfb34920c2895472413dff0a4451de19f492ea35",
+      "candidate_sha256": null
+    },
+    {
+      "source": "devsecops/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "43989139169ee559a4660596b1cf9e33efc20bcf5f567b6d75fce0c86fb48b91",
+      "candidate_sha256": "b7d3e10841dd66ade00c105c77930202198e56dbbc4a9878eade440d4d2c8ea4"
+    },
+    {
+      "source": "devsecops/acceptance.py",
+      "disposition": "sanitized",
+      "source_sha256": "90708866cc275b568b521d09cf1543403aa48f792ff4b0987d60a3b59ccc7095",
+      "candidate_sha256": "41d9c1abf64e28c5080d8602b7617529fa1d7800382be42aeaf0bac50ef09c16"
+    },
+    {
+      "source": "devsecops/app-create.py",
+      "disposition": "excluded",
+      "source_sha256": "727fa76fc3faeaa0bb9a5abcf530513360e40277b027ad37a5b7a7329986d0b6",
+      "candidate_sha256": null
+    },
+    {
+      "source": "devsecops/app-test-red.py",
+      "disposition": "excluded",
+      "source_sha256": "491708339f371b0fe3cc11e39d888699e36f28340def1fd152d9b82d99e5448c",
+      "candidate_sha256": null
+    },
+    {
+      "source": "devsecops/argocd/demo-app-dev.yaml",
+      "disposition": "copied",
+      "source_sha256": "a6efffc86476a2a9889ede7e8378d9abe459f792c9d586f9f5ccf570b6fe64f2",
+      "candidate_sha256": "a6efffc86476a2a9889ede7e8378d9abe459f792c9d586f9f5ccf570b6fe64f2"
+    },
+    {
+      "source": "devsecops/argocd/demo-app-prod.yaml",
+      "disposition": "copied",
+      "source_sha256": "5c627962001f51a9e843dca5af8fdbaa81d765d0bd4023f92dbec4821d8bea04",
+      "candidate_sha256": "5c627962001f51a9e843dca5af8fdbaa81d765d0bd4023f92dbec4821d8bea04"
+    },
+    {
+      "source": "devsecops/argocd/demo-app-staging.yaml",
+      "disposition": "copied",
+      "source_sha256": "3f4e701a21ddf8f4f9cc38cb77fd02d9b996a786e8c21f65f9cd18201efb1fe5",
+      "candidate_sha256": "3f4e701a21ddf8f4f9cc38cb77fd02d9b996a786e8c21f65f9cd18201efb1fe5"
+    },
+    {
+      "source": "devsecops/bootstrap-ci.py",
+      "disposition": "sanitized",
+      "source_sha256": "c10866a063f9841c5ffe685b1f6074f8de59a141b4a8503c9890405f01eeb6f5",
+      "candidate_sha256": "da98f8e284ba913bd7398a33b97822619afda1425be0b2596402119911a378dd"
+    },
+    {
+      "source": "devsecops/ci-login.py",
+      "disposition": "sanitized",
+      "source_sha256": "1d57c56e59fd69a07a589c30be38f820e151d3accba51c87b7e38600c4a31454",
+      "candidate_sha256": "fb0506308b1d472e85543c24d8eebfd4e3d9a51c3f25ba01e43e9bd2c6676340"
+    },
+    {
+      "source": "devsecops/ci-repo.json",
+      "disposition": "copied",
+      "source_sha256": "67acccf99fad62ca667e13f835417e8e11179cad3433e84d599a2ded648aadba",
+      "candidate_sha256": "67acccf99fad62ca667e13f835417e8e11179cad3433e84d599a2ded648aadba"
+    },
+    {
+      "source": "devsecops/ci-status.py",
+      "disposition": "sanitized",
+      "source_sha256": "31fdd987e35ff9fa93ecd273e6f268463c753140cb9fca086abe8ec220e939a8",
+      "candidate_sha256": "1b5336869e7d16c428ff0aa4f849938bc74b15ffd97d162f82b88ddd317a1750"
+    },
+    {
+      "source": "devsecops/cnpg-digest-fix.py",
+      "disposition": "sanitized",
+      "source_sha256": "21a4b9a10f79a5124cb5591fa0d57f012db2c2dfcb598d02dad8bf8600e57440",
+      "candidate_sha256": "d41d191e9caedf87319b456e25d607ffffe96890d98640e9a07d53525c867cf0"
+    },
+    {
+      "source": "devsecops/cnpg-values.yaml",
+      "disposition": "copied",
+      "source_sha256": "612db2baec5548d08bb406c79be5e497b2d021e8aa4aced897353b5dc279d6ad",
+      "candidate_sha256": "612db2baec5548d08bb406c79be5e497b2d021e8aa4aced897353b5dc279d6ad"
+    },
+    {
+      "source": "devsecops/compat-fixes.py",
+      "disposition": "sanitized",
+      "source_sha256": "83051ddb6a71877baf730b1c0e6cdd73c3ebe4afa047e5151d7131482391889a",
+      "candidate_sha256": "cd07023cf5d3a4de52940472c9e61033375bd40e676764b3375f5e1be0050973"
+    },
+    {
+      "source": "devsecops/configure-registry-trust.py",
+      "disposition": "sanitized",
+      "source_sha256": "cda37e1d97036749f9bbe26fb658a79317cf98e8f501935a3950a6ee0fb05318",
+      "candidate_sha256": "362705f6ed574cb47ccc4149abd9e2bf4005f7c2023a8a1aee7bd2995f3b02ce"
+    },
+    {
+      "source": "devsecops/final-audit.py",
+      "disposition": "sanitized",
+      "source_sha256": "97a7f866f819b4575366e0bcc6786bb26de04d7656edb4797c1ae01a4a405a9a",
+      "candidate_sha256": "2ec8e8cdfd0c12127e740cdfd3fc7478c03ea96e8f7bbfd59bcddc1be8a39c06"
+    },
+    {
+      "source": "devsecops/final-setup.py",
+      "disposition": "sanitized",
+      "source_sha256": "6ecf33e685093199ba161438572d5b85a9549461a006b034502a95cf88af1905",
+      "candidate_sha256": "a6a761a0b5755b508370ec90fccc89356f1545ffa744dac1f306b612b7287f14"
+    },
+    {
+      "source": "devsecops/infra-images.json",
+      "disposition": "copied",
+      "source_sha256": "c9166acf40e41959231288785dd237490a6339bb6424c18657dae006290c47f4",
+      "candidate_sha256": "c9166acf40e41959231288785dd237490a6339bb6424c18657dae006290c47f4"
+    },
+    {
+      "source": "devsecops/inotify-diag.py",
+      "disposition": "sanitized",
+      "source_sha256": "75f8cf874aa24236623c9fa0e28f7b44950999c1b74c329dcf8fb3201a3b0fcc",
+      "candidate_sha256": "359186c3f620633f331c361c18705a2483cef5a2499ce277d346d475b5b9a6d4"
+    },
+    {
+      "source": "devsecops/install-data-platform.py",
+      "disposition": "sanitized",
+      "source_sha256": "cb7471b6eab632402d4bc1081800bba855bf29d76abcef33852080c669091b42",
+      "candidate_sha256": "9c33a94b5211c2040e571efecf98647d9cea982149db6a5de20949c29839ed17"
+    },
+    {
+      "source": "devsecops/install-environments.py",
+      "disposition": "sanitized",
+      "source_sha256": "bde42b442a302384aa9d1cb5584b30f15313ea47c39b438fa817b1dd4ce2c8f2",
+      "candidate_sha256": "adf146cd506d2f96b360dcd2fb69262bdd138f040d531a8c8c4e5f79dac02048"
+    },
+    {
+      "source": "devsecops/install-gitops.py",
+      "disposition": "sanitized",
+      "source_sha256": "648d35b63a712acaaeaa7c2ecab6da97527ac451d688c0253efffb3371b3ef33",
+      "candidate_sha256": "b93fab193f3a588b42136779963acc124c065eb3b91696ab13051a14ddbb8db2"
+    },
+    {
+      "source": "devsecops/install-signature-gate.py",
+      "disposition": "sanitized",
+      "source_sha256": "f1c54468214f5e853d4d31aa4774644049abb669e1279168fe87ce87f79ed940",
+      "candidate_sha256": "173eed0127a64c94345e2f089701d136857fadb967077abb4d386a66b2c820fa"
+    },
+    {
+      "source": "devsecops/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "653975f6da7ec670c1dabe763833db1f1f0f0c189b51f56b4bfe96db33878983",
+      "candidate_sha256": "27a6bfd47a32d3439ff9e7da193f6beb5c4cb0f8d7031d36f208a150b9303630"
+    },
+    {
+      "source": "devsecops/kafka.yaml",
+      "disposition": "copied",
+      "source_sha256": "985acfd5d435e6e6bdc9fa7b8dcdcf11316dd5f6e0b676e5edb73f448e51ec63",
+      "candidate_sha256": "985acfd5d435e6e6bdc9fa7b8dcdcf11316dd5f6e0b676e5edb73f448e51ec63"
+    },
+    {
+      "source": "devsecops/kyverno-registry-values.yaml",
+      "disposition": "sanitized",
+      "source_sha256": "457fdc1c35a9b6ac8b03655fa1ad2f8f8af8d6e18718555de5c5eb6735b38a20",
+      "candidate_sha256": "404344b76b23169487eb8b86645f65cd6f209c2ed6f08a9acde257915a9f72e5"
+    },
+    {
+      "source": "devsecops/lab-prod-signatures.yaml",
+      "disposition": "sanitized",
+      "source_sha256": "d914e85b0c6d1ba4be4ef1741706bd047752caebc8e99652aefc11ae672a6b39",
+      "candidate_sha256": "b1fc5b1bd4a12d588b01d704413a3df72fe438f2212c89b13855f6b0f501025f"
+    },
+    {
+      "source": "devsecops/netpol/dev-acme.yaml",
+      "disposition": "copied",
+      "source_sha256": "84aa007c6ed3a1784206d0293dd8fb9142338eb4b1de9d9a2077d2194cebc160",
+      "candidate_sha256": "84aa007c6ed3a1784206d0293dd8fb9142338eb4b1de9d9a2077d2194cebc160"
+    },
+    {
+      "source": "devsecops/netpol/dev-cnpg-api.yaml",
+      "disposition": "copied",
+      "source_sha256": "e318ff92698fd66aa1971d5cdcade9a511016ea3db2029aa17466c8cfe3ab488",
+      "candidate_sha256": "e318ff92698fd66aa1971d5cdcade9a511016ea3db2029aa17466c8cfe3ab488"
+    },
+    {
+      "source": "devsecops/netpol/dev.yaml",
+      "disposition": "copied",
+      "source_sha256": "8534cba9e3e0d3b27e90ab7f241ff0e28991fbfe41a135739034f8619fd04546",
+      "candidate_sha256": "8534cba9e3e0d3b27e90ab7f241ff0e28991fbfe41a135739034f8619fd04546"
+    },
+    {
+      "source": "devsecops/netpol/prod-acme.yaml",
+      "disposition": "copied",
+      "source_sha256": "240e1412e4ee27f9e8ef98716f4e3c3bc541a612e65e4a5b890203e430d99cba",
+      "candidate_sha256": "240e1412e4ee27f9e8ef98716f4e3c3bc541a612e65e4a5b890203e430d99cba"
+    },
+    {
+      "source": "devsecops/netpol/prod-cnpg-api.yaml",
+      "disposition": "copied",
+      "source_sha256": "f5698e7920fb82ee900b7aad07c8d1e39baac5b77d483981c264b8d7e9dbc111",
+      "candidate_sha256": "f5698e7920fb82ee900b7aad07c8d1e39baac5b77d483981c264b8d7e9dbc111"
+    },
+    {
+      "source": "devsecops/netpol/prod.yaml",
+      "disposition": "copied",
+      "source_sha256": "2b725e78dc520b6652c571d5127e082c125aba4b0660dc3ecdde8583903c8e40",
+      "candidate_sha256": "2b725e78dc520b6652c571d5127e082c125aba4b0660dc3ecdde8583903c8e40"
+    },
+    {
+      "source": "devsecops/netpol/staging-acme.yaml",
+      "disposition": "copied",
+      "source_sha256": "45544fa1c9a47797cf5abfa16ce7d02757af3a2b05ee970e281a09dbfd42c8f4",
+      "candidate_sha256": "45544fa1c9a47797cf5abfa16ce7d02757af3a2b05ee970e281a09dbfd42c8f4"
+    },
+    {
+      "source": "devsecops/netpol/staging-cnpg-api.yaml",
+      "disposition": "copied",
+      "source_sha256": "fafeef77d00a361f0add4953a304af2a12c495a6cdf2e11cecc1206dd4cd139e",
+      "candidate_sha256": "fafeef77d00a361f0add4953a304af2a12c495a6cdf2e11cecc1206dd4cd139e"
+    },
+    {
+      "source": "devsecops/netpol/staging.yaml",
+      "disposition": "copied",
+      "source_sha256": "c2a25b68a007cbbf195cd220b95abd87ba8ea612637c5393d852f34a03347614",
+      "candidate_sha256": "c2a25b68a007cbbf195cd220b95abd87ba8ea612637c5393d852f34a03347614"
+    },
+    {
+      "source": "devsecops/oci-fix.py",
+      "disposition": "sanitized",
+      "source_sha256": "ec9bd3058aec25be23f69c11dffe3d886ac80ce87f85bfa2ccdea2877e95c144",
+      "candidate_sha256": "f4978ef3eb5e16fe99b9d7e57e60ee6e3a2f88f81fecfcd0d7f0d5a70aa33d5e"
+    },
+    {
+      "source": "devsecops/offline-policy-fix.py",
+      "disposition": "sanitized",
+      "source_sha256": "bc0c1963f5a81bf5fb543ca9965eaf7e6005ff74104a36f751979a152f8c9fa8",
+      "candidate_sha256": "be4914846217295528a1f0537fb07d87ca06399ec4765048e8a11ac900b28605"
+    },
+    {
+      "source": "devsecops/pipeline-create.py",
+      "disposition": "sanitized",
+      "source_sha256": "52ec05705c7aa87f85068bc2e26b351f86a7ee0cc343e5193cb98bf501862454",
+      "candidate_sha256": "22a77bdbc847834c7cd8e199f31e6f73b9e0915e705e0e9ed8f7939dd7b7a04e"
+    },
+    {
+      "source": "devsecops/publish-repos.py",
+      "disposition": "sanitized",
+      "source_sha256": "654d5f70f9acd1be4f9cbaa475b1cd2d1a02c887707ba372c0d39d1d8824ed48",
+      "candidate_sha256": "9d9106f16f100fcd5623013a41cce4af87a9d475cf52eaa55a62cb195736a6bd"
+    },
+    {
+      "source": "devsecops/recovery-fixes.py",
+      "disposition": "sanitized",
+      "source_sha256": "c8a4eeaa07ed7ba985511418eaa62e1c0772cb09962843624dbf5a9af57bdbb3",
+      "candidate_sha256": "c7f2c2959df19c01ed526112eed35437a6554fd8f8f5f07b48a5dbe6da36f3d3"
+    },
+    {
+      "source": "devsecops/replay-webhook.py",
+      "disposition": "sanitized",
+      "source_sha256": "b61835813186901e9b5af7fc5c81db23e0074aec915bab8a9144c61930af0a98",
+      "candidate_sha256": "d087c32ffb816ca4d16d1324e1407bb82ec091daa2e9fe2e18f17040794441fe"
+    },
+    {
+      "source": "devsecops/signature-format-fix.py",
+      "disposition": "sanitized",
+      "source_sha256": "24bbb04ae97abbf6c068c9e46fa6b4eb7f2f150331333149f42c2f09f646a5dd",
+      "candidate_sha256": "daf936836d91519ab3326160c2690dc97fee7bdd17edb350b8589ee250f48ace"
+    },
+    {
+      "source": "devsecops/test-generator.py",
+      "disposition": "sanitized",
+      "source_sha256": "cd3a173eeebdf44dfe145430652aebf9332aaba431c08829e74963c5c378a416",
+      "candidate_sha256": "7e0e0399d2c17e8e47ef5472a8dbfa6cff67aa48fc90679dc09fa67858a43f47"
+    },
+    {
+      "source": "devsecops/test-recovery.py",
+      "disposition": "copied",
+      "source_sha256": "dfc7bca8248d4a2decb00f7e01c4250e28033c6f352ed9f85ed6afd5b5809999",
+      "candidate_sha256": "dfc7bca8248d4a2decb00f7e01c4250e28033c6f352ed9f85ed6afd5b5809999"
+    },
+    {
+      "source": "devsecops/vendor/20-kubernetes.md",
+      "disposition": "excluded",
+      "source_sha256": "58b273f58fa9c700fab82d4c0349c82fdbc66e0e1e92996f11f2a1596a451d17",
+      "candidate_sha256": null
+    },
+    {
+      "source": "devsecops/vendor/agent-values.yaml",
+      "disposition": "excluded",
+      "source_sha256": "8c994a55e05336e92f81d479d07faa3a16df3c690348614aa76cf80d66deaf91",
+      "candidate_sha256": null
+    },
+    {
+      "source": "devsecops/vendor/cnpg-values.yaml",
+      "disposition": "excluded",
+      "source_sha256": "361630eeb052bc0427a6099eadd185bb2b9ad1332311566e57db531251b2f8fd",
+      "candidate_sha256": null
+    },
+    {
+      "source": "devsecops/vendor/forgejo-api.json",
+      "disposition": "excluded",
+      "source_sha256": "0a336dc9cbc3f61c7c128456df7c37bbafe91e00d564d91b3f20dee39f220221",
+      "candidate_sha256": null
+    },
+    {
+      "source": "devsecops/vendor/kyverno-chart-values.yaml",
+      "disposition": "excluded",
+      "source_sha256": "aeadec63937711533b77e2a44d258cb2228da595175292d2271de9cdbce6c557",
+      "candidate_sha256": null
+    },
+    {
+      "source": "devsecops/vendor/login.go",
+      "disposition": "excluded",
+      "source_sha256": "447425ce09657990461175ab1fdf206fa78c668fd5a3782f2a3a497169869027",
+      "candidate_sha256": null
+    },
+    {
+      "source": "devsecops/vendor/server-values.yaml",
+      "disposition": "excluded",
+      "source_sha256": "cd3227f6c2d9339301b5cb6abc738fb7b751c16243eb4106f6a7c408d94ef75e",
+      "candidate_sha256": null
+    },
+    {
+      "source": "devsecops/woodpecker-values.yaml",
+      "disposition": "sanitized",
+      "source_sha256": "51ee62c0ee226953b8018fbb5967e2f6eb6deef0bae3af48feef6673b81c4e4e",
+      "candidate_sha256": "fcb62145e24551952fdbb37b284cfc8d35c1e70439b52ee7c0ba89dc461cfd83"
+    },
+    {
+      "source": "hardening/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "9fcca1548b4ada82afcd285b3619cc0f73dda1e089920dff6d760ef6fc07e2ed",
+      "candidate_sha256": "d520f4860b722b24d82d118b5fc55f550c07398b685501a8f2a25a139d87e1f3"
+    },
+    {
+      "source": "hardening/configure-live-policies.py",
+      "disposition": "sanitized",
+      "source_sha256": "7345772a55619fb5ff28307602fc9636937b2ecf8393223e874c1ce02429601a",
+      "candidate_sha256": "4162ba018a17f3b4170b523c172b00190cdbe44b215942e5efe0c0ec31c43f40"
+    },
+    {
+      "source": "hardening/create-client-config.py",
+      "disposition": "sanitized",
+      "source_sha256": "8199341fe70e0160f0a607124d43ce17d7d27b7b6a51c2cd110a422811766c66",
+      "candidate_sha256": "6e82282410d490f431f9c31694916247cf77bc878a5d4e0faa3740f3bac927a2"
+    },
+    {
+      "source": "hardening/create-live-artifacts.py",
+      "disposition": "sanitized",
+      "source_sha256": "76ce8aa153712137d467a2672cec5bd00d474e353b018e5ad8be9572ce94e9dd",
+      "candidate_sha256": "20f30eabf821a315311901bdf7e6b986db52d0634d0c87976be4a9ae23badfc0"
+    },
+    {
+      "source": "hardening/enable-live-baseline.py",
+      "disposition": "sanitized",
+      "source_sha256": "a0b237a8089286530b17de56cfaa12cf0559aa97b14fea4c498b4f7bccbf59f6",
+      "candidate_sha256": "93dff4c78f2f49dafc785698c386365ee156ebae2d2c5588735254c0189fdc06"
+    },
+    {
+      "source": "hardening/finalize-safety.py",
+      "disposition": "sanitized",
+      "source_sha256": "3cbd15dd8458dfc2a5993ee459078a8a255e00ecee307622c8358cbb1f20171f",
+      "candidate_sha256": "9fd704a58b5c131a2d3f01b481c275d1c5cf31dcf77e176836fc09281a5d40e0"
+    },
+    {
+      "source": "hardening/fix-live.py",
+      "disposition": "sanitized",
+      "source_sha256": "507c246a9830a236f0ca1781bdd9a7810af57a60f57a318c7f7f07a104323133",
+      "candidate_sha256": "d8e2bba325aa89e54d9d8af2b7c7b3271e21c5cf3ef532034bfc840f40770298"
+    },
+    {
+      "source": "hardening/kyverno/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "d7c5f6c38d85c6dc3fe1b2500a1e2794128a6aed90c6c458a76a142ce145cbdb",
+      "candidate_sha256": "b2637a78f7eb5dab63106b49745e426f7444a6e08c0eabeef8ab7d6b3442cd46"
+    },
+    {
+      "source": "hardening/kyverno/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "96610520745968b7c7745764549188e5b6a34d160ba162971ff7b75812a7f64e",
+      "candidate_sha256": "96610520745968b7c7745764549188e5b6a34d160ba162971ff7b75812a7f64e"
+    },
+    {
+      "source": "hardening/kyverno/apply-policies.sh",
+      "disposition": "sanitized",
+      "source_sha256": "7037c2a074f59e2bae3bd97e089b2cc0b904b2920009e140c9628dd59da08cdd",
+      "candidate_sha256": "7c96a9b2f44954f83a061fa02f1f2d8c7eddeaf6ed4131a016fef82cd8bb63a3"
+    },
+    {
+      "source": "hardening/kyverno/cosign.pub",
+      "disposition": "excluded",
+      "source_sha256": "c2b7c20561e9e16fddb25be49c6593aa22820dd99e13518292251f177b5424da",
+      "candidate_sha256": null
+    },
+    {
+      "source": "hardening/kyverno/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "d6fdc0e45bf1a3eb0a62e7ac2891fa057be713c14bea566011205bb693a12ba0",
+      "candidate_sha256": "7399bfb014bed91491366140997d7cf89fa30930f5223c0c2973f31f62fd7078"
+    },
+    {
+      "source": "hardening/kyverno/policies/lab-host-isolation.yaml",
+      "disposition": "copied",
+      "source_sha256": "599a11a06150f3d01f01ba6bdb3027d5c09bb4f898759c41ed9219804551f9e6",
+      "candidate_sha256": "599a11a06150f3d01f01ba6bdb3027d5c09bb4f898759c41ed9219804551f9e6"
+    },
+    {
+      "source": "hardening/kyverno/policies/lab-image-registries.yaml",
+      "disposition": "copied",
+      "source_sha256": "1bc8ae5dc8861d8eb4db6a6ced04f7775fac1fde83e1dbdc73cd4779daec7a08",
+      "candidate_sha256": "1bc8ae5dc8861d8eb4db6a6ced04f7775fac1fde83e1dbdc73cd4779daec7a08"
+    },
+    {
+      "source": "hardening/kyverno/policies/lab-image-tags.yaml",
+      "disposition": "copied",
+      "source_sha256": "67e3ebfab4ff6356645a67a153ef86761ab73d5e25578fc46f1d2dca4fa4694d",
+      "candidate_sha256": "67e3ebfab4ff6356645a67a153ef86761ab73d5e25578fc46f1d2dca4fa4694d"
+    },
+    {
+      "source": "hardening/kyverno/policies/lab-no-default-token.yaml",
+      "disposition": "copied",
+      "source_sha256": "5da02360b8b799fe361c789557fd001059dba3e075813027bfa0af4977e6758a",
+      "candidate_sha256": "5da02360b8b799fe361c789557fd001059dba3e075813027bfa0af4977e6758a"
+    },
+    {
+      "source": "hardening/kyverno/policies/lab-prod-signatures.yaml",
+      "disposition": "sanitized",
+      "source_sha256": "400dd333b285b0b8cf2030929b324a3baed0c15f4422455d37333cdf24ee6a06",
+      "candidate_sha256": "62d51bbe190898267e5939f221a00d00a797e38c7034420a00b7c84fafdd797d"
+    },
+    {
+      "source": "hardening/kyverno/policies/lab-resource-budget.yaml",
+      "disposition": "copied",
+      "source_sha256": "2342618b3fd21471c12ca396759d983d02b824691fe3afe68edb0f2d0579823b",
+      "candidate_sha256": "2342618b3fd21471c12ca396759d983d02b824691fe3afe68edb0f2d0579823b"
+    },
+    {
+      "source": "hardening/kyverno/recover-ca.py",
+      "disposition": "sanitized",
+      "source_sha256": "d87827e33253c7819d35f0ca80567f8fcc39f010fa20906b4af01f689c9dedb4",
+      "candidate_sha256": "25b8968f3588409c940b2124c5ea9494d97ad207c37978972fb7b89830bda0a2"
+    },
+    {
+      "source": "hardening/kyverno/render.py",
+      "disposition": "sanitized",
+      "source_sha256": "52c146d23f40d25bee16ef8c07363a55b528c886376592be56c1beff2654b8d3",
+      "candidate_sha256": "758c160b7164d8f845f6b4f349c98c0f43edfc035bee6e98cc1f90b389fdffbc"
+    },
+    {
+      "source": "hardening/kyverno/test-signatures.sh",
+      "disposition": "sanitized",
+      "source_sha256": "cdb68d5486badebd4cc432d69b71e8a6e51d112c9edcde876256fb7f5f9a148a",
+      "candidate_sha256": "769e1856d61a61f997788a7b023c09948ce0fac5001b31524c32dbccfae3d19a"
+    },
+    {
+      "source": "hardening/kyverno/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "cd637649dbbf8ab9c721f8d55200d0eac1a146e79a859b17b53c882d2e93cda1",
+      "candidate_sha256": "310f45885084684442dc4012f35422e775dc65a93d55eb384ba23e50fbc90329"
+    },
+    {
+      "source": "hardening/kyverno/tests/kyverno-test.yaml",
+      "disposition": "copied",
+      "source_sha256": "71faf8ec7baf70189ef38808a52e84fbfcbfbe049cfe94570c67fed90a1229f1",
+      "candidate_sha256": "71faf8ec7baf70189ef38808a52e84fbfcbfbe049cfe94570c67fed90a1229f1"
+    },
+    {
+      "source": "hardening/kyverno/tests/resources.yaml",
+      "disposition": "copied",
+      "source_sha256": "f201b743f6a21e28b8bca29852c7f33e204d8e0aa94716a4793223aef779e176",
+      "candidate_sha256": "f201b743f6a21e28b8bca29852c7f33e204d8e0aa94716a4793223aef779e176"
+    },
+    {
+      "source": "hardening/kyverno/values.yaml",
+      "disposition": "sanitized",
+      "source_sha256": "b66895f6e854c689e3500d0c9bf23d2f0cf98a01c2ca9be85e32b48bb1515bea",
+      "candidate_sha256": "4aae72fb6118b86a436d9a225c48762a5ba795a15cd5b8bfb95429ea2300ba49"
+    },
+    {
+      "source": "hardening/netpol/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "bb68d3da48ab26696fa6dfb6becec9efecd8bd8e3602b846880c157f49ed8358",
+      "candidate_sha256": "544cd8232d9f99cdf9dcf8f6f151e926d0e31d4ae30047604723766d9d8ab058"
+    },
+    {
+      "source": "hardening/netpol/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "6ba1bd29c3ab4e1ff5b4756aa6747f7c463a9422be6f0c223f5bcc5a8ec38733",
+      "candidate_sha256": "6ba1bd29c3ab4e1ff5b4756aa6747f7c463a9422be6f0c223f5bcc5a8ec38733"
+    },
+    {
+      "source": "hardening/netpol/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "ccdc0d4a89419159a95d9eba633892bca56cd06276dc377215b9515bb8546e3a",
+      "candidate_sha256": "417381483ab88e571f32f42d76368b5ba6f2922452e9f1d82f2f2f14d7538616"
+    },
+    {
+      "source": "hardening/netpol/isolate-template.yaml",
+      "disposition": "copied",
+      "source_sha256": "94531896ce787b7044aae4f646cde8bf543e50f113a238f0d0d82524c3c1b19c",
+      "candidate_sha256": "94531896ce787b7044aae4f646cde8bf543e50f113a238f0d0d82524c3c1b19c"
+    },
+    {
+      "source": "hardening/netpol/policies.yaml",
+      "disposition": "copied",
+      "source_sha256": "c8e49c8c71ff3a5a423410900b86529f179caf273d794504754ddb9d99ed2abf",
+      "candidate_sha256": "c8e49c8c71ff3a5a423410900b86529f179caf273d794504754ddb9d99ed2abf"
+    },
+    {
+      "source": "hardening/netpol/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "4dff13aa3ef86090bedfff80a4b2326c72575f4af4566a02610b31c2f10f977e",
+      "candidate_sha256": "b712e58113991417b5defa76cc22cb05e0f2de7111729dea136bdf2db85391af"
+    },
+    {
+      "source": "hardening/prepare-live.py",
+      "disposition": "sanitized",
+      "source_sha256": "9237e0659002e95275c703f3ae302f029a0829be5015f1a01ac88b034d85cb73",
+      "candidate_sha256": "1b647610a88e9b46de0dcc51a2d04201aa5d69f0d4ca2b56ce5166dacc12ad30"
+    },
+    {
+      "source": "hardening/prove.py",
+      "disposition": "sanitized",
+      "source_sha256": "4c33f4b150786f32dd75fc407bad7059888d9ffde3eb9f407a0ec001ebbc814c",
+      "candidate_sha256": "5c062eeeaef4f52a64c91e3306470b10c5c056f783aaa654e4ec5d8eb9a1f36e"
+    },
+    {
+      "source": "hardening/pss/EXEMPTIONS.md",
+      "disposition": "sanitized",
+      "source_sha256": "b8b900ff21692ef2a709deff9b4f55becb97139d161b7636b58559973a33db94",
+      "candidate_sha256": "7413f5ddaa3cd4b1a08a48eb0e2a16df431f0863fafdc1f8d22c25ae3652bcf0"
+    },
+    {
+      "source": "hardening/pss/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "cb2d639b24bf9917499b4a5c8e0a3e5e9735f202be886393a5cac7a23e419137",
+      "candidate_sha256": "ff7286dad4fc03e6cc186c113c183ca4670cdbf8bd5b9bce7d01e461a7ea0b8f"
+    },
+    {
+      "source": "hardening/pss/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "9a4a8dea61fc064c642e0c09958f39980267436f1a23e4dd76abd0da1d596821",
+      "candidate_sha256": "9a4a8dea61fc064c642e0c09958f39980267436f1a23e4dd76abd0da1d596821"
+    },
+    {
+      "source": "hardening/pss/apply-budgets.py",
+      "disposition": "sanitized",
+      "source_sha256": "2fee0618a1ec426db901da81d36f036884fe6ebe736a381cff4bfb43e7bfba9a",
+      "candidate_sha256": "057a011b652fdebb3cbf51a2aae1ed7bfd76e2cbaaa80076760b64096c7b7e42"
+    },
+    {
+      "source": "hardening/pss/budgets.yaml",
+      "disposition": "copied",
+      "source_sha256": "36c5f767d8ba8cb8e10240e8f8dbcb7a68b656e54eefc2202941c4d40bd6f5c1",
+      "candidate_sha256": "36c5f767d8ba8cb8e10240e8f8dbcb7a68b656e54eefc2202941c4d40bd6f5c1"
+    },
+    {
+      "source": "hardening/pss/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "ff364abc13794a5648e91ef1695c177100cd3f843a9d04fca7ecc9ee2572df4f",
+      "candidate_sha256": "b85d0be4408244ee9d441b52ab9f1f6ed5f8ad448a7fd4adeb41331e9c018bb8"
+    },
+    {
+      "source": "hardening/pss/namespaces.yaml",
+      "disposition": "copied",
+      "source_sha256": "b38bd92bc4a5a71606027689a2185d7884b85ad8a3f19651882d995a78797d94",
+      "candidate_sha256": "b38bd92bc4a5a71606027689a2185d7884b85ad8a3f19651882d995a78797d94"
+    },
+    {
+      "source": "hardening/pss/privileged-negative.yaml",
+      "disposition": "copied",
+      "source_sha256": "deed64adf9e458237822f92dca626d0950126c9e1f8a64b5826ae0bccf731a9f",
+      "candidate_sha256": "deed64adf9e458237822f92dca626d0950126c9e1f8a64b5826ae0bccf731a9f"
+    },
+    {
+      "source": "hardening/pss/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "599fb2055b8c6566f87c834125047300e151d178df0bd7f6f7e8bae24b12df56",
+      "candidate_sha256": "1b83d888f008aa3fc864be774b8a62f130ab1195a62b35e088f0074c4c3d97f3"
+    },
+    {
+      "source": "hardening/rbac/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "31eba38128521e46bdb6ae4c92ccc8b15598437321c562845ee40de7ce61fbec",
+      "candidate_sha256": "e736c569e4d8ba0ff9cd07dec75ea21dbb535e8214f5a571ee37c350433eb89e"
+    },
+    {
+      "source": "hardening/rbac/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "c260dedbb1415643431ba6dddc567da766ce4290c87e91a7203a09b35d41df68",
+      "candidate_sha256": "c260dedbb1415643431ba6dddc567da766ce4290c87e91a7203a09b35d41df68"
+    },
+    {
+      "source": "hardening/rbac/audit-secrets.py",
+      "disposition": "sanitized",
+      "source_sha256": "cd7b71edd1fa44ec978a08660ba9c3dd5ca00fc65dbbef8b70c812842a4cb948",
+      "candidate_sha256": "95c2f1d56adb042eddb6b353c3fe2db72483f93d0fe831cfb33f64ee6e68440a"
+    },
+    {
+      "source": "hardening/rbac/audit-secrets.sh",
+      "disposition": "sanitized",
+      "source_sha256": "df45d6e6fa7523bae3656b9604b710a19fcfb79d945121bec7a73da73e0b0096",
+      "candidate_sha256": "f4bb6c608633ec36eab15cb4859f1c9f1a4f1aef764c9a7310cdf33dc625f9d6"
+    },
+    {
+      "source": "hardening/rbac/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "6baf1bf77719c1d82a6e1b56d230ac8b88d1ffc5854829d67e76ca62d734c924",
+      "candidate_sha256": "af6bfc40f1960eebb16a1b408b2e6908f4ab7d00eed697d1657720e4193a1f1a"
+    },
+    {
+      "source": "hardening/rbac/prove.py",
+      "disposition": "sanitized",
+      "source_sha256": "6eab581294fddac5ddf1a24db14e586804d7ab4752e3a93ad2506bc0c0f7b01b",
+      "candidate_sha256": "270993102cf856aa03b78a5b7af195a635b3590a399a1afdbe4b178d043beb67"
+    },
+    {
+      "source": "hardening/rbac/roles.yaml",
+      "disposition": "copied",
+      "source_sha256": "f79927771404fc5f5092e44de6c51cb82c9f87cf8009f190a5a28dc10cc5b79c",
+      "candidate_sha256": "f79927771404fc5f5092e44de6c51cb82c9f87cf8009f190a5a28dc10cc5b79c"
+    },
+    {
+      "source": "hardening/rbac/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "ef790818fe504b916a171cf626d2766baf4d2c0442a2daebbf9a70712e001a04",
+      "candidate_sha256": "e983e1a560afda93551f3882a6a7625d74e1504005f70ccadf5c3277103147fa"
+    },
+    {
+      "source": "hardening/safe-journal.py",
+      "disposition": "sanitized",
+      "source_sha256": "a92535ff9be0e845d205367c299fa255ec358764009a156909e4ba2ccbfa4dac",
+      "candidate_sha256": "fd10f3a23575cb777626c62fbf19fec7075e1f26ad5d343e860c251e3db12699"
+    },
+    {
+      "source": "hardening/write-blocked-report.py",
+      "disposition": "excluded",
+      "source_sha256": "3c44b4131e051572e8fed001212ce67baf53cb6ba4507c4f4fc390970c89dacb",
+      "candidate_sha256": null
+    },
+    {
+      "source": "infra-services/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "d81c312e372675415e3680b3cc0560f2057c182c5a1eb8c3b831971ad5f5bc33",
+      "candidate_sha256": "91f244aeb4060b09859c12159b89e38f7361c37107f2eaa948e930987dcde131"
+    },
+    {
+      "source": "infra-services/backup/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "104b05f0c02353d9a58a0993fe68fe630eb946d7da010e2efabe009b3eeb5bf0",
+      "candidate_sha256": "c490c431c0a4267e1f5c6ab2f8c61c20e4f708eca2c1638ded75c70fa17493ed"
+    },
+    {
+      "source": "infra-services/backup/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "3cc555490906fa6b0488e358fb334c6215d8ed5878e02ec102fad675d2b0cb02",
+      "candidate_sha256": "3cc555490906fa6b0488e358fb334c6215d8ed5878e02ec102fad675d2b0cb02"
+    },
+    {
+      "source": "infra-services/backup/drill-backup.json",
+      "disposition": "copied",
+      "source_sha256": "ddbca864fc4d7768efd0c41328224626a42b6b2d3e3ad646831e58c9341f0129",
+      "candidate_sha256": "ddbca864fc4d7768efd0c41328224626a42b6b2d3e3ad646831e58c9341f0129"
+    },
+    {
+      "source": "infra-services/backup/drill-fixture.yaml",
+      "disposition": "sanitized",
+      "source_sha256": "02c6772457c2918da6cec4dbe86e37d93e85b345248d28c01391189515a44f01",
+      "candidate_sha256": "41c845523e79bc6b77880eb20b87c7f8af8addfef53136842257e39acfe4a70c"
+    },
+    {
+      "source": "infra-services/backup/drill-restore.json",
+      "disposition": "copied",
+      "source_sha256": "80f1436f1360fe06621a390e7d3bc9be8d5307d9eecf8f762aefa2db072220b2",
+      "candidate_sha256": "80f1436f1360fe06621a390e7d3bc9be8d5307d9eecf8f762aefa2db072220b2"
+    },
+    {
+      "source": "infra-services/backup/drill.sh",
+      "disposition": "sanitized",
+      "source_sha256": "921c315094561fd1a4f93670be4d0108576a6395a22487715ad578c22638d2c3",
+      "candidate_sha256": "8e2a310179e2a58120d9c2a6616e77459d0e2c8a789c3fe4fdda721e7a26fd51"
+    },
+    {
+      "source": "infra-services/backup/garage.yaml",
+      "disposition": "copied",
+      "source_sha256": "c972816265206ac8c32c0ab71753b6f907ee6dfba3438a32d264734989473a04",
+      "candidate_sha256": "c972816265206ac8c32c0ab71753b6f907ee6dfba3438a32d264734989473a04"
+    },
+    {
+      "source": "infra-services/backup/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "01cce979cade831cf867528eb0dab775f2db7032013de4350988f650b36ca0be",
+      "candidate_sha256": "36b7efc5f49f4092455c15be21fc96f915634764a5961f8c74022c3901d05e05"
+    },
+    {
+      "source": "infra-services/backup/node-agent-config.yaml",
+      "disposition": "copied",
+      "source_sha256": "d25a83824ae3d508d7b6e43ec945ab8bd3ca4bc9ea5c7c3aba03a067e3138e60",
+      "candidate_sha256": "d25a83824ae3d508d7b6e43ec945ab8bd3ca4bc9ea5c7c3aba03a067e3138e60"
+    },
+    {
+      "source": "infra-services/backup/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "ec0a704c039fdf57e6023be3ea6fcc5081e3bba499d7d1c6be4b661124f30530",
+      "candidate_sha256": "a74d0d230a20e85d05bb45050a38fb4d2b4ef970200da245b65c65fe2986890d"
+    },
+    {
+      "source": "infra-services/backup/velero-values.yaml",
+      "disposition": "copied",
+      "source_sha256": "c77f2cf50651bb2fd19f0935f43de0b0d3db6710bc7fd3fd350d5c2dec1e0f1f",
+      "candidate_sha256": "c77f2cf50651bb2fd19f0935f43de0b0d3db6710bc7fd3fd350d5c2dec1e0f1f"
+    },
+    {
+      "source": "infra-services/backup/verify-drill.py",
+      "disposition": "sanitized",
+      "source_sha256": "e890b527be9b86ba60deb2192a808ceff525088ecfd92e7c2f9ddb67899bb3f8",
+      "candidate_sha256": "bd185e9721a74759e5abf25f58dba114e0726db8dd346c08587522f7b1502f4c"
+    },
+    {
+      "source": "infra-services/common.sh",
+      "disposition": "sanitized",
+      "source_sha256": "85d4d993bc9146d9cc75a61d93e8e3f9609793035774a9a76707ebfe5bd25f27",
+      "candidate_sha256": "659f86357a8ffa9588ffb54f7daf908c7a64a1bbd7dc79e4bb2d4d3c7d441b56"
+    },
+    {
+      "source": "infra-services/identity/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "b9a418c0808aac77714f2a909ebeb31f5b2a39e4d57550043e923844d0da93fa",
+      "candidate_sha256": "5fec9a2272c9b5c4a232f765719e4fcb0b5ed496c98505e16d86c636fcb2cb7f"
+    },
+    {
+      "source": "infra-services/identity/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "e238f6ef7c1946afd72d5c1332525fb3e238242b136e00223f7b5856c2c3b8fd",
+      "candidate_sha256": "e238f6ef7c1946afd72d5c1332525fb3e238242b136e00223f7b5856c2c3b8fd"
+    },
+    {
+      "source": "infra-services/identity/argocd-oidc.yaml",
+      "disposition": "sanitized",
+      "source_sha256": "26bb70ce59a9c052d2b23fed871481f42cda7268d2abe91db88ec1629f23ac78",
+      "candidate_sha256": "07a116afc367a8ce0933062b1e6489e361120af6dcdca00ab4f76c696b6fdb53"
+    },
+    {
+      "source": "infra-services/identity/argocd-rbac.yaml",
+      "disposition": "copied",
+      "source_sha256": "714a257e726756e80b3b118d0cd3e04827896c317c0c89a76e21593ba2044db6",
+      "candidate_sha256": "714a257e726756e80b3b118d0cd3e04827896c317c0c89a76e21593ba2044db6"
+    },
+    {
+      "source": "infra-services/identity/forgejo-source.sh",
+      "disposition": "sanitized",
+      "source_sha256": "7c90ccf620049dc844ff5e9e9225721ea5f52e5801c4ec9d9a7d85425256aba8",
+      "candidate_sha256": "c35f2bdad04d1029e58180fff29b4223bd4ba4ee7a881cc965c0150cf9055fde"
+    },
+    {
+      "source": "infra-services/identity/install-app-oidc.sh",
+      "disposition": "sanitized",
+      "source_sha256": "8d62ffa01f6d64cfe32719e76be5803205ce6e1fc8482d84fecf8054695aa418",
+      "candidate_sha256": "5abb0f2009d58ce186c718cff2b17c43c03c6fbdf94380c860324e6273adffd9"
+    },
+    {
+      "source": "infra-services/identity/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "91f06c0fb33d832527b7b37ae4fa1f8fe52e25dcec997cf4e15f7ec6166db9f9",
+      "candidate_sha256": "baf03beb5cd02ea2c10ebf93c3e97f125cd86e53a80b87476c36af7958b94329"
+    },
+    {
+      "source": "infra-services/identity/oidc-check.py",
+      "disposition": "sanitized",
+      "source_sha256": "816c135fb67340455112307ee285eed32fdcfa5859163bc924f84e171330acdc",
+      "candidate_sha256": "21d3260f8ead5d600a17fc0d9a543f3022a60df688f02f66ac63e525e9c0215a"
+    },
+    {
+      "source": "infra-services/identity/opensearch-dashboards-values.yaml",
+      "disposition": "copied",
+      "source_sha256": "8b46ffa02d1ab973cac11e72b36291920f89811225130120f15f34a69a6e0da9",
+      "candidate_sha256": "8b46ffa02d1ab973cac11e72b36291920f89811225130120f15f34a69a6e0da9"
+    },
+    {
+      "source": "infra-services/identity/opensearch-openid.yaml",
+      "disposition": "copied",
+      "source_sha256": "a6645f3c5a2f42b4185b4c04d69229f6b3960a33a54b3ae3958c85ce5c6a7d4b",
+      "candidate_sha256": "a6645f3c5a2f42b4185b4c04d69229f6b3960a33a54b3ae3958c85ce5c6a7d4b"
+    },
+    {
+      "source": "infra-services/identity/opensearch-roles-mapping.yaml",
+      "disposition": "copied",
+      "source_sha256": "dc7d06ab7275f5c7e059a93f46ec6b881cc333e33e4834cddc0bd62961d3002f",
+      "candidate_sha256": "dc7d06ab7275f5c7e059a93f46ec6b881cc333e33e4834cddc0bd62961d3002f"
+    },
+    {
+      "source": "infra-services/identity/realm-lab.json",
+      "disposition": "copied",
+      "source_sha256": "c6dfd6892069a0ca427cb500ac96e1aae83060e10e85bc2018cd9ca08b8ee107",
+      "candidate_sha256": "c6dfd6892069a0ca427cb500ac96e1aae83060e10e85bc2018cd9ca08b8ee107"
+    },
+    {
+      "source": "infra-services/identity/sso-session-check.py",
+      "disposition": "sanitized",
+      "source_sha256": "6919eed43acb083120b815f1e2bd3bb81af2822965466e171c039c12608e85e2",
+      "candidate_sha256": "c205447919f5fa3078e4e8ccd26aaa84988976500c4b716586407b596a6e90bc"
+    },
+    {
+      "source": "infra-services/identity/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "2de35c0d8b89a2ef5619a882aa300d1bbb5cd7ae75042a721d0680024f96891a",
+      "candidate_sha256": "937231d2929aa4b73b935c9f1741ed19878d587eee5f58581b5a00f818276b49"
+    },
+    {
+      "source": "infra-services/identity/workloads.yaml",
+      "disposition": "copied",
+      "source_sha256": "a04e7f4ef8add5960f48e0f9bc804da9a98933c76f6961341ee23e1f6289c869",
+      "candidate_sha256": "a04e7f4ef8add5960f48e0f9bc804da9a98933c76f6961341ee23e1f6289c869"
+    },
+    {
+      "source": "infra-services/install-p3.sh",
+      "disposition": "sanitized",
+      "source_sha256": "84fb17f98c58e94c82128f72cfdb3c9dfbc0ab7d591924ed6fbc7db8b6f875a3",
+      "candidate_sha256": "bc78a9bffe066d79426300fa0775e0c439d90568ed21581dd9dcd0ab45a2f16d"
+    },
+    {
+      "source": "infra-services/observability/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "75bbe8838e5a446483253c231434bc5af2a7003cdf3a1f8c593e49b964a9e3fe",
+      "candidate_sha256": "15ec320a573f6b3f4a28e3cd9989131f2a9a58f8fc2443be83c2435be08b78fe"
+    },
+    {
+      "source": "infra-services/observability/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "bd26d8c554c32014284155e801be65dfd9aabc42fd8ce97fe7345a5401b39337",
+      "candidate_sha256": "bd26d8c554c32014284155e801be65dfd9aabc42fd8ce97fe7345a5401b39337"
+    },
+    {
+      "source": "infra-services/observability/alloy-values.yaml",
+      "disposition": "copied",
+      "source_sha256": "3cd228652b9fcb9dca6d0a719267476b0c99899a474fdfdb8cdd85d91d92a1bf",
+      "candidate_sha256": "3cd228652b9fcb9dca6d0a719267476b0c99899a474fdfdb8cdd85d91d92a1bf"
+    },
+    {
+      "source": "infra-services/observability/check.py",
+      "disposition": "sanitized",
+      "source_sha256": "aae8878f65c6a4a1b65cae776965b4c1c3002d6c6c0d4de3845556d8c0e1c560",
+      "candidate_sha256": "0cac85891868fe1066c11fe61bf443caa2caa88a2aa968b9bcf76c6ac1749239"
+    },
+    {
+      "source": "infra-services/observability/config.alloy",
+      "disposition": "copied",
+      "source_sha256": "0ff0a4de825c181c601c3d5afe3ec4408e4fadc9b399c3a4d14055657f88fbb1",
+      "candidate_sha256": "0ff0a4de825c181c601c3d5afe3ec4408e4fadc9b399c3a4d14055657f88fbb1"
+    },
+    {
+      "source": "infra-services/observability/dashboards.yaml",
+      "disposition": "copied",
+      "source_sha256": "aecb4c942e4d250314837667928e0d153875e97d595bb3a5b1b529d1624e202f",
+      "candidate_sha256": "aecb4c942e4d250314837667928e0d153875e97d595bb3a5b1b529d1624e202f"
+    },
+    {
+      "source": "infra-services/observability/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "1edff9530fb19cb216b13fb6b8d61f7a1be79c9a8f999b256f19ccf5e16603c9",
+      "candidate_sha256": "6d82bd7275a01b1627705145f396df8d08db9afa5f0ad0f26edb276c8d2f0e68"
+    },
+    {
+      "source": "infra-services/observability/loki-values.yaml",
+      "disposition": "copied",
+      "source_sha256": "7b2b9a224bd1e78f8cda7d05b65d3331434845a197cf571198c87fddb35f9edb",
+      "candidate_sha256": "7b2b9a224bd1e78f8cda7d05b65d3331434845a197cf571198c87fddb35f9edb"
+    },
+    {
+      "source": "infra-services/observability/manifests.yaml",
+      "disposition": "sanitized",
+      "source_sha256": "412470e6b1405ceaf3b93112beda2337b359da0052f21ebed445b5fc02069854",
+      "candidate_sha256": "e63a52c43fba2651c015828b5fc7f943ef31c2597797058313edae3fb26cfe82"
+    },
+    {
+      "source": "infra-services/observability/prometheus-values.yaml",
+      "disposition": "copied",
+      "source_sha256": "e5a9c9dcb48d12ccfd278daf047fd7d0cca8188f65e056656d7706a4876a427a",
+      "candidate_sha256": "e5a9c9dcb48d12ccfd278daf047fd7d0cca8188f65e056656d7706a4876a427a"
+    },
+    {
+      "source": "infra-services/observability/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "8520d76338c5efb1ff837dc3de71cbd6a296059636c7634a971c5623ecbdf4f5",
+      "candidate_sha256": "015fb43a8962aed7165cbf90bf270cfe29dd0b447777c84eb47512060771cddd"
+    },
+    {
+      "source": "infra-services/pki/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "0d092fd8e66630c03b9b170a7837e2f8c3e5b8212d1d631f7e33a961ea899fd2",
+      "candidate_sha256": "f019b82a632e8229e36ac20fcf49b198fbc872d178e5fa7991f0b6f508cbd15a"
+    },
+    {
+      "source": "infra-services/pki/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "5fa969df9d2b7f89ae5bcfc3e2004d9d7966e00e7f532c1e09af3d88a849c554",
+      "candidate_sha256": "5fa969df9d2b7f89ae5bcfc3e2004d9d7966e00e7f532c1e09af3d88a849c554"
+    },
+    {
+      "source": "infra-services/pki/ca.json",
+      "disposition": "copied",
+      "source_sha256": "7158e397a039df731191332e716973e776e1a90a2c67734c272267d44d8abc3e",
+      "candidate_sha256": "7158e397a039df731191332e716973e776e1a90a2c67734c272267d44d8abc3e"
+    },
+    {
+      "source": "infra-services/pki/cert-manager-values.yaml",
+      "disposition": "copied",
+      "source_sha256": "896f86d456d054d3b7cfeb2ff2778789f5ca5abbdbf1c12649cc3d2780f8f160",
+      "candidate_sha256": "896f86d456d054d3b7cfeb2ff2778789f5ca5abbdbf1c12649cc3d2780f8f160"
+    },
+    {
+      "source": "infra-services/pki/chain-check.py",
+      "disposition": "sanitized",
+      "source_sha256": "cbbec9553362b0096439490b4c989f49a7cb3abe442ab7cc4a9f74c44f12944d",
+      "candidate_sha256": "808db97ac4ddf9c0c76e72e95469ac2054624b61cde1872ea1bf9bce332e21c0"
+    },
+    {
+      "source": "infra-services/pki/gateway-api.yaml",
+      "disposition": "excluded",
+      "source_sha256": "356c2b8e286a964dc20995435659ad1095386329974793af10bbfe3eff977fe5",
+      "candidate_sha256": null
+    },
+    {
+      "source": "infra-services/pki/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "25cc5c514ad391cb7d150e529aa68d337cea207e221864f379cc7d8de75377d2",
+      "candidate_sha256": "db6a137774a6261d0cb00314f53614f433af65404ad5b5ecb28e4a050698840b"
+    },
+    {
+      "source": "infra-services/pki/issuers.yaml",
+      "disposition": "sanitized",
+      "source_sha256": "2a57bf3b113d1807a4d675619a787670b702d1fcd477d26089f3af15027e5b53",
+      "candidate_sha256": "9ad3fc373adf3f73e9fd9b53ced582d7f8aedeccec39adef6165f0c4216df2ce"
+    },
+    {
+      "source": "infra-services/pki/step-ca-values.yaml",
+      "disposition": "copied",
+      "source_sha256": "d8b3083d03b3983f04a24b6d161ee1a271a22361d7ebf762a6c72d78e41cb592",
+      "candidate_sha256": "d8b3083d03b3983f04a24b6d161ee1a271a22361d7ebf762a6c72d78e41cb592"
+    },
+    {
+      "source": "infra-services/pki/step-public.yaml",
+      "disposition": "sanitized",
+      "source_sha256": "6ef78a937281a2fdc78c9078d8459351643e6acafab8d5c80ab664459bfd2897",
+      "candidate_sha256": "8dcc05fd2e0dc16931a3fa1afb085af5d5277fc9688aad9c2684502e5a34b5d1"
+    },
+    {
+      "source": "infra-services/pki/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "8a4cac2424541cf08fd4527ed1ebf7b8eb54bdecddcbdb93838f2a15f2bf4584",
+      "candidate_sha256": "b23c503cb6eb8ea8106132423ba30eb22834a58b41996b9795b752fe00a122eb"
+    },
+    {
+      "source": "infra-services/registry/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "a55877fc96b6a3ad869b9875ac8cd3ea71589a81b635b7c96f5882ecfc5ecaf7",
+      "candidate_sha256": "9c497ec13d5de9e5bfa380013f510fb1c32f7aa7f0008352cff52e0afd5f5eaa"
+    },
+    {
+      "source": "infra-services/registry/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "760e9641e82a4fc2ce5973e466b1cc70f63ce3bf0f44194ee44291ed5c4c2de3",
+      "candidate_sha256": "760e9641e82a4fc2ce5973e466b1cc70f63ce3bf0f44194ee44291ed5c4c2de3"
+    },
+    {
+      "source": "infra-services/registry/check.py",
+      "disposition": "sanitized",
+      "source_sha256": "cb30ad98b396dd5b65df0d936755556bf3da1964de761fdbde505d453f9107d5",
+      "candidate_sha256": "3db8365140a1805d820eeb3a2a87e32e1dfd7c922efe8288c0fd7c4ebc572a52"
+    },
+    {
+      "source": "infra-services/registry/config.json",
+      "disposition": "copied",
+      "source_sha256": "c5b5240a1877f342d94a18f3a44704f0c534a20a50501eef4b74087cbd83756a",
+      "candidate_sha256": "c5b5240a1877f342d94a18f3a44704f0c534a20a50501eef4b74087cbd83756a"
+    },
+    {
+      "source": "infra-services/registry/install-crane.py",
+      "disposition": "sanitized",
+      "source_sha256": "9b4247ade25288da60d5e9825575e54bc52bbfa94ed9602ad0021f84e8cb6956",
+      "candidate_sha256": "33ea73d8e74cdb27f81a86963ce538b8c3cbe5e4ad674fcf014217eaa5a289ab"
+    },
+    {
+      "source": "infra-services/registry/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "cc9d4c6899fab8c2f4449e8511f5b6f22f8bb7c7dab6941c2095bf6a7dcf260d",
+      "candidate_sha256": "26e6c238fc902727517eeaff0e80b71737af7aa9afc4da6faa184aa0720a1da2"
+    },
+    {
+      "source": "infra-services/registry/manifests.yaml",
+      "disposition": "copied",
+      "source_sha256": "7c0b1677b8fcf95836d2105a1d1351d92bfc52f51ec45bb212c59c439e378de0",
+      "candidate_sha256": "7c0b1677b8fcf95836d2105a1d1351d92bfc52f51ec45bb212c59c439e378de0"
+    },
+    {
+      "source": "infra-services/registry/push-pull-check.py",
+      "disposition": "sanitized",
+      "source_sha256": "d8775729c0d0352abec9e9d1338a932844c0d52f4b29fd04b2eae78210e868c6",
+      "candidate_sha256": "78d27931176beb69c8382b1b1329bb95a287093b00646fef35989e2bedbb3686"
+    },
+    {
+      "source": "infra-services/registry/registries.yaml.example",
+      "disposition": "sanitized",
+      "source_sha256": "024b77d5761fb915f141049fb1e817aaa4c2bd014abaf8354aec0fd6ba26c757",
+      "candidate_sha256": "e33919ee19519fb69dee0dc1d2361a370de7132a754dc6d46027227d603c3ea8"
+    },
+    {
+      "source": "infra-services/registry/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "67a8ce3c25a41495571798ff701f8489227333baae25897cccc3d67bdbe2a875",
+      "candidate_sha256": "28c7eb768ee080f8530511407094621d8d4f583c8ac87775e9104165dbcc5a07"
+    },
+    {
+      "source": "infra-services/secrets/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "c75ca49af0230a65684a95fdf4232f4cebc39166368d6f3ef60eb1855898f5a3",
+      "candidate_sha256": "ad9990363d76977c2fb73783fd994ffd7e81fc2fbe75efca05f9ebce914252eb"
+    },
+    {
+      "source": "infra-services/secrets/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "5ca5db4141fecc91ab92cd708a7fdd05c2062815b209b337bc229e53d3d3d48d",
+      "candidate_sha256": "5ca5db4141fecc91ab92cd708a7fdd05c2062815b209b337bc229e53d3d3d48d"
+    },
+    {
+      "source": "infra-services/secrets/configure.py",
+      "disposition": "sanitized",
+      "source_sha256": "ee7a27e0917e01f328c24464e594df006b60dd1ce16f6755fb16479b035f009d",
+      "candidate_sha256": "0940e31ea2ee436981e03220d90064343727ed623b863f0c44620c4428d81e0b"
+    },
+    {
+      "source": "infra-services/secrets/eso-values.yaml",
+      "disposition": "copied",
+      "source_sha256": "b7127f166ae6babbe1aeadd013da19737924c38c9a9b8f5d1f5394c1695b5ee4",
+      "candidate_sha256": "b7127f166ae6babbe1aeadd013da19737924c38c9a9b8f5d1f5394c1695b5ee4"
+    },
+    {
+      "source": "infra-services/secrets/external-secrets.yaml",
+      "disposition": "copied",
+      "source_sha256": "ba3f4de95a59d8840b4f15b826d9f39782f2d883bbc65cacc6c8ba8ef6b5fc11",
+      "candidate_sha256": "ba3f4de95a59d8840b4f15b826d9f39782f2d883bbc65cacc6c8ba8ef6b5fc11"
+    },
+    {
+      "source": "infra-services/secrets/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "35aa497a3245d44c55c721bc3a8d2d78500189d99fe9ce2cd21616ebfd3aacd0",
+      "candidate_sha256": "4f1185022e258147c1c6c846ea736cd6f92ade989f06d61d433db7ef3549826c"
+    },
+    {
+      "source": "infra-services/secrets/openbao-values.yaml",
+      "disposition": "copied",
+      "source_sha256": "8d7c3236eddc05f034e179639c05cd656a7b24aac7141cad37e588b715c4621d",
+      "candidate_sha256": "8d7c3236eddc05f034e179639c05cd656a7b24aac7141cad37e588b715c4621d"
+    },
+    {
+      "source": "infra-services/secrets/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "54878172e10befc1d01a74d4014b68afc121136c61a85c2c7dfb5eaaac0c49c4",
+      "candidate_sha256": "2dd40edc46f16d5a496942e525e7114138b6f862e3c8bfed43a78b4e8582c006"
+    },
+    {
+      "source": "infra-services/secrets/unseal.sh",
+      "disposition": "sanitized",
+      "source_sha256": "e7b6b03a9ae4aeb6042d528af6e57c513c6a3105163b911b8b0af3bd8e5eca85",
+      "candidate_sha256": "ca0f5ab8551b8dc93159b339e3f41d3fd2c2c2d8cde619d787e97cd4dc8b9708"
+    },
+    {
+      "source": "infra-services/secrets/verify.py",
+      "disposition": "sanitized",
+      "source_sha256": "f3ca66d509dc44113b6eb70dbe78f2f95fbb1750a99a2a006c6359d8e4c48a8e",
+      "candidate_sha256": "a5af2fdbdcbb399e3463f42c84d893bcfb466192de934fe4af2774bc47bc0561"
+    },
+    {
+      "source": "infra/k3s/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "04b11f58c3ccf9741d72a5d87c196f37fd1b9a2b01482d585ad76f0254cbf523",
+      "candidate_sha256": "c3a4223d58b221ce9f198d3d3b98a8c09e2bf4e87e50ae3a1906848598675352"
+    },
+    {
+      "source": "infra/k3s/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "e74f3c2b1985a3eb9c008ba0c5d09bbba4c7516329614ce22bb9ce374ccc7fee",
+      "candidate_sha256": "e74f3c2b1985a3eb9c008ba0c5d09bbba4c7516329614ce22bb9ce374ccc7fee"
+    },
+    {
+      "source": "infra/k3s/audit-check.py",
+      "disposition": "sanitized",
+      "source_sha256": "530dc1b753bc4c3b0fcb2fbcf624049c39b238864baca45f5cbdf36aeeb89fc8",
+      "candidate_sha256": "02935d9f73a519b8a95066afcf104a49bff88710c22ba6b9c5db35438b7a0ee0"
+    },
+    {
+      "source": "infra/k3s/audit-policy.yaml",
+      "disposition": "copied",
+      "source_sha256": "080e1050cc09b577ed917ffd5540f946c8820cf9c5b959b0ccf3c3017b8c1da9",
+      "candidate_sha256": "080e1050cc09b577ed917ffd5540f946c8820cf9c5b959b0ccf3c3017b8c1da9"
+    },
+    {
+      "source": "infra/k3s/check-no-secrets.py",
+      "disposition": "sanitized",
+      "source_sha256": "92d99c3d395185c0436b67bf4a8c400cef21dab08cf1de598bddf8ba0016fdc7",
+      "candidate_sha256": "8cc2984493b24ae298df050c0113ba694d5f143e336d80feadfbc5a5ff171985"
+    },
+    {
+      "source": "infra/k3s/env.sh",
+      "disposition": "sanitized",
+      "source_sha256": "f857e29b4f0ac9fc6dd38206af448f02feffe2906369553741301894a054eecc",
+      "candidate_sha256": "2dd315404418c4f2938a436e00c63c3e61dca274fab61507debc8331c83e6811"
+    },
+    {
+      "source": "infra/k3s/install-k3s.sh",
+      "disposition": "excluded",
+      "source_sha256": "46177d4c99440b4c0311b67233823a8e8a2fc09693f6c89af1a7161e152fbfad",
+      "candidate_sha256": null
+    },
+    {
+      "source": "infra/k3s/install-k3s.sha256",
+      "disposition": "copied",
+      "source_sha256": "d3394aca0ceab3f99453c07ac0bba98da7d1dfa6a759eb402702674015edd661",
+      "candidate_sha256": "d3394aca0ceab3f99453c07ac0bba98da7d1dfa6a759eb402702674015edd661"
+    },
+    {
+      "source": "infra/k3s/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "9c7fb7debb5cd2e3ad14cf844a216ac2e52d24b4ede529eea255c429cc17ba25",
+      "candidate_sha256": "6581a74e5e309c6c47ecebecd30515cc5c63c2be529598a31e6208c187726e0f"
+    },
+    {
+      "source": "infra/k3s/kube-vip.yaml",
+      "disposition": "copied",
+      "source_sha256": "be101dfd0108acde36c6a1dee8618b76d459e4bdec21625b03a471d0d02fb136",
+      "candidate_sha256": "be101dfd0108acde36c6a1dee8618b76d459e4bdec21625b03a471d0d02fb136"
+    },
+    {
+      "source": "infra/k3s/remediate-memory.sh",
+      "disposition": "sanitized",
+      "source_sha256": "b2ffbd73ceb46ee45b645040ffd38b97de779009ef9e52d75fc04577897efc58",
+      "candidate_sha256": "44203220ab24b21f940316cb8b41b1103ccf90da6262a92d0b862fd028e4c3d9"
+    },
+    {
+      "source": "infra/k3s/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "19cb5b4ff445cd13f894eb53ecfd993bf00f2b897be8b2412330feec0e205f1d",
+      "candidate_sha256": "b9a64e84a05d93901c1747c74e7dd1ed5216f46842710749f469c689c13bab75"
+    },
+    {
+      "source": "infra/libvirt/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "4c5659db4c2ead27e7736a93b98c355d14a3db45da2e5ce0888aff12c43a5e57",
+      "candidate_sha256": "69a39e3a500fe85eb91c5f25ddfeeadcbac1d6aaaf915b122972189d594e02c3"
+    },
+    {
+      "source": "infra/libvirt/down.sh",
+      "disposition": "sanitized",
+      "source_sha256": "93d12f6702b3a9a05f50d8c887d8daa844c55bc640d7ae4c9764dfcff192e7e3",
+      "candidate_sha256": "ddb28051d1c26498c339391e469c3eed6d4f1ffafa12f78c77998bab5d45bd41"
+    },
+    {
+      "source": "infra/libvirt/guard.sh",
+      "disposition": "sanitized",
+      "source_sha256": "bee6fa0d68059f7b9b4a15fb3ef2484cce3d436fe9d33275cfd36aefeece000e",
+      "candidate_sha256": "99f389cb9b9a085810fccae6b1bbffc91c20afd14182e8446d7d244d7c3bf4e0"
+    },
+    {
+      "source": "infra/libvirt/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "579887fb77d45eb78a925ee852deecb379b4c040ff120b9137e03937ce75cde6",
+      "candidate_sha256": "fa6f4436223fa928bd412c06bc5d107b2b9ad6b15b240c0c2780a5b550898e41"
+    },
+    {
+      "source": "infra/libvirt/network.xml",
+      "disposition": "sanitized",
+      "source_sha256": "a5e61946ec39b0b2e255e83452b23ec285d6fd607a5f81fe624b0925ce70df31",
+      "candidate_sha256": "8ee6fabe06ae865eb605a880bfa636295a1b4728e4dd1ea152cdf3419c1e19ae"
+    },
+    {
+      "source": "infra/libvirt/set-disk-cache.sh",
+      "disposition": "sanitized",
+      "source_sha256": "369cea58404927a55a59fec7cfe1c01b69ad0797ffc11f4e18ff2e5864bee581",
+      "candidate_sha256": "a62e6b671a773f9f5eacd1649be2d62acdc9c60a661b89077ebc6ecbf519767b"
+    },
+    {
+      "source": "infra/libvirt/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "013a31c932e0b25f757335ba29cefefb128f60813b47b8b906b8ab95afc1fcbf",
+      "candidate_sha256": "2f172b321c37ab379ec86884456ee64920c6aad6a9364ed5d449c610f6d3cbcb"
+    },
+    {
+      "source": "infra/libvirt/ubuntu-SHA256SUMS",
+      "disposition": "copied",
+      "source_sha256": "b61a6497608cdea66f54968d52d3457365b0645ccb2b1371c8f092ecce806183",
+      "candidate_sha256": "b61a6497608cdea66f54968d52d3457365b0645ccb2b1371c8f092ecce806183"
+    },
+    {
+      "source": "infra/libvirt/up.sh",
+      "disposition": "sanitized",
+      "source_sha256": "4f11482e0b93bfa6e082dae04ddbe0ae0a573d250b2edb1bc30b2d94080ddd1f",
+      "candidate_sha256": "082a7b8ecf9bedd1c63bf6854c0359eb66baf1141b3f9640f9ee0f69f3b71048"
+    },
+    {
+      "source": "platform/argocd/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "60a4cb97d90feaa09d19dcdf147c62019873bc22f088ef327f83923a746c5bf8",
+      "candidate_sha256": "9311fbda28cd4b9d0a5acc15a3447b72ba38409a6c9721ed4366ff76d85c0cd5"
+    },
+    {
+      "source": "platform/argocd/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "4e693a542a68d477953bf85737094874e5e541f9320b8d630e129c2286400ede",
+      "candidate_sha256": "4e693a542a68d477953bf85737094874e5e541f9320b8d630e129c2286400ede"
+    },
+    {
+      "source": "platform/argocd/application.yaml",
+      "disposition": "copied",
+      "source_sha256": "5f25f5ca5cf0ffae9885889b4ed4e48818074527a661846a3a5ca853ca296a0c",
+      "candidate_sha256": "5f25f5ca5cf0ffae9885889b4ed4e48818074527a661846a3a5ca853ca296a0c"
+    },
+    {
+      "source": "platform/argocd/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "324f1b943d98366107a7cf943e40642938989abd4018c908f314c53655e9aa9c",
+      "candidate_sha256": "99c219d1cec77af3fcb585d7008ee19ce1603b111f1a76b82e0c873b01a47460"
+    },
+    {
+      "source": "platform/argocd/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "b1e10ffd5a2a78bc6fbbe963290746e3be51b29680a4f5b7c8a0f9be36fd17f6",
+      "candidate_sha256": "578324ac9a1142c995fe09e1928f3508976891dbbc212998db89c37df15e5c02"
+    },
+    {
+      "source": "platform/argocd/values.yaml",
+      "disposition": "sanitized",
+      "source_sha256": "cb3f5ce9114e0dde35ebc52f8e64337bf572394af153d4de6439db1fc89d2c1f",
+      "candidate_sha256": "527facd9761d440dbf6784897287f2d4d4fa0b4a12255e6309f1156b57e7b695"
+    },
+    {
+      "source": "platform/budget.sh",
+      "disposition": "sanitized",
+      "source_sha256": "f80c146fc858233d9c1adfdfdc0dbf41c7715b065c047bd478b15bdc3ffc6453",
+      "candidate_sha256": "d05b32a384bed764b1eeaa907a4209b4087f69a4e55cfeb38a9987faec38363e"
+    },
+    {
+      "source": "platform/cilium/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "e825e65faffb6aab8293c202eee581f3ad2214641de644fff726f95299a288f3",
+      "candidate_sha256": "9f7a0b325e7546a93de1bc3cacb36285af40911a72d9b8afe3d3ec6760956445"
+    },
+    {
+      "source": "platform/cilium/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "5d61572af383d9294076b4e2850f85e404eeddf40caf790d940c036c82ab0b2c",
+      "candidate_sha256": "5d61572af383d9294076b4e2850f85e404eeddf40caf790d940c036c82ab0b2c"
+    },
+    {
+      "source": "platform/cilium/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "a20a72a1aecb506e223cb8d72ba3868df45d21ba023edcf02834a0d08fed4b70",
+      "candidate_sha256": "6a45261c63286838925fc74ab4f332a74ffa3057dee88f9b6eddc9d9c5d5dae1"
+    },
+    {
+      "source": "platform/cilium/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "221ad08b38481c77665f0ed59c15aa4c546448bf77388e873bf17541a7018e29",
+      "candidate_sha256": "c5195670b4d3778d45328203b637e7d544422cadeaf8ed507e8caed64f78e9f6"
+    },
+    {
+      "source": "platform/cilium/values.yaml",
+      "disposition": "copied",
+      "source_sha256": "52f969a5000afa667c62d3c95fab132ecf7baf6078690b2a7b41a5fd91dd8a61",
+      "candidate_sha256": "52f969a5000afa667c62d3c95fab132ecf7baf6078690b2a7b41a5fd91dd8a61"
+    },
+    {
+      "source": "platform/forgejo/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "04bb4bb8efe91eaa03b3b40ee4c41d5dba2d087269f4baacc1d3e59e3b215d58",
+      "candidate_sha256": "3fdc6e68d615c30eda4398ce4584741106a2ef1252cb905dff1b8690a0d8ed66"
+    },
+    {
+      "source": "platform/forgejo/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "cda5b7a6be7716e0318a32dec209d936aca638b702bfd986ad3a889f6f284bdd",
+      "candidate_sha256": "cda5b7a6be7716e0318a32dec209d936aca638b702bfd986ad3a889f6f284bdd"
+    },
+    {
+      "source": "platform/forgejo/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "105e45da328288de187a866f57d18987e2443698c820d051220a38020ffd3ba0",
+      "candidate_sha256": "ecdd465dfa0c4748dbf6a685e5a971ae959c8a5fd0521adc484287b9ff7d1992"
+    },
+    {
+      "source": "platform/forgejo/seed.py",
+      "disposition": "sanitized",
+      "source_sha256": "70a87685f0f5f9bd7aa4b46dbd296b7e7d1d2257c92d7e68945dc03bcce9b1b2",
+      "candidate_sha256": "46eca88911b396850240ad596f40ae2c3f344db64ea6975873c0fa67edb71bb8"
+    },
+    {
+      "source": "platform/forgejo/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "3a41174d0a9ef876296dbdfb5b9ce4160702db5bfc575f69954b6df1045851d5",
+      "candidate_sha256": "9a38486ae61d99737f278d1a93dcabea4840ab0555af1f94e9a08ef96c3588b6"
+    },
+    {
+      "source": "platform/forgejo/values.yaml",
+      "disposition": "copied",
+      "source_sha256": "1f149269973add51edc35b11420a28e43971cd7e7478d7454a175aefa05947cd",
+      "candidate_sha256": "1f149269973add51edc35b11420a28e43971cd7e7478d7454a175aefa05947cd"
+    },
+    {
+      "source": "platform/gitops-seed/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "9957a36bac5c01494ff1899460aa426d054812fa64e6195887c80c5c005919f1",
+      "candidate_sha256": "c49001ab94df3725b5a3c17b9e43fe9d8fc9e26d8bb5c091018134ac375ce682"
+    },
+    {
+      "source": "platform/gitops-seed/app.yaml",
+      "disposition": "copied",
+      "source_sha256": "5f0dc9407360cb7628ac372859c0cf7ee5e44d3f6d3af13e1860486155efbaff",
+      "candidate_sha256": "5f0dc9407360cb7628ac372859c0cf7ee5e44d3f6d3af13e1860486155efbaff"
+    },
+    {
+      "source": "platform/gitops-seed/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "aa3d788a6c479ea953b437179625a73629c0675f4aeef4c3d81184a49d3fbf00",
+      "candidate_sha256": "2d6ca054a39cb4e1460df53c54967fa5d29bb77c19b9f3fbc6a03a58fce0754f"
+    },
+    {
+      "source": "platform/gitops-seed/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "e0f1c3e91576f9c46f09c5488a62dfea9df133f81c607346e56c17fbb5e56fcf",
+      "candidate_sha256": "71fe6500d93833870c201417b38f0d0f27809a6f7578a84ddbd57cb2875ae142"
+    },
+    {
+      "source": "platform/ingress/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "efcf3bc41f2a5aa2a535892c17e71d77b7d2ef273731862307df497e6dd33e71",
+      "candidate_sha256": "accdbadd0c967b97399b37bda9147408ecb5f22cf30c1a2e7e808b97ea953fb0"
+    },
+    {
+      "source": "platform/ingress/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "3d8577d52585d4c13c738e72e3248816da8280102e5941ae83dabfef4b5f4a32",
+      "candidate_sha256": "3d8577d52585d4c13c738e72e3248816da8280102e5941ae83dabfef4b5f4a32"
+    },
+    {
+      "source": "platform/ingress/gateway-api-standard.sha256",
+      "disposition": "copied",
+      "source_sha256": "af29730f46140f68a4e1fb1fb7c46c1025deb3349f87d3ea93398f4933a5a8a6",
+      "candidate_sha256": "af29730f46140f68a4e1fb1fb7c46c1025deb3349f87d3ea93398f4933a5a8a6"
+    },
+    {
+      "source": "platform/ingress/gateway-api-standard.yaml",
+      "disposition": "excluded",
+      "source_sha256": "356c2b8e286a964dc20995435659ad1095386329974793af10bbfe3eff977fe5",
+      "candidate_sha256": null
+    },
+    {
+      "source": "platform/ingress/gateway.yaml",
+      "disposition": "copied",
+      "source_sha256": "fd955cdf0171bfe0db6aeb71ac3702458f85e6a3e1114d779d4b1fa9dbc5375b",
+      "candidate_sha256": "fd955cdf0171bfe0db6aeb71ac3702458f85e6a3e1114d779d4b1fa9dbc5375b"
+    },
+    {
+      "source": "platform/ingress/hubble.yaml",
+      "disposition": "copied",
+      "source_sha256": "cf438922f3fcaee3d9c132e901713ad84ac031dd7e13506c3bc60413f97e6062",
+      "candidate_sha256": "cf438922f3fcaee3d9c132e901713ad84ac031dd7e13506c3bc60413f97e6062"
+    },
+    {
+      "source": "platform/ingress/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "49851f3b6a529eea0b82d46a7d27e7322684dda1fbcf28d531292368d8da10f9",
+      "candidate_sha256": "34198e953f51dd639c8204a0c51a6f2430084d417b890b3a8aa80f76f096e338"
+    },
+    {
+      "source": "platform/ingress/lb.yaml",
+      "disposition": "copied",
+      "source_sha256": "b7a15b6871b54d4f21d1deaeb7e1d31896aa2a4172e379134bb9baf1dc9e54af",
+      "candidate_sha256": "b7a15b6871b54d4f21d1deaeb7e1d31896aa2a4172e379134bb9baf1dc9e54af"
+    },
+    {
+      "source": "platform/ingress/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "69d35bcace7fbe51ab8b9d8aabd23e33dc3b805d1f82cbf14a1c39a72753e96b",
+      "candidate_sha256": "f3a64180e512a3aa17d4272007bbebfb90e425c5108f1de6051a458bde68a35e"
+    },
+    {
+      "source": "platform/ingress/traefik-config.yaml",
+      "disposition": "copied",
+      "source_sha256": "bd025fed1554f58465de3e452e2945321c91d4909cc94c58d77408aa031cd7ac",
+      "candidate_sha256": "bd025fed1554f58465de3e452e2945321c91d4909cc94c58d77408aa031cd7ac"
+    },
+    {
+      "source": "platform/install-p2.sh",
+      "disposition": "sanitized",
+      "source_sha256": "2149ca71999a06e238798692792bbc7805c7527e23368893148b749ccbe3abf5",
+      "candidate_sha256": "2c042b0ab47365796817c61e861890d64a103e351479d21f2e05bb5f21521b63"
+    },
+    {
+      "source": "platform/storage/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "e169a331142332a1e5667e5a806a1bd89e2661bd1968cb1a9c348396264df844",
+      "candidate_sha256": "a29beb1919bf3041bee97e68d95a7d9dd2071d264dbd643de84aaf0cbbe637a7"
+    },
+    {
+      "source": "platform/storage/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "f9af292e2d80e54b79f15e609bec9f83088d99731c8736afc3bd2b0d5c720d62",
+      "candidate_sha256": "f9af292e2d80e54b79f15e609bec9f83088d99731c8736afc3bd2b0d5c720d62"
+    },
+    {
+      "source": "platform/storage/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "a0d5e0aa63eba6f5dd48a02e9dec6ee937798b9aa7c7fe4a9d4c9f26eac71b26",
+      "candidate_sha256": "ed1feb2c592f70e4015aeed710e32e4227685b201cbeb894c0f24e6a250a2668"
+    },
+    {
+      "source": "platform/storage/limits.yaml",
+      "disposition": "copied",
+      "source_sha256": "d322549a3b8c03632118eb8263d3457cde5387888a034296b9f597c0c910b87a",
+      "candidate_sha256": "d322549a3b8c03632118eb8263d3457cde5387888a034296b9f597c0c910b87a"
+    },
+    {
+      "source": "platform/storage/post-render.py",
+      "disposition": "sanitized",
+      "source_sha256": "4d48a25add336a2bf4ec43679c9dd8b580bdca7fb8d06ff695b8bb81aa44abd8",
+      "candidate_sha256": "5160ff6c933386279acdd88f783e1ddb352d59bdb17fb33a92a1adccef9cb964"
+    },
+    {
+      "source": "platform/storage/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "cca5ac211fe596f06bc4ac04c53e9d7a5579d94ce5b570ef73dcb79001f4efde",
+      "candidate_sha256": "05bebb2179ead816aec9be125819cb4321d9384b469266eaddac6eee815c9d61"
+    },
+    {
+      "source": "platform/storage/values.yaml",
+      "disposition": "copied",
+      "source_sha256": "c22fe97f39c9d933da32c6133571df7335e0dad8c49f6a9a3962f5d03e6da1af",
+      "candidate_sha256": "c22fe97f39c9d933da32c6133571df7335e0dad8c49f6a9a3962f5d03e6da1af"
+    },
+    {
+      "source": "scenarios/01-port-scan/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "19d17a0c3e98217de005217d02fc6fad4d6e3bd991f8eea6bde65bcf96357c18",
+      "candidate_sha256": "994a81049a4a9149cf5dd46ee55ec9f4ccaaa8394b40f80ea40d37ff4a3b9884"
+    },
+    {
+      "source": "scenarios/01-port-scan/cleanup.sh",
+      "disposition": "sanitized",
+      "source_sha256": "1c4c8c5c05c9205eec0b7dd123257e392640601c73c3272bd705ce4ca62bc290",
+      "candidate_sha256": "a05978bfeb3dd1c5b3b386d5e766054d43877c5ce31106b9c9405a3d24be20c1"
+    },
+    {
+      "source": "scenarios/01-port-scan/detect.sh",
+      "disposition": "sanitized",
+      "source_sha256": "38de9c0d5dc66f7a55d13b7c12310774bb977899143e20b1e0209a8243f239cd",
+      "candidate_sha256": "a391b8a2a82555395ab46a8bb820cfcd26c701115b6812759e91411d222b27a6"
+    },
+    {
+      "source": "scenarios/01-port-scan/generate.sh",
+      "disposition": "sanitized",
+      "source_sha256": "248330d3c14a53527fc6996742da487c2ad7cc50fd4c85795572ba1211710331",
+      "candidate_sha256": "10107cfefcea649f2f9a465483f369895eae921e68c165e1f74f0e37f4203564"
+    },
+    {
+      "source": "scenarios/01-port-scan/manifests/client-example.json",
+      "disposition": "sanitized",
+      "source_sha256": "267dd29f8549c1d4802053811e9e0ec58f739442608728ab9c9190adcb019a09",
+      "candidate_sha256": "14ab2291830c54cde1ca010a4d63809f569ed8f75fb0922da97f0ad983eb8c72"
+    },
+    {
+      "source": "scenarios/01-port-scan/respond.sh",
+      "disposition": "sanitized",
+      "source_sha256": "44e1ef1bb2a54fbdadd62121f3aa9ce6a026ac66b65f843ff073f110282aad82",
+      "candidate_sha256": "7ead309817a48123187989404a0fd4505bcf435e9ec7d46f491b90c4aaae28f6"
+    },
+    {
+      "source": "scenarios/01-port-scan/verify.sh",
+      "disposition": "sanitized",
+      "source_sha256": "f995636ac8b40e153240cbdc75b3cea4008d8db0dd5c6c4756b8b55ae0e6dbab",
+      "candidate_sha256": "f39dd1d675839f4180bc221ea3297e5082432d76eb3430b71c98510e60d924aa"
+    },
+    {
+      "source": "scenarios/02-dns-intel/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "d65c50ef2172768ea756b5901706f54df3df79feee8abcc27a6c4f7e28663b5e",
+      "candidate_sha256": "df1280dd25bffe6cf4761a3b625b45a6366d5bed59b545630913b4512d7f5905"
+    },
+    {
+      "source": "scenarios/02-dns-intel/cleanup.sh",
+      "disposition": "sanitized",
+      "source_sha256": "275baaec306e20bdb6d3d6d592dfeebff90ba12126b90ba8a4a497f71735f102",
+      "candidate_sha256": "ddb3517e25c402f76fa71c446240574c2cdeb20068a6598ef6723183c35ad296"
+    },
+    {
+      "source": "scenarios/02-dns-intel/detect.sh",
+      "disposition": "sanitized",
+      "source_sha256": "550036d082f12f7153bfaa3933448843f9e197db4a3f789bbe7a71faa60eca7e",
+      "candidate_sha256": "495d9ac59e0ff9273cb55aebc76d8da8e974e23898ece192f9319498cd736fb3"
+    },
+    {
+      "source": "scenarios/02-dns-intel/generate.sh",
+      "disposition": "sanitized",
+      "source_sha256": "6d7208fd8af1c63f84fe1ef20da277d641dd66161bd77cc446fc92fdc45d34c7",
+      "candidate_sha256": "ca625c4e9e9fb18fd816c38c29b0fefaa0e026eef3d72ebbf0070156627c7d25"
+    },
+    {
+      "source": "scenarios/02-dns-intel/manifests/client-example.json",
+      "disposition": "sanitized",
+      "source_sha256": "115ccb6a6a9e613d0ac510057a7942ebf5d26c3bd4ef7ef4b463b5f829572a7e",
+      "candidate_sha256": "18b665ff143c61167fef634163f68897ae89e82a3b6158a4af02c2821e11a30b"
+    },
+    {
+      "source": "scenarios/02-dns-intel/respond.sh",
+      "disposition": "sanitized",
+      "source_sha256": "29f9e9e4a377b35ebfe3b3ad1d7b9b9d8e8ba73d3cd678ed0aa08c8d1f164982",
+      "candidate_sha256": "3babdfdf70995ce5f0f1ad4fccb2bb9a18d665e6013b87d5dad901415b931fad"
+    },
+    {
+      "source": "scenarios/02-dns-intel/verify.sh",
+      "disposition": "sanitized",
+      "source_sha256": "b0de2438c5464a3971f0ecc64f6acecc53449a40372deaedf8b8ce83c4bfd0eb",
+      "candidate_sha256": "2648e44921c3546303d7a6d005cd36fde082e5dd0a617fe6779f80d6482f6923"
+    },
+    {
+      "source": "scenarios/03-lateral-netpol/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "ed0ae4c8e1bade99c7b84501a15495338351a08e3f824b57d0e88c25fcd21e21",
+      "candidate_sha256": "93f1ce5a2ed7e5e11762236be8cbda4ac7476f96e8058679752b100e1f9467ef"
+    },
+    {
+      "source": "scenarios/03-lateral-netpol/cleanup.sh",
+      "disposition": "sanitized",
+      "source_sha256": "fc43c4095104d32100329e671a58263f240c25abd386b9dfb4c1b5e184628ff6",
+      "candidate_sha256": "9a98b607a9d8c663e1ebbb7f7fb2b96c38a889dba2197f034834dbb0e1a0a1ac"
+    },
+    {
+      "source": "scenarios/03-lateral-netpol/detect.sh",
+      "disposition": "sanitized",
+      "source_sha256": "e358cef550fe9d285af633e56561ba2b39906f8498c7bf45d9d52fa2de55afcb",
+      "candidate_sha256": "7a32ae97fcb9265041a953eaeaa2cacbfb63453c3e8990d518603239196630de"
+    },
+    {
+      "source": "scenarios/03-lateral-netpol/generate.sh",
+      "disposition": "sanitized",
+      "source_sha256": "6bda0cb005b2a5c45dcd55981d61ddc328fb594d411a340baa6b384d8eb715a8",
+      "candidate_sha256": "e5b45961631922a6e188c428aae027b8ef6b7f3406cb755164aa0e74eb802fb3"
+    },
+    {
+      "source": "scenarios/03-lateral-netpol/manifests/client-example.json",
+      "disposition": "sanitized",
+      "source_sha256": "f1efccc442837c5bf05891076cca05d9ef31d3088385cf127f20cfa5d3191d46",
+      "candidate_sha256": "c9eee8eb75a630dc2a20648c23641b2236dd933f680d679a159b6660c4b659de"
+    },
+    {
+      "source": "scenarios/03-lateral-netpol/respond.sh",
+      "disposition": "sanitized",
+      "source_sha256": "5b8a9ed4784692f8520f1d2ac439daf772deae4d89d3d91d7d4db45ccf36b3cd",
+      "candidate_sha256": "f40d3585509a363a2c34cbebc70abe5d469c6e61bdecd0cb331208b3460711f8"
+    },
+    {
+      "source": "scenarios/03-lateral-netpol/verify.sh",
+      "disposition": "sanitized",
+      "source_sha256": "a1e07a64046387cc00ea61bd07f9025fa4a3de3a9dcdf2dab584b5716feb0e56",
+      "candidate_sha256": "93f4418ff9f284c50369493ad44175058b7b3d75bfe92cced32b0792f7c69c70"
+    },
+    {
+      "source": "scenarios/04-shell-admission/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "6ecb943e9f19df6d1fb3190bb8de2ab71ff84efba45c59685ee4430b9f29e717",
+      "candidate_sha256": "4310723fd8cb94a61d549c76500554fd26b3078244f0c173d7cae32f86de3050"
+    },
+    {
+      "source": "scenarios/04-shell-admission/cleanup.sh",
+      "disposition": "sanitized",
+      "source_sha256": "3f6259f653e7f4c1c3d0c6aacd18af49ba3726b709ce859d32bc9d77d925b8f1",
+      "candidate_sha256": "09d39060f14804b89be62b2cf72150c079b72dd45ed958f181c8238a031f4a31"
+    },
+    {
+      "source": "scenarios/04-shell-admission/detect.sh",
+      "disposition": "sanitized",
+      "source_sha256": "2c9cbc933256f0035000e4f47650d9054f69254d51cd6c1b7acf08d8438aa917",
+      "candidate_sha256": "119f272fb41448448f2311122d364bdc4927e5a8507e938183c25e31ffaf3a47"
+    },
+    {
+      "source": "scenarios/04-shell-admission/generate.sh",
+      "disposition": "sanitized",
+      "source_sha256": "c4453abac668f69112381bfdb19a8d3a237ff6c3696fc2332f6433fbaaf3f1ac",
+      "candidate_sha256": "8cf4fbabafb05f810f96c1c43fa8ac965a90a6d39fd601ad5c96d39d817b53cf"
+    },
+    {
+      "source": "scenarios/04-shell-admission/manifests/client-example.json",
+      "disposition": "sanitized",
+      "source_sha256": "d262a280e50a6a7f99e94e02d8c2651e55b7c2b3c43428d0eb46a5a90a388580",
+      "candidate_sha256": "8e01af9d8c93b983a50699d8acc417c6a5f27505aacb94e9e8e86f794cfa26d8"
+    },
+    {
+      "source": "scenarios/04-shell-admission/respond.sh",
+      "disposition": "sanitized",
+      "source_sha256": "f2dfbbf0107745d72eaecebffb4d34b48ab152ad65c00228670b6c5d57b8494e",
+      "candidate_sha256": "7d11afb0886535d6aa5d63e65029b1006f7a3903d50eb15df8be4908be4345ff"
+    },
+    {
+      "source": "scenarios/04-shell-admission/verify.sh",
+      "disposition": "sanitized",
+      "source_sha256": "864ee9a1e1196a5494237d7a6bbad54e51dc1337df145f31c56273d32ef49886",
+      "candidate_sha256": "eb84a07f7d9b48a38ebcce783c1a8e83cc1399dddf5d40391aa5cca3292eaff0"
+    },
+    {
+      "source": "scenarios/05-forbidden-secret/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "8e9db42bd7ba9c4f593cde4469dad75d14b2a11abe68eff185a103d824975f7a",
+      "candidate_sha256": "7b580d6ebf081a70a913269a570c5119395d2fb1a970a289379df983e444ec4c"
+    },
+    {
+      "source": "scenarios/05-forbidden-secret/cleanup.sh",
+      "disposition": "sanitized",
+      "source_sha256": "23d2e939e20edaf1c2ad4721b99997c1dbd23e804678fe8a6209bad70f084759",
+      "candidate_sha256": "10902620a47d01fc984b8402318c9ab19081722162ba6191dbcb901e56b53a11"
+    },
+    {
+      "source": "scenarios/05-forbidden-secret/detect.sh",
+      "disposition": "sanitized",
+      "source_sha256": "be1eee247920df2b519c2220c99f7d6cb5fce617e1343c159c52ea6488d847ab",
+      "candidate_sha256": "559bf77809137373d4a633d7efb42a63360c821bf9e4b48b7da20615bce98c08"
+    },
+    {
+      "source": "scenarios/05-forbidden-secret/generate.sh",
+      "disposition": "sanitized",
+      "source_sha256": "c67e072fe07ed6f5779c0db168c4c7881548efedee008e81d8b59eae41e5f27b",
+      "candidate_sha256": "11b079f0a129c1d667de6147107deddbb41f06f3cdbcaca066ef8a326e62230f"
+    },
+    {
+      "source": "scenarios/05-forbidden-secret/manifests/client-example.json",
+      "disposition": "sanitized",
+      "source_sha256": "847ed22bea0f036a59b12c56e8b58b2850e9b329aaf623b607be79ddfe3f27f6",
+      "candidate_sha256": "28e2804021bc37e33dc8a637ff99b1c9a208cb431688f9ba9ae65bfc709ef218"
+    },
+    {
+      "source": "scenarios/05-forbidden-secret/respond.sh",
+      "disposition": "sanitized",
+      "source_sha256": "41d2c3ad265a3dbad3272b203fc25c2bd10d0676a6593ff1d210df74dc700340",
+      "candidate_sha256": "7c8d38fad5eefc54f83edf529cf851234d606bc3bce5f12e3d5fe31a8546ba59"
+    },
+    {
+      "source": "scenarios/05-forbidden-secret/verify.sh",
+      "disposition": "sanitized",
+      "source_sha256": "a136fd35dcdca1deec4e3b588430d59dcd8e5ae40b82b202f08caa5e69d3ba04",
+      "candidate_sha256": "bacec5fe40b73844bd77bca3b40a692dc05ebf7f5cedecf4347e3f75735f5816"
+    },
+    {
+      "source": "scenarios/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "c4365e03155ff351134b9b3b243e7723e0910cec18ce14ef1dd09ce748b7a293",
+      "candidate_sha256": "f1ae8099e27bd694a64bf6811dfa267293f06c0766308c20f8fda8335f6c300c"
+    },
+    {
+      "source": "scenarios/report.py",
+      "disposition": "sanitized",
+      "source_sha256": "65ed83681eca629a16385f588f52f9e256a0e3fec5848724bc2ba5ccf9a4f97a",
+      "candidate_sha256": "33e9134fe73b6031182f87e62b9cf3aa542602a0da9df1d973716d1b06714b19"
+    },
+    {
+      "source": "scenarios/run-all.sh",
+      "disposition": "sanitized",
+      "source_sha256": "85e7d7ba084f19824e6e17e11089165c7ea7424966d69be5cc1444a332ecea76",
+      "candidate_sha256": "91498519fe7a61dcaff0333353229d0ebc22c49442f5b1ae8eacdaeb6ca17f5b"
+    },
+    {
+      "source": "scenarios/runner.py",
+      "disposition": "sanitized",
+      "source_sha256": "632750c3c91c117bbc4556d73891d05f0947ae1a0ea078f1ec547925a620bbc8",
+      "candidate_sha256": "c0a80a88572d0154e116280f809952786e8eb59ac00ac88a4156b9ad3beb6907"
+    },
+    {
+      "source": "scenarios/test_report.py",
+      "disposition": "copied",
+      "source_sha256": "43deba8d4d7e34db90c27989406d46d29918b426ccb3645a2ed61ee4f2554cc6",
+      "candidate_sha256": "43deba8d4d7e34db90c27989406d46d29918b426ccb3645a2ed61ee4f2554cc6"
+    },
+    {
+      "source": "scenarios/test_unit.py",
+      "disposition": "sanitized",
+      "source_sha256": "afe1d30f2c80e507b4017b28307034364fa053b4de314235759724be95fb25f9",
+      "candidate_sha256": "55b351561b7bdc996df1b6a2560b21bfa5ad0e51b3e2537dcdc2004cb2b25288"
+    },
+    {
+      "source": "scripts/creds.sh",
+      "disposition": "excluded",
+      "source_sha256": "7b5c2078f35cff13bfc87a0b0e7ca164126c74d5ccade6954bd693fe7e39e5b1",
+      "candidate_sha256": null
+    },
+    {
+      "source": "scripts/demo-list.sh",
+      "disposition": "excluded",
+      "source_sha256": "f8720b6d5db45dfd012c39eaf1899057d8afe1fd11ac3ff70c739a11891caa6f",
+      "candidate_sha256": null
+    },
+    {
+      "source": "scripts/diagrams/README.md",
+      "disposition": "excluded",
+      "source_sha256": "ee872203bf08725415f8f7f3881aa14ed76122b78efa105d4c9a69b4dafff670",
+      "candidate_sha256": null
+    },
+    {
+      "source": "scripts/diagrams/generate.py",
+      "disposition": "excluded",
+      "source_sha256": "fe00266c69918b27ef203f7f53b29c30ff6405ffde34a3c0d5ad8dfa06359d14",
+      "candidate_sha256": null
+    },
+    {
+      "source": "scripts/diagrams/test_generate.py",
+      "disposition": "excluded",
+      "source_sha256": "e868f3a7fe2314ba0dc70758a08d10b20f1b80f9f6ea50f2ae8e3a01735b0a53",
+      "candidate_sha256": null
+    },
+    {
+      "source": "scripts/kafka-lag-once.sh",
+      "disposition": "sanitized",
+      "source_sha256": "e5cf65493254ff2dc5e8603779f91e4dacbcc16d0fabc304b2b886d61641cae7",
+      "candidate_sha256": "1a8e8ff702e9903ef344ad4a8280fab8b1c70c08542e9a036afd0fe6645ecfd0"
+    },
+    {
+      "source": "scripts/kafka-reset-broker-data.sh",
+      "disposition": "excluded",
+      "source_sha256": "e6f37243ad14aa17a908f585a804386906b95f83ab4f4da0707ddefdaafab1ae",
+      "candidate_sha256": null
+    },
+    {
+      "source": "scripts/lab-start.sh",
+      "disposition": "excluded",
+      "source_sha256": "432e9ac4da3e1494df83d997511923dc0fcf0d72a4f9c61aa3dd834a5cd50bb4",
+      "candidate_sha256": null
+    },
+    {
+      "source": "scripts/lab-status.sh",
+      "disposition": "sanitized",
+      "source_sha256": "5463d2d93294bb3e6c4be20d0de819646dd1592151f0a38d665fe1b2cb773d5a",
+      "candidate_sha256": "171eb97b1926a20b27f41928d39ab56cf556841fa47e586bf98d4eb1d5bcacb7"
+    },
+    {
+      "source": "scripts/lab-stop.sh",
+      "disposition": "excluded",
+      "source_sha256": "df75d2f3037c973370c6e9ea20a3b9e35e7dab9a252d7da68b7faed2fa0004fc",
+      "candidate_sha256": null
+    },
+    {
+      "source": "scripts/opensearch-health.py",
+      "disposition": "sanitized",
+      "source_sha256": "5d189cab180d961c7dd5809e6c3df1a0d08f473ab970d82d917b81e5f6d0a613",
+      "candidate_sha256": "d46129508374a04e96e9732cb10060ba5ef10d8e23d95d2a58c3751f2e142c31"
+    },
+    {
+      "source": "scripts/opensearch-recover-red.py",
+      "disposition": "excluded",
+      "source_sha256": "921b1c814ce66cfd79128683bfad2a6b1f72db6daf9acca217cd114b81471e70",
+      "candidate_sha256": null
+    },
+    {
+      "source": "scripts/opensearch-set-replicas.py",
+      "disposition": "sanitized",
+      "source_sha256": "381f602ec417653d9e79b833f46aeeec25390c1e2177a81b0df5fe2a324ed4be",
+      "candidate_sha256": "16b1303e37c2502bb33e83d29d5e0b79d2aa16de825e2f8de67901ca2ca646a9"
+    },
+    {
+      "source": "scripts/repair-a1-os.sh",
+      "disposition": "excluded",
+      "source_sha256": "ef7c2a7afd88aa8dddb0be1d0be4bc385415644f08a8c15015153f51fd97978f",
+      "candidate_sha256": null
+    },
+    {
+      "source": "scripts/repair-kafka-checkpoints.sh",
+      "disposition": "excluded",
+      "source_sha256": "141fa90eef007ddd36533853eb836ae03c6e0ecbeb03878844eb05ed729f488c",
+      "candidate_sha256": null
+    },
+    {
+      "source": "scripts/repair-kafka-restore-binary.sh",
+      "disposition": "excluded",
+      "source_sha256": "79e5503683bfe6cbd7cbbe3933066c03a9eb5880301b23c8db2aa3ce7ef8d875",
+      "candidate_sha256": null
+    },
+    {
+      "source": "scripts/ssh-node.sh",
+      "disposition": "sanitized",
+      "source_sha256": "9ae10b3a98fb4cbbb9dbf4898c29d3cebb03ffa4828ffcbbcebb8341c7052070",
+      "candidate_sha256": "588dfaf91e32002ed55894f27b340bc8c09ccd973e9ad7cb14b46cf894219471"
+    },
+    {
+      "source": "soc/README-A.md",
+      "disposition": "sanitized",
+      "source_sha256": "0e9385f6394caa4b815735922bfcc9785704bbf41e11bbfb0f1ca64e21d382d3",
+      "candidate_sha256": "eb5cf0c4315e5ef944c9c7525876d0b47c694b444f80a411e55c618293ad4562"
+    },
+    {
+      "source": "soc/README-B.md",
+      "disposition": "sanitized",
+      "source_sha256": "e24719dd833b77ba1ec9f10ab399be82d0a2a7a4b2f38b18bb51e2c52b853368",
+      "candidate_sha256": "b74e8bcec056e5c0ef9c68a9371b797b8e31ff4f333e6d12d40d00af9b0792c6"
+    },
+    {
+      "source": "soc/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "77d1e1e0d4e117e7597a77faa6346a3a7e7c355838aac0aa255f7383280cc02a",
+      "candidate_sha256": "83f83f88e7bc53417c6837adf58b766f485ea9ab4f1453e40f9b2e445fc564b8"
+    },
+    {
+      "source": "soc/detection/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "95e78bbfe9bf498779d1e285972a338bcd7fdd3e1ca5822fbb3f4b1e54fd9408",
+      "candidate_sha256": "48fcc2776403cb5d62e3816e2b9e82f7018064112e7d7b8a4135738c3396020f"
+    },
+    {
+      "source": "soc/detection/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "553328db56bb028fb269bf260408092a01f808ef13c785e6f352d92848e93040",
+      "candidate_sha256": "553328db56bb028fb269bf260408092a01f808ef13c785e6f352d92848e93040"
+    },
+    {
+      "source": "soc/detection/install-alerting.py",
+      "disposition": "sanitized",
+      "source_sha256": "1404d1386a85a7c0b3fb8c53063891fce661c9cd9720a7a9fb5c9d53a1cd2d9e",
+      "candidate_sha256": "310c3d6a9765995f590c81a8e923841e1e36106ccd8fd21afe552ea055d9898f"
+    },
+    {
+      "source": "soc/detection/install-security-analytics.py",
+      "disposition": "sanitized",
+      "source_sha256": "7ffa177a1c3eea3096651d1aa4336e1958df9c28f4577f505d0ede83517ee102",
+      "candidate_sha256": "9dc2b1859e2c8fc38078a6461935378b4adedb267ecde82258fba9d13d4dfc6e"
+    },
+    {
+      "source": "soc/detection/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "6126e1a0a79169551de6aef34c8e71a218b60febb2b40277fa0a5c1b06221ccf",
+      "candidate_sha256": "f56bbd51e099a15c5e7afdcbbec74f36bff4725d309a6d1cabedb4ca43f0b80d"
+    },
+    {
+      "source": "soc/detection/lucene/audit-anonymous.txt",
+      "disposition": "copied",
+      "source_sha256": "4ef3acec7681a43611779e308b4d0050cbf958fd4f2ed16c31d8723edbb10bef",
+      "candidate_sha256": "4ef3acec7681a43611779e308b4d0050cbf958fd4f2ed16c31d8723edbb10bef"
+    },
+    {
+      "source": "soc/detection/lucene/audit-deploy.txt",
+      "disposition": "copied",
+      "source_sha256": "f73827fa36541ca6ab464d4e1efd03b1b1b76f00977973edbee25f875e12c027",
+      "candidate_sha256": "f73827fa36541ca6ab464d4e1efd03b1b1b76f00977973edbee25f875e12c027"
+    },
+    {
+      "source": "soc/detection/lucene/audit-exec.txt",
+      "disposition": "copied",
+      "source_sha256": "3b0b681ec7cde10bfe6527ad48a3ce9c49cfdae68d71563371ebd0e66a544f08",
+      "candidate_sha256": "3b0b681ec7cde10bfe6527ad48a3ce9c49cfdae68d71563371ebd0e66a544f08"
+    },
+    {
+      "source": "soc/detection/lucene/audit-rbac.txt",
+      "disposition": "copied",
+      "source_sha256": "39a0bda765fb0bc22fdeea8dd2c4da627acd0e1a517f531748ee1da4dd42a50d",
+      "candidate_sha256": "39a0bda765fb0bc22fdeea8dd2c4da627acd0e1a517f531748ee1da4dd42a50d"
+    },
+    {
+      "source": "soc/detection/lucene/audit-secrets.txt",
+      "disposition": "copied",
+      "source_sha256": "5fe6b8691ce647766a0d990c3cddcfa4209eaf13a157b590adf15671559d262b",
+      "candidate_sha256": "5fe6b8691ce647766a0d990c3cddcfa4209eaf13a157b590adf15671559d262b"
+    },
+    {
+      "source": "soc/detection/lucene/conn-scan.txt",
+      "disposition": "copied",
+      "source_sha256": "3a6abb3c8e622cc3bf8b972ade601407b6495bcb99cb423d5655d6c77c8e419b",
+      "candidate_sha256": "3a6abb3c8e622cc3bf8b972ade601407b6495bcb99cb423d5655d6c77c8e419b"
+    },
+    {
+      "source": "soc/detection/lucene/dns-c2.txt",
+      "disposition": "copied",
+      "source_sha256": "8c9aa495319d302b9dab7a7bff6311bee2e92001c31d39dd6bf67a8094b3cd16",
+      "candidate_sha256": "8c9aa495319d302b9dab7a7bff6311bee2e92001c31d39dd6bf67a8094b3cd16"
+    },
+    {
+      "source": "soc/detection/lucene/dns-entropy.txt",
+      "disposition": "copied",
+      "source_sha256": "937e360b42351d8426ea1e542c79521c653914a485b135f15569aab848d70d13",
+      "candidate_sha256": "937e360b42351d8426ea1e542c79521c653914a485b135f15569aab848d70d13"
+    },
+    {
+      "source": "soc/detection/lucene/dns-exfil.txt",
+      "disposition": "copied",
+      "source_sha256": "7d5ac53f22df09020e640529062685a17f1e249318a6b094f2a51c8b47b100ec",
+      "candidate_sha256": "7d5ac53f22df09020e640529062685a17f1e249318a6b094f2a51c8b47b100ec"
+    },
+    {
+      "source": "soc/detection/lucene/dns-tunnel.txt",
+      "disposition": "copied",
+      "source_sha256": "98ec2048168941967d0f65ecad13598541baa75585e5d2eb758f7ff2df59cef2",
+      "candidate_sha256": "98ec2048168941967d0f65ecad13598541baa75585e5d2eb758f7ff2df59cef2"
+    },
+    {
+      "source": "soc/detection/lucene/falco-c2.txt",
+      "disposition": "copied",
+      "source_sha256": "8a9c3be169896721c3873d7575858b90affeb6d1b14515f52d5997bd1fd8d496",
+      "candidate_sha256": "8a9c3be169896721c3873d7575858b90affeb6d1b14515f52d5997bd1fd8d496"
+    },
+    {
+      "source": "soc/detection/lucene/falco-mount.txt",
+      "disposition": "copied",
+      "source_sha256": "53a3209ee23c13ffbe8759c2826cc67e7bb3b18121ac3f09d003e39733a64fbb",
+      "candidate_sha256": "53a3209ee23c13ffbe8759c2826cc67e7bb3b18121ac3f09d003e39733a64fbb"
+    },
+    {
+      "source": "soc/detection/lucene/falco-shell.txt",
+      "disposition": "copied",
+      "source_sha256": "4ec7628ab0123ef626f0ac13df98032a09e0c56a3a5838a365a6e6d30ac6fd57",
+      "candidate_sha256": "4ec7628ab0123ef626f0ac13df98032a09e0c56a3a5838a365a6e6d30ac6fd57"
+    },
+    {
+      "source": "soc/detection/lucene/falco-token.txt",
+      "disposition": "copied",
+      "source_sha256": "a0a57a2691fe821560561bf67fb9f4827ca4ce7d6fbd67df22b463d40f899cda",
+      "candidate_sha256": "a0a57a2691fe821560561bf67fb9f4827ca4ce7d6fbd67df22b463d40f899cda"
+    },
+    {
+      "source": "soc/detection/lucene/http-beacon.txt",
+      "disposition": "copied",
+      "source_sha256": "b86390a8789be8756510443dfe9bc0839d1bf0d60c832b3cb0f2a92fcaed4898",
+      "candidate_sha256": "b86390a8789be8756510443dfe9bc0839d1bf0d60c832b3cb0f2a92fcaed4898"
+    },
+    {
+      "source": "soc/detection/lucene/intel-hit.txt",
+      "disposition": "copied",
+      "source_sha256": "ebf5740d9893f4c828b19d94fba0b75e3732128c38807645a8c2e939daee6255",
+      "candidate_sha256": "ebf5740d9893f4c828b19d94fba0b75e3732128c38807645a8c2e939daee6255"
+    },
+    {
+      "source": "soc/detection/lucene/notice-scan.txt",
+      "disposition": "copied",
+      "source_sha256": "82912d925ae5b46c7128f49d476b89d8847ee9cfbfb487e6a601a92cfbe2fad5",
+      "candidate_sha256": "82912d925ae5b46c7128f49d476b89d8847ee9cfbfb487e6a601a92cfbe2fad5"
+    },
+    {
+      "source": "soc/detection/monitors/audit-anonymous.json",
+      "disposition": "copied",
+      "source_sha256": "9962a250d7067d40e4f369e0e593df01a5d39869482c805f3c90fe005a9f7807",
+      "candidate_sha256": "9962a250d7067d40e4f369e0e593df01a5d39869482c805f3c90fe005a9f7807"
+    },
+    {
+      "source": "soc/detection/monitors/audit-deploy.json",
+      "disposition": "copied",
+      "source_sha256": "689b88e1f8ac32f3493c1b9c6450597809f223c5b0d4d3a580e9e3e7cdb34625",
+      "candidate_sha256": "689b88e1f8ac32f3493c1b9c6450597809f223c5b0d4d3a580e9e3e7cdb34625"
+    },
+    {
+      "source": "soc/detection/monitors/audit-exec.json",
+      "disposition": "copied",
+      "source_sha256": "cb3de720dc79608b42b72598b93f1c024ac43bcb783af0b97fb3c9066520b14e",
+      "candidate_sha256": "cb3de720dc79608b42b72598b93f1c024ac43bcb783af0b97fb3c9066520b14e"
+    },
+    {
+      "source": "soc/detection/monitors/audit-rbac.json",
+      "disposition": "copied",
+      "source_sha256": "c5ad4e8b6a6ea5fcc853bd2d5b884f9a34c70d26bf089b98122a440cbdc9f3cf",
+      "candidate_sha256": "c5ad4e8b6a6ea5fcc853bd2d5b884f9a34c70d26bf089b98122a440cbdc9f3cf"
+    },
+    {
+      "source": "soc/detection/monitors/audit-secrets.json",
+      "disposition": "copied",
+      "source_sha256": "c80f03e8cde71d963f4a09d1c8bdf62fbf32d712fbab44786ce7a066c603e006",
+      "candidate_sha256": "c80f03e8cde71d963f4a09d1c8bdf62fbf32d712fbab44786ce7a066c603e006"
+    },
+    {
+      "source": "soc/detection/monitors/conn-scan.json",
+      "disposition": "copied",
+      "source_sha256": "4bc8c68ddecfeb8b0e0e180e2d01aea0b810a13610f4928f4c2905cd42492a42",
+      "candidate_sha256": "4bc8c68ddecfeb8b0e0e180e2d01aea0b810a13610f4928f4c2905cd42492a42"
+    },
+    {
+      "source": "soc/detection/monitors/dns-c2.json",
+      "disposition": "copied",
+      "source_sha256": "fdf0d2d3e81266e2982a8ab00a163a040c5c4470f28b38ef370d0c9c547edbb4",
+      "candidate_sha256": "fdf0d2d3e81266e2982a8ab00a163a040c5c4470f28b38ef370d0c9c547edbb4"
+    },
+    {
+      "source": "soc/detection/monitors/dns-entropy.json",
+      "disposition": "copied",
+      "source_sha256": "f63bb52416380972793b090eb6770bf8743f8e0d91a1789366711869b4275add",
+      "candidate_sha256": "f63bb52416380972793b090eb6770bf8743f8e0d91a1789366711869b4275add"
+    },
+    {
+      "source": "soc/detection/monitors/dns-exfil.json",
+      "disposition": "copied",
+      "source_sha256": "094bf0a4bfb4cadc1bd7eafadef00637d8b4bfdc57b27ea34c6bf518f9486cec",
+      "candidate_sha256": "094bf0a4bfb4cadc1bd7eafadef00637d8b4bfdc57b27ea34c6bf518f9486cec"
+    },
+    {
+      "source": "soc/detection/monitors/dns-tunnel.json",
+      "disposition": "copied",
+      "source_sha256": "2716f86107becec61c08c64d4b6b801b86c7785bec3aeb904d22e0bc20aa8a46",
+      "candidate_sha256": "2716f86107becec61c08c64d4b6b801b86c7785bec3aeb904d22e0bc20aa8a46"
+    },
+    {
+      "source": "soc/detection/monitors/falco-c2.json",
+      "disposition": "copied",
+      "source_sha256": "d33155b5a8393fbbee05382b30f715c2ebf7150f883f84d581530790a50f0d0f",
+      "candidate_sha256": "d33155b5a8393fbbee05382b30f715c2ebf7150f883f84d581530790a50f0d0f"
+    },
+    {
+      "source": "soc/detection/monitors/falco-mount.json",
+      "disposition": "copied",
+      "source_sha256": "84700299487029237890626a27677e063657e9ac5b57a5255c776554ddf6d9d5",
+      "candidate_sha256": "84700299487029237890626a27677e063657e9ac5b57a5255c776554ddf6d9d5"
+    },
+    {
+      "source": "soc/detection/monitors/falco-shell.json",
+      "disposition": "copied",
+      "source_sha256": "0ffef9f7f3ee53021376bc8b2c12c53fee9425c61ce2c93f30fca0acb8e13c98",
+      "candidate_sha256": "0ffef9f7f3ee53021376bc8b2c12c53fee9425c61ce2c93f30fca0acb8e13c98"
+    },
+    {
+      "source": "soc/detection/monitors/falco-token.json",
+      "disposition": "copied",
+      "source_sha256": "73ac4bc7f1554453f3d6afafce900239f0a0fd02a6ea7bb8530f69578685fa58",
+      "candidate_sha256": "73ac4bc7f1554453f3d6afafce900239f0a0fd02a6ea7bb8530f69578685fa58"
+    },
+    {
+      "source": "soc/detection/monitors/http-beacon.json",
+      "disposition": "copied",
+      "source_sha256": "c209f7e0fd668c23f853d55eb21a3df65601e53dac2c3c947d805664e06a801b",
+      "candidate_sha256": "c209f7e0fd668c23f853d55eb21a3df65601e53dac2c3c947d805664e06a801b"
+    },
+    {
+      "source": "soc/detection/monitors/intel-hit.json",
+      "disposition": "copied",
+      "source_sha256": "22cb81c7fc348b50e0e6ba2e20600b5e960d335be047b5c27f3fc3f2f09d0369",
+      "candidate_sha256": "22cb81c7fc348b50e0e6ba2e20600b5e960d335be047b5c27f3fc3f2f09d0369"
+    },
+    {
+      "source": "soc/detection/monitors/notice-scan.json",
+      "disposition": "copied",
+      "source_sha256": "1ea7d22d609483554dd171d716bd88150551569e5ed48d3cb70606bfab130ccd",
+      "candidate_sha256": "1ea7d22d609483554dd171d716bd88150551569e5ed48d3cb70606bfab130ccd"
+    },
+    {
+      "source": "soc/detection/queries/audit-anonymous.json",
+      "disposition": "copied",
+      "source_sha256": "df5d51f2ac60cb408be1c7e9f0113a075dcd264da19c846a136d70971f67481e",
+      "candidate_sha256": "df5d51f2ac60cb408be1c7e9f0113a075dcd264da19c846a136d70971f67481e"
+    },
+    {
+      "source": "soc/detection/queries/audit-deploy.json",
+      "disposition": "copied",
+      "source_sha256": "78074bd4eb4cfe07bd3f8194b02299578bc3eb9deb161482a365886ff2594527",
+      "candidate_sha256": "78074bd4eb4cfe07bd3f8194b02299578bc3eb9deb161482a365886ff2594527"
+    },
+    {
+      "source": "soc/detection/queries/audit-exec.json",
+      "disposition": "copied",
+      "source_sha256": "f12eaf4b52529f3e741fa68ae768fce3a5a5314f8c3444236af02c8bcfaafcfc",
+      "candidate_sha256": "f12eaf4b52529f3e741fa68ae768fce3a5a5314f8c3444236af02c8bcfaafcfc"
+    },
+    {
+      "source": "soc/detection/queries/audit-rbac.json",
+      "disposition": "copied",
+      "source_sha256": "3707180d4e7bdf36af0104f146e32fad49e9ffeb63b31038e43a1c17a5a4348a",
+      "candidate_sha256": "3707180d4e7bdf36af0104f146e32fad49e9ffeb63b31038e43a1c17a5a4348a"
+    },
+    {
+      "source": "soc/detection/queries/audit-secrets.json",
+      "disposition": "copied",
+      "source_sha256": "69060edb58a85c8803d4ef8253c38c01d638a497519371fca4e4790ccde1979e",
+      "candidate_sha256": "69060edb58a85c8803d4ef8253c38c01d638a497519371fca4e4790ccde1979e"
+    },
+    {
+      "source": "soc/detection/queries/conn-scan.json",
+      "disposition": "copied",
+      "source_sha256": "9b058b7673f6eed0df850a1822165211873d32f239d51910900d134c16f89672",
+      "candidate_sha256": "9b058b7673f6eed0df850a1822165211873d32f239d51910900d134c16f89672"
+    },
+    {
+      "source": "soc/detection/queries/dns-c2.json",
+      "disposition": "copied",
+      "source_sha256": "3909aa27b31879bc55f287fcf61a594f96fc7be6e293b7fd7fc31eddb1db9a40",
+      "candidate_sha256": "3909aa27b31879bc55f287fcf61a594f96fc7be6e293b7fd7fc31eddb1db9a40"
+    },
+    {
+      "source": "soc/detection/queries/dns-entropy.json",
+      "disposition": "copied",
+      "source_sha256": "d829a29631a4eaacef9ec2c2cb1c415cd43d6174097f391271a964f6c73b7b33",
+      "candidate_sha256": "d829a29631a4eaacef9ec2c2cb1c415cd43d6174097f391271a964f6c73b7b33"
+    },
+    {
+      "source": "soc/detection/queries/dns-exfil.json",
+      "disposition": "copied",
+      "source_sha256": "9fe0e99ad017aa76389a2b929db1596c9193280483e2740712683ed6d7a1a306",
+      "candidate_sha256": "9fe0e99ad017aa76389a2b929db1596c9193280483e2740712683ed6d7a1a306"
+    },
+    {
+      "source": "soc/detection/queries/dns-tunnel.json",
+      "disposition": "copied",
+      "source_sha256": "5d3966dead0b221385dcd22edf852a6e839ab49fce93bd80ec410f15493547ae",
+      "candidate_sha256": "5d3966dead0b221385dcd22edf852a6e839ab49fce93bd80ec410f15493547ae"
+    },
+    {
+      "source": "soc/detection/queries/falco-c2.json",
+      "disposition": "copied",
+      "source_sha256": "9d2d82e2461b5783b8ea046d5b3363e1c7936a1e7af929e7044d3ca82d5f1892",
+      "candidate_sha256": "9d2d82e2461b5783b8ea046d5b3363e1c7936a1e7af929e7044d3ca82d5f1892"
+    },
+    {
+      "source": "soc/detection/queries/falco-mount.json",
+      "disposition": "copied",
+      "source_sha256": "e4591ae37f3607e9534a3d452067e0354b9bc7a2609725f4309814883306416b",
+      "candidate_sha256": "e4591ae37f3607e9534a3d452067e0354b9bc7a2609725f4309814883306416b"
+    },
+    {
+      "source": "soc/detection/queries/falco-shell.json",
+      "disposition": "copied",
+      "source_sha256": "5d1e8b1b5abbba5432c655c6a908e70e4e25245edbfe03c465e0530f8e0da1ce",
+      "candidate_sha256": "5d1e8b1b5abbba5432c655c6a908e70e4e25245edbfe03c465e0530f8e0da1ce"
+    },
+    {
+      "source": "soc/detection/queries/falco-token.json",
+      "disposition": "copied",
+      "source_sha256": "e3defc426f8e59ea9e093448053498f27ca263ba4b7c3999c2673b58537a45eb",
+      "candidate_sha256": "e3defc426f8e59ea9e093448053498f27ca263ba4b7c3999c2673b58537a45eb"
+    },
+    {
+      "source": "soc/detection/queries/http-beacon-aggregation.json",
+      "disposition": "copied",
+      "source_sha256": "d734e32822c2f381d4cf4ce197b83755ed20d82e57be9e63f5d5e288da785c78",
+      "candidate_sha256": "d734e32822c2f381d4cf4ce197b83755ed20d82e57be9e63f5d5e288da785c78"
+    },
+    {
+      "source": "soc/detection/queries/http-beacon.json",
+      "disposition": "copied",
+      "source_sha256": "905208948127523f507eb5e4a23cdf966b8f1d220bc3994771b19106572ee80f",
+      "candidate_sha256": "905208948127523f507eb5e4a23cdf966b8f1d220bc3994771b19106572ee80f"
+    },
+    {
+      "source": "soc/detection/queries/intel-hit.json",
+      "disposition": "copied",
+      "source_sha256": "f5fa5dec57f5c19ab4c15c375c4d25da28d5bb6f5497368d9c573c71857e5042",
+      "candidate_sha256": "f5fa5dec57f5c19ab4c15c375c4d25da28d5bb6f5497368d9c573c71857e5042"
+    },
+    {
+      "source": "soc/detection/queries/notice-scan.json",
+      "disposition": "copied",
+      "source_sha256": "6495b19b0be78d5b3392c72982eb923c881dea493a44a9c8c2171f17eb47a208",
+      "candidate_sha256": "6495b19b0be78d5b3392c72982eb923c881dea493a44a9c8c2171f17eb47a208"
+    },
+    {
+      "source": "soc/detection/rules/audit-anonymous.yaml",
+      "disposition": "copied",
+      "source_sha256": "879f4f3edb690815ed3cf39152c66daf8cdebf19bf1654d6a74b758fb996ecbb",
+      "candidate_sha256": "879f4f3edb690815ed3cf39152c66daf8cdebf19bf1654d6a74b758fb996ecbb"
+    },
+    {
+      "source": "soc/detection/rules/audit-deploy.yaml",
+      "disposition": "copied",
+      "source_sha256": "669922861b30301da9a8f4f1a442f9fb9c7bcdde900174b98edb3d239f8f1cb8",
+      "candidate_sha256": "669922861b30301da9a8f4f1a442f9fb9c7bcdde900174b98edb3d239f8f1cb8"
+    },
+    {
+      "source": "soc/detection/rules/audit-exec.yaml",
+      "disposition": "copied",
+      "source_sha256": "1b04a0f1fbdbba083e7dbb5f91a2de765b1e7a4c5082ce744a0d94457856ac2d",
+      "candidate_sha256": "1b04a0f1fbdbba083e7dbb5f91a2de765b1e7a4c5082ce744a0d94457856ac2d"
+    },
+    {
+      "source": "soc/detection/rules/audit-forbidden-secret.yaml",
+      "disposition": "copied",
+      "source_sha256": "d348d10b7b52a03de63068ebf717977df1d1f276b0770b50bd81de28be2ec2ed",
+      "candidate_sha256": "d348d10b7b52a03de63068ebf717977df1d1f276b0770b50bd81de28be2ec2ed"
+    },
+    {
+      "source": "soc/detection/rules/audit-rbac.yaml",
+      "disposition": "copied",
+      "source_sha256": "a47c8e700bdb3a2105236f08e3e9ea367ce5d1d055ff7a5c2e3f909815068fe8",
+      "candidate_sha256": "a47c8e700bdb3a2105236f08e3e9ea367ce5d1d055ff7a5c2e3f909815068fe8"
+    },
+    {
+      "source": "soc/detection/rules/audit-secrets.yaml",
+      "disposition": "copied",
+      "source_sha256": "3cebdf786f9230c4e97b85de4d0e0b249068c831bdaaa5df1cec59d8e0fa1d03",
+      "candidate_sha256": "3cebdf786f9230c4e97b85de4d0e0b249068c831bdaaa5df1cec59d8e0fa1d03"
+    },
+    {
+      "source": "soc/detection/rules/conn-scan.yaml",
+      "disposition": "copied",
+      "source_sha256": "fb1372979627a76210c39957d38ba928b6c5dbe56811ffb1e1a55b520172cfd0",
+      "candidate_sha256": "fb1372979627a76210c39957d38ba928b6c5dbe56811ffb1e1a55b520172cfd0"
+    },
+    {
+      "source": "soc/detection/rules/dns-c2.yaml",
+      "disposition": "copied",
+      "source_sha256": "2eb7c633c12ce58bededcf26204868b9536bc411923ff624efca4ec790850d3e",
+      "candidate_sha256": "2eb7c633c12ce58bededcf26204868b9536bc411923ff624efca4ec790850d3e"
+    },
+    {
+      "source": "soc/detection/rules/dns-entropy.yaml",
+      "disposition": "copied",
+      "source_sha256": "cf6ecbdda1457ffe46b36daea085e99d1185ba174f6d8c442774be5d0d6e0b98",
+      "candidate_sha256": "cf6ecbdda1457ffe46b36daea085e99d1185ba174f6d8c442774be5d0d6e0b98"
+    },
+    {
+      "source": "soc/detection/rules/dns-exfil.yaml",
+      "disposition": "copied",
+      "source_sha256": "29522739a51f2dea3e53723a3f28bd298272f86b1e78b8323fc417a69d7c5579",
+      "candidate_sha256": "29522739a51f2dea3e53723a3f28bd298272f86b1e78b8323fc417a69d7c5579"
+    },
+    {
+      "source": "soc/detection/rules/dns-tunnel.yaml",
+      "disposition": "copied",
+      "source_sha256": "7447f911e686ce66dde9860e058afc9b15a43f6ea6bb5bf2f9f94695937bbdf7",
+      "candidate_sha256": "7447f911e686ce66dde9860e058afc9b15a43f6ea6bb5bf2f9f94695937bbdf7"
+    },
+    {
+      "source": "soc/detection/rules/falco-c2.yaml",
+      "disposition": "copied",
+      "source_sha256": "b832fa1a17d7668bcf7b48ee1a53d218d6d545c64f756ec6d59fd61ca50a1a1d",
+      "candidate_sha256": "b832fa1a17d7668bcf7b48ee1a53d218d6d545c64f756ec6d59fd61ca50a1a1d"
+    },
+    {
+      "source": "soc/detection/rules/falco-mount.yaml",
+      "disposition": "copied",
+      "source_sha256": "4d4263b241091d12736bc7da5774e306dbd68ab370d1689731751543eee96b9d",
+      "candidate_sha256": "4d4263b241091d12736bc7da5774e306dbd68ab370d1689731751543eee96b9d"
+    },
+    {
+      "source": "soc/detection/rules/falco-shell.yaml",
+      "disposition": "copied",
+      "source_sha256": "85918c6c89914216b7b29a5796fd1873ff178e5035e8fde33e1818af540a6853",
+      "candidate_sha256": "85918c6c89914216b7b29a5796fd1873ff178e5035e8fde33e1818af540a6853"
+    },
+    {
+      "source": "soc/detection/rules/falco-token.yaml",
+      "disposition": "copied",
+      "source_sha256": "ac1658d8b12522656e5ab24ddde1015361a4439a99dadcb5866e64a0bbb33f09",
+      "candidate_sha256": "ac1658d8b12522656e5ab24ddde1015361a4439a99dadcb5866e64a0bbb33f09"
+    },
+    {
+      "source": "soc/detection/rules/http-beacon.yaml",
+      "disposition": "copied",
+      "source_sha256": "a1d8178dba605ea378d6e086930f4a152819bb7e7ddeea3ad598372e03d9c427",
+      "candidate_sha256": "a1d8178dba605ea378d6e086930f4a152819bb7e7ddeea3ad598372e03d9c427"
+    },
+    {
+      "source": "soc/detection/rules/intel-hit.yaml",
+      "disposition": "copied",
+      "source_sha256": "06c79f024e687ed5e702e8bfbf02024a45bb17144a14992d799e5fa64bf5e063",
+      "candidate_sha256": "06c79f024e687ed5e702e8bfbf02024a45bb17144a14992d799e5fa64bf5e063"
+    },
+    {
+      "source": "soc/detection/rules/notice-scan.yaml",
+      "disposition": "copied",
+      "source_sha256": "91da4603771d21f7b42698a4dca6e0f0a3005e5340b53efea581ebc0eae835e3",
+      "candidate_sha256": "91da4603771d21f7b42698a4dca6e0f0a3005e5340b53efea581ebc0eae835e3"
+    },
+    {
+      "source": "soc/detection/test-live.py",
+      "disposition": "sanitized",
+      "source_sha256": "2f1e10512521615e4a47407d982ff1b4c20db026abad6ce8a811db2d3c99ffb3",
+      "candidate_sha256": "513aabe1afa6f4d0564839b9be4c4a21c4e7afe12b906dce4a4c1303ca1e6340"
+    },
+    {
+      "source": "soc/detection/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "7fe151de328fa31c51ed65e1a4b7c7aec03df64e552c000389aba5cf98480d16",
+      "candidate_sha256": "f72bca473a0f77d646c67d540c0a08ab2e6007eed913b8f85ef17b8b3490cc06"
+    },
+    {
+      "source": "soc/detection/triggers/_common.sh",
+      "disposition": "sanitized",
+      "source_sha256": "f25adb35bcf321f4cf7245b24b59afd6363a90739acc4cf111e02b8909e4c5d2",
+      "candidate_sha256": "a1357869e19f171be1322f6a36ecce92dec2802f07dd3f6dfbe4feb550480021"
+    },
+    {
+      "source": "soc/detection/triggers/_pod.sh",
+      "disposition": "sanitized",
+      "source_sha256": "8781cb80ab26d87b2f1420dfa39d9b8892821d0f2021ec73195c31529ab84418",
+      "candidate_sha256": "2fd0379faac1114918d5bd57d145bbb0c41ba623dedba37c10774dde7c06557d"
+    },
+    {
+      "source": "soc/detection/triggers/audit-anonymous.sh",
+      "disposition": "sanitized",
+      "source_sha256": "72c7276b896cdf3f7f0a82632e8f014719f9fdeaa81bca8154a03e10e24ae111",
+      "candidate_sha256": "41fb58309cbd146a02cb1f33efadbdb9cd6c405ee06f0f33af0e099ecd45ec42"
+    },
+    {
+      "source": "soc/detection/triggers/audit-deploy.sh",
+      "disposition": "sanitized",
+      "source_sha256": "5ca63b97af80eff97857c38daae91205fd9a8770171827fa675ef2c6a64b02ae",
+      "candidate_sha256": "de3049ef33d0c20ffe83f17a0a73838923996c4e18e086331378c73e4b9800ae"
+    },
+    {
+      "source": "soc/detection/triggers/audit-exec.sh",
+      "disposition": "sanitized",
+      "source_sha256": "f1a83996fc66a805320d05c3ca064de71e01859f0abff8ea00f6d4d40963578e",
+      "candidate_sha256": "070fba4ca8160f82a41fa06fd57f650a7a56b9b7db36541f7e12be3143ba8274"
+    },
+    {
+      "source": "soc/detection/triggers/audit-rbac.sh",
+      "disposition": "sanitized",
+      "source_sha256": "582aa38c842e465d32b9bba5aa84ae45c256adb7bc151608465f8892d3656c0c",
+      "candidate_sha256": "1d28f0599d78edb4179a9474f57b8dc075e1cc5634d8bdf1ca1bfe3bc0960cfa"
+    },
+    {
+      "source": "soc/detection/triggers/audit-secrets.sh",
+      "disposition": "sanitized",
+      "source_sha256": "95068ac9b7854b1c23adbbbefbfe598e32863750be801d7722c201ccb72c64e1",
+      "candidate_sha256": "211ba05c468e1d4aff58bad6a747e99c8a51e790a8252ac47dae60d64d84b5f0"
+    },
+    {
+      "source": "soc/detection/triggers/conn-scan.sh",
+      "disposition": "sanitized",
+      "source_sha256": "1e4646de43704cdbd9ebe0889a72821dda613754d204a1bd31900d68c5f5a92c",
+      "candidate_sha256": "f683794345c73cc4d7cf9fb80040113f035001442975613ed824aa2bc45be2c9"
+    },
+    {
+      "source": "soc/detection/triggers/dns-c2.sh",
+      "disposition": "sanitized",
+      "source_sha256": "1e4646de43704cdbd9ebe0889a72821dda613754d204a1bd31900d68c5f5a92c",
+      "candidate_sha256": "f683794345c73cc4d7cf9fb80040113f035001442975613ed824aa2bc45be2c9"
+    },
+    {
+      "source": "soc/detection/triggers/dns-entropy.sh",
+      "disposition": "sanitized",
+      "source_sha256": "1e4646de43704cdbd9ebe0889a72821dda613754d204a1bd31900d68c5f5a92c",
+      "candidate_sha256": "f683794345c73cc4d7cf9fb80040113f035001442975613ed824aa2bc45be2c9"
+    },
+    {
+      "source": "soc/detection/triggers/dns-exfil.sh",
+      "disposition": "sanitized",
+      "source_sha256": "1e4646de43704cdbd9ebe0889a72821dda613754d204a1bd31900d68c5f5a92c",
+      "candidate_sha256": "f683794345c73cc4d7cf9fb80040113f035001442975613ed824aa2bc45be2c9"
+    },
+    {
+      "source": "soc/detection/triggers/dns-tunnel.sh",
+      "disposition": "sanitized",
+      "source_sha256": "1e4646de43704cdbd9ebe0889a72821dda613754d204a1bd31900d68c5f5a92c",
+      "candidate_sha256": "f683794345c73cc4d7cf9fb80040113f035001442975613ed824aa2bc45be2c9"
+    },
+    {
+      "source": "soc/detection/triggers/falco-c2.sh",
+      "disposition": "sanitized",
+      "source_sha256": "531df33ab548d8f69e787691f2b273e5127ff6481ce470dd3c36d279c601cb01",
+      "candidate_sha256": "69f1a9353f4795df55e14e273144d858a9d845122b56692ca475a4fb0432ca07"
+    },
+    {
+      "source": "soc/detection/triggers/falco-mount.sh",
+      "disposition": "sanitized",
+      "source_sha256": "8bb7f5a4cc55b089010afb923e68479bb33e5e2ecfccd984035d9c9fad207ab5",
+      "candidate_sha256": "f2aaf98b7fc5248b842543625b18860d9e9aca8caf3503c2e59c5127b291cc90"
+    },
+    {
+      "source": "soc/detection/triggers/falco-shell.sh",
+      "disposition": "sanitized",
+      "source_sha256": "c30b5b11cbed49138b9756a7c65ddeeaec2119034862bf059dac0d7675e5fa90",
+      "candidate_sha256": "89d72108540b4290217052cb99153ad49b6c69246b6d96b90b219fd0a579deca"
+    },
+    {
+      "source": "soc/detection/triggers/falco-token.sh",
+      "disposition": "sanitized",
+      "source_sha256": "e8cc4ac955f90fc8ff46139272b1d59af5defa5d90a178de0d1f04477bd9f5ca",
+      "candidate_sha256": "676f6ad669d02a2230d766e4176d2d1ee5f05859ff76c9afbbd452310a960f78"
+    },
+    {
+      "source": "soc/detection/triggers/http-beacon.sh",
+      "disposition": "sanitized",
+      "source_sha256": "1e4646de43704cdbd9ebe0889a72821dda613754d204a1bd31900d68c5f5a92c",
+      "candidate_sha256": "f683794345c73cc4d7cf9fb80040113f035001442975613ed824aa2bc45be2c9"
+    },
+    {
+      "source": "soc/detection/triggers/intel-hit.sh",
+      "disposition": "sanitized",
+      "source_sha256": "1e4646de43704cdbd9ebe0889a72821dda613754d204a1bd31900d68c5f5a92c",
+      "candidate_sha256": "f683794345c73cc4d7cf9fb80040113f035001442975613ed824aa2bc45be2c9"
+    },
+    {
+      "source": "soc/detection/triggers/notice-scan.sh",
+      "disposition": "sanitized",
+      "source_sha256": "1e4646de43704cdbd9ebe0889a72821dda613754d204a1bd31900d68c5f5a92c",
+      "candidate_sha256": "f683794345c73cc4d7cf9fb80040113f035001442975613ed824aa2bc45be2c9"
+    },
+    {
+      "source": "soc/detection/validate.sh",
+      "disposition": "sanitized",
+      "source_sha256": "b367acb8590c4fdec3c476b033d6137ae8966c02b9b987eb7450567cdcc75548",
+      "candidate_sha256": "7eccce9d9a10ca2594d0404fbdbb61366c2eb7ec0cafa669549b2421f6a13c15"
+    },
+    {
+      "source": "soc/falco/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "224361c679e3941741ab49dabc381220450b54fe1df8bbfa16e037a7c269d467",
+      "candidate_sha256": "e2b4628c7f91b4100fff70b2e02ac6cc21ac4ea7411b8ebe0b45a0c75b0b1daf"
+    },
+    {
+      "source": "soc/falco/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "fb46660030142590f676899dedc763b2453d3e5b9463f340adf58bd410d6aa34",
+      "candidate_sha256": "fb46660030142590f676899dedc763b2453d3e5b9463f340adf58bd410d6aa34"
+    },
+    {
+      "source": "soc/falco/chart-checksums.sha256",
+      "disposition": "copied",
+      "source_sha256": "5bdf1b89d8b98c3fafb6fa057d8c7c8cf4b7176f7789462a4aa8afaad4de5c4b",
+      "candidate_sha256": "5bdf1b89d8b98c3fafb6fa057d8c7c8cf4b7176f7789462a4aa8afaad4de5c4b"
+    },
+    {
+      "source": "soc/falco/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "9666910ab938d9b80f4fddb6b8932afbe401cd9dfdb87d37f740e991ba57eec9",
+      "candidate_sha256": "6f95eab2d1fe50713a2748ef2d201c27d8e7812da65b8e0194ff4bbd53161911"
+    },
+    {
+      "source": "soc/falco/kafka-acceptance-pod.yaml",
+      "disposition": "copied",
+      "source_sha256": "d62f0fd1c212070e7d9a9a6c96ff420cab8fb26f01e755bc310c8bb93d6dedb1",
+      "candidate_sha256": "d62f0fd1c212070e7d9a9a6c96ff420cab8fb26f01e755bc310c8bb93d6dedb1"
+    },
+    {
+      "source": "soc/falco/kafka-consume.sh",
+      "disposition": "sanitized",
+      "source_sha256": "749337df2ff9e72218e81beb9d2722565f301e6e390ddbaa7c1a6bb274dbc0c6",
+      "candidate_sha256": "5c29e5fd52b536cd0caa099368a2c0d15b80e9627f96e44605fc2b0632c0a6f7"
+    },
+    {
+      "source": "soc/falco/namespace.yaml",
+      "disposition": "copied",
+      "source_sha256": "561b863e9244eb98cc43bf3ea4085ceff6a336e4b12b0cbde33ab764539b6edc",
+      "candidate_sha256": "561b863e9244eb98cc43bf3ea4085ceff6a336e4b12b0cbde33ab764539b6edc"
+    },
+    {
+      "source": "soc/falco/sidekick-values.yaml",
+      "disposition": "copied",
+      "source_sha256": "9c4108f2102bd3e16432b6b55cddde5b6ce02b3415c6d46644db2e0df2288014",
+      "candidate_sha256": "9c4108f2102bd3e16432b6b55cddde5b6ce02b3415c6d46644db2e0df2288014"
+    },
+    {
+      "source": "soc/falco/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "68aec99385bf6212a5eb70e0ba97f7759ef6cf0a9187094bdffe7f4bb5189e22",
+      "candidate_sha256": "2b768b4a8b5f5e9c97b87e61e9ee81b0fffd34bd204d80c20629958f0cbbe076"
+    },
+    {
+      "source": "soc/falco/values.yaml",
+      "disposition": "copied",
+      "source_sha256": "a6bcfd9d9076505ae6029d197eec733fe6f5d8cb657990c1d1171d56bfc07056",
+      "candidate_sha256": "a6bcfd9d9076505ae6029d197eec733fe6f5d8cb657990c1d1171d56bfc07056"
+    },
+    {
+      "source": "soc/kafka/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "02696f4466920f20bbfce671ca282605e2f9d79087d00722292cacbfee705d4f",
+      "candidate_sha256": "25b08f92333a3f4ce2a5d20f9ad739c1e832d14541f7760ca448e8addec654a8"
+    },
+    {
+      "source": "soc/kafka/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "e41a1812c25ee3c3e1930cad5cac30fc76692608c0d5904df846cdf778fe5984",
+      "candidate_sha256": "e41a1812c25ee3c3e1930cad5cac30fc76692608c0d5904df846cdf778fe5984"
+    },
+    {
+      "source": "soc/kafka/client-intel-proof.sh",
+      "disposition": "sanitized",
+      "source_sha256": "46e800d093d1af0889bb542ad50bfb419cd76fd3ae517aa6cc84a3d4c8b5aabf",
+      "candidate_sha256": "88a1ce82fa3b8ff3296602843c05c4c8f56b295dc9b183af0136459ec7864921"
+    },
+    {
+      "source": "soc/kafka/client-lag.sh",
+      "disposition": "sanitized",
+      "source_sha256": "86b034a2d1d0e1770f1dbcb01e3483b63451de9f538a20889b96d9002555c383",
+      "candidate_sha256": "6665507d206ce9ea4db5fd5ed5ff34f99fa7b77e1fe700c3f2d0e5ba5c109d3b"
+    },
+    {
+      "source": "soc/kafka/client-pod.yaml",
+      "disposition": "copied",
+      "source_sha256": "489fe1cf93a10f1ea2a0e04b6aa0830d6d0a9f02c4a8419fad3872216313e8a0",
+      "candidate_sha256": "489fe1cf93a10f1ea2a0e04b6aa0830d6d0a9f02c4a8419fad3872216313e8a0"
+    },
+    {
+      "source": "soc/kafka/client-proof.sh",
+      "disposition": "sanitized",
+      "source_sha256": "1a0aa6dbcebbeaa393018a33e4da1c5b7e6ee91fc56e458aa2571f1feccbcb75",
+      "candidate_sha256": "504c134fdf6a1915bf72595ed69ec286c9797e90ee32adcf886f0e6ec29a85f8"
+    },
+    {
+      "source": "soc/kafka/cluster.yaml",
+      "disposition": "copied",
+      "source_sha256": "3ad43b01d05c8f7b037075ebc86b9f4f612345f5c00381e957d0fde66d1a3f75",
+      "candidate_sha256": "3ad43b01d05c8f7b037075ebc86b9f4f612345f5c00381e957d0fde66d1a3f75"
+    },
+    {
+      "source": "soc/kafka/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "5483ec67c6bba899fca96a8880919316eaf7bc06950bece26eb8c4fa3575ca4c",
+      "candidate_sha256": "4671ce42819fccf09b6082a021bd2a5b6b6c694ff28f07eb3dad01eb14588a5d"
+    },
+    {
+      "source": "soc/kafka/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "dfe50937d6bee403677daa043194761fecbfdb42e95747fbcf2e8453e756db3d",
+      "candidate_sha256": "5e18f513c559e1acdcf2e3b6056696d83bc3bce776abcdc8b211f23fdca584ae"
+    },
+    {
+      "source": "soc/kafka/topics.yaml",
+      "disposition": "copied",
+      "source_sha256": "0f9601541b3c68ec5f10c825a25b179a0a699ad8a052f665510fdba753d2007b",
+      "candidate_sha256": "0f9601541b3c68ec5f10c825a25b179a0a699ad8a052f665510fdba753d2007b"
+    },
+    {
+      "source": "soc/kafka/users.yaml",
+      "disposition": "copied",
+      "source_sha256": "d028134904d3866ddc6f53b5e66b777ee4964e3f4d2ac564e8227303203fda74",
+      "candidate_sha256": "d028134904d3866ddc6f53b5e66b777ee4964e3f4d2ac564e8227303203fda74"
+    },
+    {
+      "source": "soc/kafka/values.yaml",
+      "disposition": "copied",
+      "source_sha256": "92b8b379c416528fbcb6d567cf7be9c6454b45c159af2bb443bd553ff1730cb4",
+      "candidate_sha256": "92b8b379c416528fbcb6d567cf7be9c6454b45c159af2bb443bd553ff1730cb4"
+    },
+    {
+      "source": "soc/misp/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "077a986e56929947ac26ae1cae23efe7eca494acb2c6faca6071b02c3cad3a04",
+      "candidate_sha256": "f078c25237c664d4508ae4d461f2378fdda8768d18c5bee9309b561e8c7ce627"
+    },
+    {
+      "source": "soc/misp/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "af871c0a7ee03dbbbb4974f6bd5cb2deef00940980b1864504ec29cf2210e8f4",
+      "candidate_sha256": "af871c0a7ee03dbbbb4974f6bd5cb2deef00940980b1864504ec29cf2210e8f4"
+    },
+    {
+      "source": "soc/misp/bootstrap.py",
+      "disposition": "sanitized",
+      "source_sha256": "b1bdb9c75e7a839e91e0a7f9651d2f4b282d70572eae17126ec8238466b13efb",
+      "candidate_sha256": "2c4df1db1e62286104194596c9bed70d96976b2171f59cc061ccfa1a9276fc51"
+    },
+    {
+      "source": "soc/misp/bootstrap.sh",
+      "disposition": "sanitized",
+      "source_sha256": "7075d6466e35d9f3232eec61a7fb31e6420e78a1ea9438c0a33682e2b993506e",
+      "candidate_sha256": "cc917dde511218765f0689bf7e32f791cdc3615aec241fb74a7fd383f14d959b"
+    },
+    {
+      "source": "soc/misp/fixtures/lab-event.json",
+      "disposition": "copied",
+      "source_sha256": "a94d77b4ad2e28e562f1c90163d5ee6a73f2d9567025fec335ba6c1c44595a3c",
+      "candidate_sha256": "a94d77b4ad2e28e562f1c90163d5ee6a73f2d9567025fec335ba6c1c44595a3c"
+    },
+    {
+      "source": "soc/misp/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "f275f2b2af6d5b00f6d43e854d1fd3ca4a0f9788e9679d2b4671069c9e90accb",
+      "candidate_sha256": "24d0c249329fea8acde73efdc146a70f1cba8741625b2e7165bbce4435cb563f"
+    },
+    {
+      "source": "soc/misp/intel-cronjob.yaml",
+      "disposition": "copied",
+      "source_sha256": "c008cf2648833cc3ba94c09069bf8ad3a02f7e5b451efefe4c309480faae63c9",
+      "candidate_sha256": "c008cf2648833cc3ba94c09069bf8ad3a02f7e5b451efefe4c309480faae63c9"
+    },
+    {
+      "source": "soc/misp/manifests.yaml",
+      "disposition": "copied",
+      "source_sha256": "ce971e275d0ca31164f8478eda43eecc7a5f0dc363b5049e393f8107cf5375aa",
+      "candidate_sha256": "ce971e275d0ca31164f8478eda43eecc7a5f0dc363b5049e393f8107cf5375aa"
+    },
+    {
+      "source": "soc/misp/misp-to-zeek-intel.py",
+      "disposition": "sanitized",
+      "source_sha256": "9e54a1c22f980e7002be7ab82250e85e4dcb830a33f6064a9dfe29c08940756f",
+      "candidate_sha256": "02679db41d7598e480c37a6437cd67e452e0e43e1fc6861536798cccaed81943"
+    },
+    {
+      "source": "soc/misp/test-exporter.py",
+      "disposition": "copied",
+      "source_sha256": "377b9450f616d11afdc9f2ec8c7025459d3277c63af0b74996eade89be3980a8",
+      "candidate_sha256": "377b9450f616d11afdc9f2ec8c7025459d3277c63af0b74996eade89be3980a8"
+    },
+    {
+      "source": "soc/misp/test-hops.py",
+      "disposition": "sanitized",
+      "source_sha256": "a75173c64cf2f7b5dc0eb56eefe33372f5db12effee2f864df323f0b89eb0c68",
+      "candidate_sha256": "851323b1a0e6cd78fb374a3326b6a202e603af32e35b8c08e8e550bff7954044"
+    },
+    {
+      "source": "soc/misp/test-intel.sh",
+      "disposition": "sanitized",
+      "source_sha256": "70ba4163f98c6a48556d6fbf772340d858163bff6ee0e2f322a307bb5469855d",
+      "candidate_sha256": "e8008b85fd8f48f504b6d6aa4a955969d32de177f411a9d79e3d73ab316b18eb"
+    },
+    {
+      "source": "soc/misp/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "dc6d57e3561b0f4c92eb912c0e50443a758d0cd4912bdf6069d90b9af9924e2f",
+      "candidate_sha256": "7e358e3b91c5c4dde3986e4a7b9b7d10a9f6f4ea2824279ad0dfa669dae2fea9"
+    },
+    {
+      "source": "soc/opensearch/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "7c3d9a5c8f6532cbfaa50834d445ec8ba6249750c11a2347db3da9da813626db",
+      "candidate_sha256": "685f081dd10dd82891575246a8fdf259f6e4bf5ac17ef8f16326d4a9c767f08c"
+    },
+    {
+      "source": "soc/opensearch/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "01ff9e9aaba441ad35153fcbeb636a81a76d97f3710bedf3b1386d6936a22f85",
+      "candidate_sha256": "01ff9e9aaba441ad35153fcbeb636a81a76d97f3710bedf3b1386d6936a22f85"
+    },
+    {
+      "source": "soc/opensearch/acceptance.py",
+      "disposition": "sanitized",
+      "source_sha256": "7e424fe17f13ea57750338e3aa0803c4f0365bd544f6a3ad24535a8b76f73078",
+      "candidate_sha256": "8a95b3452eb9a8bcf21f997b7c11379ea67f9947ff9c4c036a1aee4110fbb5bb"
+    },
+    {
+      "source": "soc/opensearch/api/ism-soc.json",
+      "disposition": "copied",
+      "source_sha256": "5accc1215516cd0014c6a5df9118df55f16ba88372c72f39af26bbcdfd151ef0",
+      "candidate_sha256": "5accc1215516cd0014c6a5df9118df55f16ba88372c72f39af26bbcdfd151ef0"
+    },
+    {
+      "source": "soc/opensearch/api/role-soc-analyst.json",
+      "disposition": "copied",
+      "source_sha256": "b3c3a70f6395a993b6138e939c8401b43ef441ae1951bb02fc04fcc2211f958f",
+      "candidate_sha256": "b3c3a70f6395a993b6138e939c8401b43ef441ae1951bb02fc04fcc2211f958f"
+    },
+    {
+      "source": "soc/opensearch/api/role-soc-indexer.json",
+      "disposition": "copied",
+      "source_sha256": "cbc9ee804085f8fde955d10d410c9dd2c9ccd752fb134eb250f927c6dc2070a1",
+      "candidate_sha256": "cbc9ee804085f8fde955d10d410c9dd2c9ccd752fb134eb250f927c6dc2070a1"
+    },
+    {
+      "source": "soc/opensearch/api/template-audit-k8s.json",
+      "disposition": "copied",
+      "source_sha256": "3ac276262b2b57724436d5311e23053e999118e7f414f0f56a74fae24b6a7b20",
+      "candidate_sha256": "3ac276262b2b57724436d5311e23053e999118e7f414f0f56a74fae24b6a7b20"
+    },
+    {
+      "source": "soc/opensearch/api/template-falco.json",
+      "disposition": "copied",
+      "source_sha256": "350e518dc00249b93f728c4432bf577a64d2ca85b584ab8d673e55dfc3641e66",
+      "candidate_sha256": "350e518dc00249b93f728c4432bf577a64d2ca85b584ab8d673e55dfc3641e66"
+    },
+    {
+      "source": "soc/opensearch/api/template-zeek.json",
+      "disposition": "copied",
+      "source_sha256": "ad0edb66214e3f60d2f2bfc0f226587a21ca404772cd38b2d476cd4d7f6eb678",
+      "candidate_sha256": "ad0edb66214e3f60d2f2bfc0f226587a21ca404772cd38b2d476cd4d7f6eb678"
+    },
+    {
+      "source": "soc/opensearch/api_client.py",
+      "disposition": "sanitized",
+      "source_sha256": "fb53a21346fe1552568cf1033bd5c4ddb255fc0a801dd53bb8ba0a79402eebe5",
+      "candidate_sha256": "9a56dcdbb903c7b15e1c401f8c9d1cd7cbd1c981a0e3cb64db32cc4854f578cb"
+    },
+    {
+      "source": "soc/opensearch/cluster.yaml",
+      "disposition": "copied",
+      "source_sha256": "93eba4e748b19329a013c7a18b16cdabc63e4422c5bf289652057e8a1c249b2f",
+      "candidate_sha256": "93eba4e748b19329a013c7a18b16cdabc63e4422c5bf289652057e8a1c249b2f"
+    },
+    {
+      "source": "soc/opensearch/configure.py",
+      "disposition": "sanitized",
+      "source_sha256": "22087ff00e693fa83bb8b4dd7bb711236ddbe984e27be3fb51188ed1ca021219",
+      "candidate_sha256": "85bc762bcdaf1ffb34451ee89da57828e4015fc3f7c0be533f96fdc41d692717"
+    },
+    {
+      "source": "soc/opensearch/configure.sh",
+      "disposition": "sanitized",
+      "source_sha256": "bb106b2da6e81eaa2b43c25a2750f2f01c49687c8899709a8a4651b80facc97c",
+      "candidate_sha256": "190732815059f0e4e25d3b4fcd339a66fd0a55ec5cf8b4c50b685f6c1a00e2b3"
+    },
+    {
+      "source": "soc/opensearch/dashboards/import.py",
+      "disposition": "sanitized",
+      "source_sha256": "1053f085fea27d31516c0a285e11da6d2b17e7d45dae4241c10a2028a393f3bd",
+      "candidate_sha256": "572c5f4b595ed4bc3e4d380f42e8a4034451757a3b3d37d1cf9ba9dfc806cd13"
+    },
+    {
+      "source": "soc/opensearch/dashboards/soc-overview-source.ndjson",
+      "disposition": "excluded",
+      "source_sha256": "b989150ffb6b3d944b8be71523b8347381b97753273ed1080d8c8bb038619cfd",
+      "candidate_sha256": null
+    },
+    {
+      "source": "soc/opensearch/dashboards/soc-overview.ndjson",
+      "disposition": "excluded",
+      "source_sha256": "2034fc443bb180364a1dca0d323ea817b9bc5029e887a321cc630ae957e0f220",
+      "candidate_sha256": null
+    },
+    {
+      "source": "soc/opensearch/generate-secrets.sh",
+      "disposition": "sanitized",
+      "source_sha256": "5160d4dc81289497787f54eec5541d16184be7d9bd8018012550db5a9259c0f9",
+      "candidate_sha256": "ac5d6e61b53cb230578aaafc0831e8ad16ccc0ac7d3f535a145ec0a249a11cb3"
+    },
+    {
+      "source": "soc/opensearch/ingress.yaml",
+      "disposition": "copied",
+      "source_sha256": "cdfcdc121375a7e61c4f4af684f4df59a41e713a8d3ad68c528a551ff2c64852",
+      "candidate_sha256": "cdfcdc121375a7e61c4f4af684f4df59a41e713a8d3ad68c528a551ff2c64852"
+    },
+    {
+      "source": "soc/opensearch/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "6b4c3e73bb7d55fed57f9c56a5bb4f0e642eb3b4b3c8c7ae9792354b33d15fdf",
+      "candidate_sha256": "db2364ce224c6c79a342ae11eb5eb6c599fed26a441dbc5ebe60985ca9d691e1"
+    },
+    {
+      "source": "soc/opensearch/test-api.py",
+      "disposition": "sanitized",
+      "source_sha256": "e0dbafe5a688bfca2d10596c71b54613d078541bac4b09debfc4d947288065e3",
+      "candidate_sha256": "1828b3bbd6f57b874160d8c76bac577b6d5bf534cc94ffdc5df088f6b9985c9d"
+    },
+    {
+      "source": "soc/opensearch/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "70b8719ee5d5a9da17d4cc5d26ce3fe202f2c01151c461113f61de5ee3091b88",
+      "candidate_sha256": "b6e03269db414b35206c7cfda7b9ff4f0878535d53fd714d079a988ad7750637"
+    },
+    {
+      "source": "soc/opensearch/values.yaml",
+      "disposition": "copied",
+      "source_sha256": "671a91cdb8a597e655c497a02bae9aa04043f46dbec3417c96ef6922bcde6da2",
+      "candidate_sha256": "671a91cdb8a597e655c497a02bae9aa04043f46dbec3417c96ef6922bcde6da2"
+    },
+    {
+      "source": "soc/pipeline/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "79748828a7326dc8541c18c9e877fdd6893917b2e513a3b565ae7fc11c6a10b2",
+      "candidate_sha256": "e9e66fddf17fd895a0c0612b48efc754c8f87ac79d382b2e6dfae29a25eabfe9"
+    },
+    {
+      "source": "soc/pipeline/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "50fbe18e7cc8b426338285e3aa5a843dd3ca9a8a87ec8fb3c3fe7b0979441532",
+      "candidate_sha256": "50fbe18e7cc8b426338285e3aa5a843dd3ca9a8a87ec8fb3c3fe7b0979441532"
+    },
+    {
+      "source": "soc/pipeline/config/vector-audit.yaml",
+      "disposition": "copied",
+      "source_sha256": "151d0cad36f32ed3009676e869e94d2e8857c9fc6eb8cc7df3d458bfdf44e72b",
+      "candidate_sha256": "151d0cad36f32ed3009676e869e94d2e8857c9fc6eb8cc7df3d458bfdf44e72b"
+    },
+    {
+      "source": "soc/pipeline/config/vector-indexer.yaml",
+      "disposition": "copied",
+      "source_sha256": "5d7517d3cafe4e230249ce324f620eb66794be41f82f601e78d8ab5e7bb06540",
+      "candidate_sha256": "5d7517d3cafe4e230249ce324f620eb66794be41f82f601e78d8ab5e7bb06540"
+    },
+    {
+      "source": "soc/pipeline/config/vector-zeek.yaml",
+      "disposition": "copied",
+      "source_sha256": "c41de3341463559d0d5e3f6052d8a89da38e95ea6ef5d44adf9d743243973a43",
+      "candidate_sha256": "c41de3341463559d0d5e3f6052d8a89da38e95ea6ef5d44adf9d743243973a43"
+    },
+    {
+      "source": "soc/pipeline/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "20e1017f06e13807f46062f42adf2e224c330c804b9919e0735a54cc831f2d0b",
+      "candidate_sha256": "b856f1412d7de3429d6e7897acd4ec1a4f7e2d28ffbef398e8e76fe275d60696"
+    },
+    {
+      "source": "soc/pipeline/manifests.yaml",
+      "disposition": "copied",
+      "source_sha256": "22159e3ef7b79be0b00fcee2bb5ae671d38fd2027c970562d9dcdfe11791f0c1",
+      "candidate_sha256": "22159e3ef7b79be0b00fcee2bb5ae671d38fd2027c970562d9dcdfe11791f0c1"
+    },
+    {
+      "source": "soc/pipeline/render-configmaps.py",
+      "disposition": "sanitized",
+      "source_sha256": "aeb6b3eabffd02813417a067a18e1e973a3148f96924e7541b97fcff3f7c58b2",
+      "candidate_sha256": "aaa08e096652646599c890d7817735ae019f2c9389dde865d288822ba9e53366"
+    },
+    {
+      "source": "soc/pipeline/test-lag.sh",
+      "disposition": "sanitized",
+      "source_sha256": "ad0e1e9f42a1b3105d993730795269938a2afc45170477ac4a79181105900bac",
+      "candidate_sha256": "719ab81a984af2e5c3a7a9e9183f318396aed04022b5277b34d189f2dacbb662"
+    },
+    {
+      "source": "soc/pipeline/test-offline.py",
+      "disposition": "sanitized",
+      "source_sha256": "42845334ed9ddd04f49f7d99e975dfd98773c3fc41139c30628dbc7cf6083bc6",
+      "candidate_sha256": "302f14f6af9f10cf1e9b1423e85c33f86a8cad459b8e04f981ce163b533da5c7"
+    },
+    {
+      "source": "soc/pipeline/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "be8356c3c4fce1c3a87dbe15602c086e49e16fa2ff56513994e3e7bfd3a2dcce",
+      "candidate_sha256": "70b060d8ebf0200d3350c2daa22d1c49204c5d19540e4ace0f33ba9244d8a50e"
+    },
+    {
+      "source": "soc/pipeline/validate-static.py",
+      "disposition": "sanitized",
+      "source_sha256": "d5cbef3f7ef00a646be60425a9ae981240cdb478b76abcb9374a84d40764458f",
+      "candidate_sha256": "f261c4d346a0c0f88c38edb37e76f5fb8da11f1dd68531a94756bc2a6c8636e0"
+    },
+    {
+      "source": "soc/report.py",
+      "disposition": "sanitized",
+      "source_sha256": "1efde63ab1333cdcd4e5b5ad88eeb491d627c574b46a8a4ec5278fe350a323a8",
+      "candidate_sha256": "a5f810a2b4c2f48ca2eb8c398a971369a2a175b63dcd1de6271f474993b8daef"
+    },
+    {
+      "source": "soc/traffic/.gitignore",
+      "disposition": "copied",
+      "source_sha256": "1f6d77f7bc9ea29ec4aa2de6c792ee47b29fc405b38d4d02bf5a08568f0d95a5",
+      "candidate_sha256": "1f6d77f7bc9ea29ec4aa2de6c792ee47b29fc405b38d4d02bf5a08568f0d95a5"
+    },
+    {
+      "source": "soc/traffic/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "1434c6b96e4dc303faa1ac07460b120e935e34805d89cfd815e56194e42b0fb0",
+      "candidate_sha256": "dd6bbd2f7fc60cc7dd74db8275785666f785216d8a72fdca80d253233fbbed1f"
+    },
+    {
+      "source": "soc/traffic/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "e72b2c38f0942b450bd5d22d050f1e628db7c1f0192316d6b9e0e2472d5bc7d9",
+      "candidate_sha256": "e72b2c38f0942b450bd5d22d050f1e628db7c1f0192316d6b9e0e2472d5bc7d9"
+    },
+    {
+      "source": "soc/traffic/apk-lock.json",
+      "disposition": "copied",
+      "source_sha256": "1e12255e956d91d2bd4980017f00afb39d4e3c0f578c351c315797b6465c083f",
+      "candidate_sha256": "1e12255e956d91d2bd4980017f00afb39d4e3c0f578c351c315797b6465c083f"
+    },
+    {
+      "source": "soc/traffic/generate-pcaps.py",
+      "disposition": "sanitized",
+      "source_sha256": "7edfb3d339424f43cc909455cd7fc061efae4573ef6b35586889a249890c469b",
+      "candidate_sha256": "b5dabe6238bc392db8d0e34899d7fd07f9339603fa0c27ea7bed4d201e3d87c2"
+    },
+    {
+      "source": "soc/traffic/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "777e115d228c4d1f687fef0c312e9870f9e511938301ba7997c8241cbec0f3a2",
+      "candidate_sha256": "fbcad6b4c43454e915da34ec5e44c61e48d225d8f8e878f78793da2d23951fb1"
+    },
+    {
+      "source": "soc/traffic/live.py",
+      "disposition": "sanitized",
+      "source_sha256": "1f10f20eaa42655d2a93d0448d1fcb65b21d1e4091b7fd49bd8127f235130ae3",
+      "candidate_sha256": "eba1565e49257d900fee752db85ba654b16c3b0aa8ddca86a4997fc5acf1e5ed"
+    },
+    {
+      "source": "soc/traffic/manifests.yaml",
+      "disposition": "copied",
+      "source_sha256": "fc4dddf0b1796eddcb791cec86a12b414c8f0ce3e372d990e545d6148e0b8aab",
+      "candidate_sha256": "fc4dddf0b1796eddcb791cec86a12b414c8f0ce3e372d990e545d6148e0b8aab"
+    },
+    {
+      "source": "soc/traffic/replay-cronjob.yaml",
+      "disposition": "sanitized",
+      "source_sha256": "2cdb333bfb5605c24c0ff4c6e7bae044b52f58183d84e38d4fb5de02808bff69",
+      "candidate_sha256": "7c75c3c6b6f8e990045a671bd7017eedac28494b6e298641151fc503450480f7"
+    },
+    {
+      "source": "soc/traffic/replay.sh",
+      "disposition": "sanitized",
+      "source_sha256": "978c8d2bcfbadb1865eb4a949c91b74403e4b1496916be243fc6aec9a53a0210",
+      "candidate_sha256": "e9b30b5bfc58d3f91ccaf9b4c4397219ea621c02a466c6647868fa453c75656b"
+    },
+    {
+      "source": "soc/traffic/scan-job.json",
+      "disposition": "copied",
+      "source_sha256": "9bf29907a1ab6c814dc471640682e7f23a16cc53dd9f576ef75be2f3642bf20f",
+      "candidate_sha256": "9bf29907a1ab6c814dc471640682e7f23a16cc53dd9f576ef75be2f3642bf20f"
+    },
+    {
+      "source": "soc/traffic/scan.sh",
+      "disposition": "sanitized",
+      "source_sha256": "91c43bd0ca18145347ecdac1a585ab36665f5b173a575908505ffd7635bbfb95",
+      "candidate_sha256": "87593f9fc9b27a14fd8aceb46e60639aa54f0ce62edf3c7ceb5a411df2cf881f"
+    },
+    {
+      "source": "soc/traffic/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "50a62edea71101c0bc8e71bfdfd3eb5fcb62f2daf23b16bdc56d5bbdab90a3cf",
+      "candidate_sha256": "854cbe248174d3d299aca77e011652a56dda411c612feb18689d01a2902617de"
+    },
+    {
+      "source": "soc/verify-no-secrets.py",
+      "disposition": "sanitized",
+      "source_sha256": "cb103c2f3617f2f2e7cd982309616b8a9820446f5789d52fc9b7c5c638ecd07a",
+      "candidate_sha256": "f4227596e8432f5999177051b244d627d39994a1efa9e9ad7eb2a8fa1363783f"
+    },
+    {
+      "source": "soc/zeek/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "53ecce7b4af5163c4d9aae4c099dd8d69659ae9ac421523a38060c013efe8348",
+      "candidate_sha256": "acc67dbb975570aa3848be405e035b5ec67e8ae9246b92bf709308c22b41abca"
+    },
+    {
+      "source": "soc/zeek/VERSIONS",
+      "disposition": "copied",
+      "source_sha256": "b70f471605cb429cff7c8ddb96d2a1ed4e9ec6a42e7d104413076e676954adaf",
+      "candidate_sha256": "b70f471605cb429cff7c8ddb96d2a1ed4e9ec6a42e7d104413076e676954adaf"
+    },
+    {
+      "source": "soc/zeek/check-syntax.sh",
+      "disposition": "sanitized",
+      "source_sha256": "5056ecafadee59c04f7716e1d0acc966b7777c5b7c699cea9555b620ca94af2e",
+      "candidate_sha256": "1c2548a9c22e0c44fd5a9ba3b94cf1144709c0b5e955a97b34b7ab90c3b3c437"
+    },
+    {
+      "source": "soc/zeek/install.sh",
+      "disposition": "sanitized",
+      "source_sha256": "cce132696bb764d1feeb6762c0bbcdb5efda655c317ef45f95a3aa6b561e8fd3",
+      "candidate_sha256": "8700ffdb55bf1fd8fab907d63e6a5739b0acdd08968cb42adebf3f3482fbdf01"
+    },
+    {
+      "source": "soc/zeek/intel-empty.tsv",
+      "disposition": "copied",
+      "source_sha256": "090c57f822b97b4b2939eb7bab4e7e968ee60f16f25002d2aaf4f6ad3658b7db",
+      "candidate_sha256": "090c57f822b97b4b2939eb7bab4e7e968ee60f16f25002d2aaf4f6ad3658b7db"
+    },
+    {
+      "source": "soc/zeek/manifests.yaml",
+      "disposition": "copied",
+      "source_sha256": "968d394fc9d6a77c5e7be84e236fa5fa1fea5e8e97327c169f538bcf2181a392",
+      "candidate_sha256": "968d394fc9d6a77c5e7be84e236fa5fa1fea5e8e97327c169f538bcf2181a392"
+    },
+    {
+      "source": "soc/zeek/merge-logs.py",
+      "disposition": "sanitized",
+      "source_sha256": "a7626f631f8e1c240b358ba5116c02f28194edff173b2aeda09b9f576dff87b1",
+      "candidate_sha256": "9a208154704c27a72fec69b4fe9af8883bc0973faee18db36aff4283ae17fdf9"
+    },
+    {
+      "source": "soc/zeek/scripts/dns-anomaly.zeek",
+      "disposition": "copied",
+      "source_sha256": "348e74e2d3ac9b581c9ab2229b269ac94e2c251037a4f9339a623b11b6e641f1",
+      "candidate_sha256": "348e74e2d3ac9b581c9ab2229b269ac94e2c251037a4f9339a623b11b6e641f1"
+    },
+    {
+      "source": "soc/zeek/scripts/local.zeek",
+      "disposition": "copied",
+      "source_sha256": "b658f8fb01647c8d513523cf26b4718e844f5d545305b2ac494196ca312e06a9",
+      "candidate_sha256": "b658f8fb01647c8d513523cf26b4718e844f5d545305b2ac494196ca312e06a9"
+    },
+    {
+      "source": "soc/zeek/scripts/main.zeek",
+      "disposition": "copied",
+      "source_sha256": "16bb9b4a0ac33b25ddd370da2390af25c7adec65de57a48f99bac1241d6ada0b",
+      "candidate_sha256": "16bb9b4a0ac33b25ddd370da2390af25c7adec65de57a48f99bac1241d6ada0b"
+    },
+    {
+      "source": "soc/zeek/scripts/scan.zeek",
+      "disposition": "copied",
+      "source_sha256": "2f35e6f885b9e4008cfb2d9ff485fc8930e430a75516d440387b14e7df5e6602",
+      "candidate_sha256": "2f35e6f885b9e4008cfb2d9ff485fc8930e430a75516d440387b14e7df5e6602"
+    },
+    {
+      "source": "soc/zeek/test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "1be5e10c8f5bd0aa3181d9cddbcf087b1b09717dd1c849ae13259c29a3dd0dfd",
+      "candidate_sha256": "c6aa602d8f9152e1fabec48df7ae8e46226c39ea878471a920ad372b5a6b89bd"
+    },
+    {
+      "source": "soc/zeek/validate-offline.sh",
+      "disposition": "sanitized",
+      "source_sha256": "e649679983392bab1b567af9ac91b21a48ef49c97880e0f7dcef8340b84c2b54",
+      "candidate_sha256": "da11c2a0b4c684f37f86754b0c50fdb53ee9237f34145b32add6caf5dc50727d"
+    },
+    {
+      "source": "tests/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "b1d56c4efd480ca813c584a5ff5c263c52de5a8f83021edba094829dc0f2f903",
+      "candidate_sha256": "4763b19a999b16c8a340e4e0e35e7ea6b6f58f71669cb2005dc07113eebcc49e"
+    },
+    {
+      "source": "tests/phase-p1.sh",
+      "disposition": "sanitized",
+      "source_sha256": "365d09bb9ee3d9a45f61cc459e9f3235a7cee0637cb7b99ac80b129bd2576004",
+      "candidate_sha256": "ac0df520d9084f4733a684dca490f067facdc04c3618c8c6bb7c9f38f1e4c8fd"
+    },
+    {
+      "source": "tests/phase-p2.sh",
+      "disposition": "sanitized",
+      "source_sha256": "6866630722024cd1f4d8ce5a7153dac582374a8696bced4a7c6aaf5f908b6053",
+      "candidate_sha256": "69b23f587c097481cb747db230a0faafce8dbd1309212698b619c90489c70522"
+    },
+    {
+      "source": "tests/phase-p3.sh",
+      "disposition": "sanitized",
+      "source_sha256": "b8cbe803d074c7c8e3a3dfccb842cfa3dcbc8c1b837ccb0a1e967d6a792f9d35",
+      "candidate_sha256": "bc0e3ee3fb084bad78d372862a1be95e8fb8a54ec810eaa79d1946322f4f0e2a"
+    },
+    {
+      "source": "tests/phase-p4-a.sh",
+      "disposition": "sanitized",
+      "source_sha256": "7b667c07b188e7938ccc67e48a7585bd31f605d813393c217975aaccc860918f",
+      "candidate_sha256": "9986147b2fefa58f216a2367e98b01781ee05362be4a5d51a2d2880e9410a6cf"
+    },
+    {
+      "source": "tests/phase-p4-b.sh",
+      "disposition": "sanitized",
+      "source_sha256": "748d67fb55776e76d97890d821b792cc75c48926542cadd9eceeb77b838404b6",
+      "candidate_sha256": "cd78407ad5d7c548318bd3aaa251638d3968a7f71241a8dae6692ece8b77ba6b"
+    },
+    {
+      "source": "tests/phase-p4.sh",
+      "disposition": "sanitized",
+      "source_sha256": "7c974d9bb91a5268ad3e7606fd67e82b671572e3fc89659c26d132097d8c0434",
+      "candidate_sha256": "8b4e027cf01dc6ef10295dd9201fc2acdc508e5574bb0e507e8dab29b610d5d8"
+    },
+    {
+      "source": "tests/phase-p5-hardening.sh",
+      "disposition": "sanitized",
+      "source_sha256": "a04d844a4f4d6d0de491df88b1befa86256a19d00a7f42be56cecb2a8ec011dd",
+      "candidate_sha256": "e32e92788aff81a57e1ae2d14ed3923248103d1f285b854badc105787e8332ff"
+    },
+    {
+      "source": "tests/phase-p6.sh",
+      "disposition": "sanitized",
+      "source_sha256": "b04d83a46edfb31ac96fc0fa342437c25d13a4f2e677f5111bc91389cf2ec2d6",
+      "candidate_sha256": "c5d248cead82fb80dc46519c12751c1059657e2f5f3acd6e7444575bd50e3458"
+    },
+    {
+      "source": "tests/smoke-test.py",
+      "disposition": "sanitized",
+      "source_sha256": "a696d8bd87ec40b6f6cae7b146970e52f1839352fc724c553431f11f4ea68bb4",
+      "candidate_sha256": "ce2dab6c7624f6f8046349d30dfb6eb4d29590c5dd1bdc77ff75c731891a4564"
+    },
+    {
+      "source": "tests/smoke-test.sh",
+      "disposition": "sanitized",
+      "source_sha256": "285951c6f4161d6a4abbbc5b9e4826436d082746f18202cfd0bce15ecf09bbd0",
+      "candidate_sha256": "25e099f49bf7b822a7eea04c62db4cca3893ff09bc6fb00ce2e7c70c5f831c1e"
+    },
+    {
+      "source": "tests/smoke-unit.py",
+      "disposition": "copied",
+      "source_sha256": "070e26c491f54addb0dd174213d250d4603217b2f232ddeb411f45aa8b5aceca",
+      "candidate_sha256": "070e26c491f54addb0dd174213d250d4603217b2f232ddeb411f45aa8b5aceca"
+    },
+    {
+      "source": "docs/exercices/01-debug/FICHE.md",
+      "disposition": "sanitized",
+      "source_sha256": "939ffd37e7b465ab8649166c8e1f568bfc4d46123a16356dda8d25e25b689e73",
+      "candidate_sha256": "9eec151e8e6b28ba758a0023c8aed5c26e6612c8906278badbc31b7b3ce0cf6c"
+    },
+    {
+      "source": "docs/exercices/01-debug/cleanup.sh",
+      "disposition": "sanitized",
+      "source_sha256": "b520a7d1f25cebe78c4112cad71750556a786166591c68a934f1cff934ece3f1",
+      "candidate_sha256": "7b44c90b4abb64c1e97c33168c404e0d172bc16dfac34585319c65cf69a27481"
+    },
+    {
+      "source": "docs/exercices/01-debug/manifests/crash-bad.yaml",
+      "disposition": "copied",
+      "source_sha256": "534403c9e1de3272b885cff03560c485f8e107ea4ba3bd582ba6aa2456df7e5d",
+      "candidate_sha256": "534403c9e1de3272b885cff03560c485f8e107ea4ba3bd582ba6aa2456df7e5d"
+    },
+    {
+      "source": "docs/exercices/01-debug/manifests/crash-fixed.yaml",
+      "disposition": "copied",
+      "source_sha256": "7c2c19f4cd98eb815dc6daadc64edf71a76a41219247bec0cd17dbe50540c881",
+      "candidate_sha256": "7c2c19f4cd98eb815dc6daadc64edf71a76a41219247bec0cd17dbe50540c881"
+    },
+    {
+      "source": "docs/exercices/01-debug/manifests/image-bad.yaml",
+      "disposition": "copied",
+      "source_sha256": "95698ebc5b11e5cf7fef0defd3375512a3cfe172a539b193fbcf8bb0cd18c3ed",
+      "candidate_sha256": "95698ebc5b11e5cf7fef0defd3375512a3cfe172a539b193fbcf8bb0cd18c3ed"
+    },
+    {
+      "source": "docs/exercices/01-debug/manifests/namespace.yaml",
+      "disposition": "copied",
+      "source_sha256": "3a4ce19b1dfe65415b6dbcec211e11e9fad52428307633664a6705e59332f1f2",
+      "candidate_sha256": "3a4ce19b1dfe65415b6dbcec211e11e9fad52428307633664a6705e59332f1f2"
+    },
+    {
+      "source": "docs/exercices/01-debug/manifests/network-deny.yaml",
+      "disposition": "copied",
+      "source_sha256": "d83b413b7cab9909a7779aca1bfba64317228efe493c2e9bd7b94f776539b746",
+      "candidate_sha256": "d83b413b7cab9909a7779aca1bfba64317228efe493c2e9bd7b94f776539b746"
+    },
+    {
+      "source": "docs/exercices/01-debug/manifests/network-fixed.yaml",
+      "disposition": "copied",
+      "source_sha256": "db518bb38f5960c683f49f0ba0b9134a7d6ba921b64a84ba917ac4722ea841d5",
+      "candidate_sha256": "db518bb38f5960c683f49f0ba0b9134a7d6ba921b64a84ba917ac4722ea841d5"
+    },
+    {
+      "source": "docs/exercices/01-debug/manifests/network.yaml",
+      "disposition": "copied",
+      "source_sha256": "3eb94bd5640a9b7bd92c538f53720282c0b9544273dc914ab9be25668a8dfb40",
+      "candidate_sha256": "3eb94bd5640a9b7bd92c538f53720282c0b9544273dc914ab9be25668a8dfb40"
+    },
+    {
+      "source": "docs/exercices/01-debug/manifests/pending-bad.yaml",
+      "disposition": "copied",
+      "source_sha256": "3d240c5b6aba8f0f6856ab3d3578590be70a78c0694737784954d0d333596960",
+      "candidate_sha256": "3d240c5b6aba8f0f6856ab3d3578590be70a78c0694737784954d0d333596960"
+    },
+    {
+      "source": "docs/exercices/01-debug/manifests/pending-fixed.yaml",
+      "disposition": "copied",
+      "source_sha256": "32dd052db015ac30f09bbd160914b1578b19dfc854fd44c5cb53e97ed85cf65b",
+      "candidate_sha256": "32dd052db015ac30f09bbd160914b1578b19dfc854fd44c5cb53e97ed85cf65b"
+    },
+    {
+      "source": "docs/exercices/01-debug/run.sh",
+      "disposition": "sanitized",
+      "source_sha256": "3c2f56c43d3e07796c2c38ec895aeba88beb6bbbef337fd646a3b30ce6324dd0",
+      "candidate_sha256": "a31483a9b6d2ca7dbd69fb49500c867c7b845db3e96b54ca38d8653f06eb1af7"
+    },
+    {
+      "source": "docs/exercices/02-lifecycle/FICHE.md",
+      "disposition": "sanitized",
+      "source_sha256": "99655ce4b3aa16ea2d58b9dfe5637e174acd053a88aee3dc4cfb6f182104c39c",
+      "candidate_sha256": "324f18249e19dbba2f416fa68afaa380ebb28a9337503a1c25d1b2fe72e2be04"
+    },
+    {
+      "source": "docs/exercices/02-lifecycle/cleanup.sh",
+      "disposition": "sanitized",
+      "source_sha256": "57c9964a3757c9166ebec56383fe866ba96276d33b44bd31b9ca559326e1147d",
+      "candidate_sha256": "536fa87722001fe0a88905d6cb715cf7ff17f828f985b684e50faadfd5243641"
+    },
+    {
+      "source": "docs/exercices/02-lifecycle/manifests/client-service.yaml",
+      "disposition": "copied",
+      "source_sha256": "f58bb207ef5da403fc936855b8890c1660a0b07478178965daa3a2f1c6364c88",
+      "candidate_sha256": "f58bb207ef5da403fc936855b8890c1660a0b07478178965daa3a2f1c6364c88"
+    },
+    {
+      "source": "docs/exercices/02-lifecycle/manifests/namespace.yaml",
+      "disposition": "copied",
+      "source_sha256": "cea638459097325f85b95c4e13789028da091b620f0c5869d250033b5233d2f7",
+      "candidate_sha256": "cea638459097325f85b95c4e13789028da091b620f0c5869d250033b5233d2f7"
+    },
+    {
+      "source": "docs/exercices/02-lifecycle/manifests/pdb.yaml",
+      "disposition": "copied",
+      "source_sha256": "8480b3df4f045ca249dae347fd2f876010f8cea83be25c87e202f048181d7bb5",
+      "candidate_sha256": "8480b3df4f045ca249dae347fd2f876010f8cea83be25c87e202f048181d7bb5"
+    },
+    {
+      "source": "docs/exercices/02-lifecycle/manifests/v1.yaml",
+      "disposition": "sanitized",
+      "source_sha256": "222b3e0be59610a2ff10fe0226880ab9d57a589a834872df0a074eae1722229f",
+      "candidate_sha256": "7113cfa272c8c337f78765d4dd943b13cd469bbc39aec4c6425eeabb81591f3c"
+    },
+    {
+      "source": "docs/exercices/02-lifecycle/manifests/v2.yaml",
+      "disposition": "sanitized",
+      "source_sha256": "c7eabc8058d992f3b5611470c63e355919e3338d504537200ab952a2837fec9b",
+      "candidate_sha256": "aad933fd06ccc32935c3d4bf6671b0ac1ac202a2190927f25ed050fae88ace3e"
+    },
+    {
+      "source": "docs/exercices/02-lifecycle/manifests/v3.yaml",
+      "disposition": "sanitized",
+      "source_sha256": "8df2ac4e019253d42e6484fbe8ec3ceed18f54a4c2a0dbec4ab1c0789c56a283",
+      "candidate_sha256": "0687bfe95cb94caca35b50b0a251b6d8abea99683efb13f4b4c49ecee610d82e"
+    },
+    {
+      "source": "docs/exercices/02-lifecycle/run.sh",
+      "disposition": "sanitized",
+      "source_sha256": "3d7102fdf4ad4b65a1ed055b1477f79b4bfe85a3584067dd67a5d6bca610f5a1",
+      "candidate_sha256": "30d3a9c6ddea0215dfcff393e12c5c9b7c65ba9f4573052f73a598e13735724b"
+    },
+    {
+      "source": "docs/exercices/03-resources/FICHE.md",
+      "disposition": "sanitized",
+      "source_sha256": "7991e9fcb452e2e2341b2bbc786db4e0ced3d2fecc8add7aa2cb4ef96332dec3",
+      "candidate_sha256": "3a4388e8ec3b816930b4634f2d7269f61243d512bfeb2549b4aabe0a0713ea37"
+    },
+    {
+      "source": "docs/exercices/03-resources/cleanup.sh",
+      "disposition": "sanitized",
+      "source_sha256": "efe2d70c8ffa2685f82a914b4a03d299bfd8aa40513a1756938ec5938b71d9f5",
+      "candidate_sha256": "1d2918dd55490f23b460f7ff696127f3e530748bae3ba44ff5536fee65ec178e"
+    },
+    {
+      "source": "docs/exercices/03-resources/manifests/namespace.yaml",
+      "disposition": "copied",
+      "source_sha256": "527c4648aba4917b8affd049d9824a9925ba72b07a8eb02795016de6b5b51363",
+      "candidate_sha256": "527c4648aba4917b8affd049d9824a9925ba72b07a8eb02795016de6b5b51363"
+    },
+    {
+      "source": "docs/exercices/03-resources/manifests/oom-fixed.yaml",
+      "disposition": "copied",
+      "source_sha256": "ee06c4abe810015e09d88baa027d930f5a0b6b79e7a38713d344083d681a0111",
+      "candidate_sha256": "ee06c4abe810015e09d88baa027d930f5a0b6b79e7a38713d344083d681a0111"
+    },
+    {
+      "source": "docs/exercices/03-resources/manifests/oom.yaml",
+      "disposition": "copied",
+      "source_sha256": "9706331d06d6c2ef066b56b7e90c50d85cbc06a3b41bd46f08ebce1b7ee80865",
+      "candidate_sha256": "9706331d06d6c2ef066b56b7e90c50d85cbc06a3b41bd46f08ebce1b7ee80865"
+    },
+    {
+      "source": "docs/exercices/03-resources/manifests/qos.yaml",
+      "disposition": "copied",
+      "source_sha256": "a7f2d07aff6e89e0933e3993453b15e004d55de4b741ecb7e7aae2456102b39b",
+      "candidate_sha256": "a7f2d07aff6e89e0933e3993453b15e004d55de4b741ecb7e7aae2456102b39b"
+    },
+    {
+      "source": "docs/exercices/03-resources/run.sh",
+      "disposition": "sanitized",
+      "source_sha256": "e2fceb557945b92b2d7e81820dc91df6a1589ca6a46f7a6c484298a958c7f286",
+      "candidate_sha256": "c9d8fe12d806a03d06ef5fbf6512af182b545227ac92cb568b553906947adc8b"
+    },
+    {
+      "source": "docs/exercices/04-control-plane/FICHE.md",
+      "disposition": "sanitized",
+      "source_sha256": "2d6c77642e4052dcce64ac4be8bd62caa129fa4d1d7eb0e1010eb852cabb11df",
+      "candidate_sha256": "c8e743348b39710b732b26c0f82fe7d87f6a4e1051001411d8157bccfb61ad21"
+    },
+    {
+      "source": "docs/exercices/04-control-plane/cleanup.sh",
+      "disposition": "sanitized",
+      "source_sha256": "5d89c61b768c0ae317f9adc6676b7db52a33f8da2cbd54f35f8243d86436581b",
+      "candidate_sha256": "60687b3e0cd05d918afce17209e158bbc2c6040e5ae8834252ffa444f3f4d783"
+    },
+    {
+      "source": "docs/exercices/04-control-plane/manifests/namespace.yaml",
+      "disposition": "copied",
+      "source_sha256": "142bc178546f5c87d9e8fc4c55aebd326b69aaa114b46db58188e1275b682a99",
+      "candidate_sha256": "142bc178546f5c87d9e8fc4c55aebd326b69aaa114b46db58188e1275b682a99"
+    },
+    {
+      "source": "docs/exercices/04-control-plane/run.sh",
+      "disposition": "sanitized",
+      "source_sha256": "74e4dd3bd9522b22968bbdcfbfe662e12577241a01d0e9134399f7414648f60b",
+      "candidate_sha256": "24de9235e7eb647ceaea230c71f62cc0fd1dcce166490a32ea59fccc8735cb9a"
+    },
+    {
+      "source": "docs/exercices/04-control-plane/snapshot-lib.sh",
+      "disposition": "sanitized",
+      "source_sha256": "e67b3e9639fadd22ab78e224ce2ed8655b8dd35887f510c283ebb6eb08bc3f60",
+      "candidate_sha256": "ef0f9ea44938d4883c35c99e0ff0b0287f5a9185e49fe3c49880007d0e0a42c2"
+    },
+    {
+      "source": "docs/exercices/RAPPORT.md",
+      "disposition": "excluded",
+      "source_sha256": "6d56cb39964a3b2cdffddb376d02f589d488d55b9d228185d73a164c3796f25f",
+      "candidate_sha256": null
+    },
+    {
+      "source": "docs/exercices/README.md",
+      "disposition": "sanitized",
+      "source_sha256": "1f8402e2b3ed81457423e2c570e3ea04439358c3c688a1aa8395972e32e18c8b",
+      "candidate_sha256": "c0684e3a16b89a985cd99da41580348d349f491be6dbdf8b065d2574f8407261"
+    },
+    {
+      "source": "docs/exercices/_lib/common.sh",
+      "disposition": "sanitized",
+      "source_sha256": "abe4507a2e348026445785911fa4caf8cc8fba184873acfef272985e82c16f79",
+      "candidate_sha256": "29e1227ca61cabe68b9d11ff717f0f9c505b3f00bbcf22b307d00c3728dcc7ae"
+    },
+    {
+      "source": "docs/exercices/_lib/gate.py",
+      "disposition": "sanitized",
+      "source_sha256": "0758d03cd124edc5099d720fb82fd32903ef6faabb681941268682d35229f0b0",
+      "candidate_sha256": "1e89f03347d030286d71280146b410109bce61867c9b23d3754f139e3d1e7739"
+    },
+    {
+      "source": "docs/exercices/_lib/test-safety.py",
+      "disposition": "sanitized",
+      "source_sha256": "14c0e3aa8d9abd1d070d8c00836e97375f676fedaf907bc939b79c1e13dd768a",
+      "candidate_sha256": "6ce585b2a473a92cf7bc7ec8ca5897595d3bf6f948cceb64fa3f2ed257e20164"
+    },
+    {
+      "source": "docs/exercices/_lib/verify.py",
+      "disposition": "sanitized",
+      "source_sha256": "0dacc7ab3d73dbe07ee305b5c08a7bf8ecf6cc8ec1da0ae0668ff0a54e91a453",
+      "candidate_sha256": "5c215755175d4a1cd6a76284ee44e51edd90833fb2962b718c28b33652891099"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  annotations:
+    pod-policies.kyverno.io/autogen-controllers: none
+  name: lab-prod-signatures
+spec:
+  background: false
+  rules:
+  - match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - prod
+    name: verify-lab-signature
+    verifyImages:
+    - attestors:
+      - count: 1
+        entries:
+        - keys:
+            ctlog:
+              ignoreSCT: true
+            publicKeys: 'REGENERATE_LAB_TRUST_MATERIAL
+
+              '
+            rekor:
+              ignoreTlog: true
+      imageReferences:
+      - '*'
+      imageRegistryCredentials:
+        secrets:
+        - p6-zot-auth
+      mutateDigest: true
+      required: true
+      verifyDigest: true
+  validationFailureAction: Enforce

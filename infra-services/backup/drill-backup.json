@@ -1,0 +1,17 @@
+{
+  "apiVersion": "velero.io/v1",
+  "kind": "Backup",
+  "metadata": {
+    "name": "drill-example",
+    "namespace": "velero"
+  },
+  "spec": {
+    "includedNamespaces": [
+      "drill"
+    ],
+    "storageLocation": "default",
+    "snapshotVolumes": false,
+    "defaultVolumesToFsBackup": true,
+    "ttl": "24h"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "cluster_permissions": [
+    "cluster_monitor",
+    "indices:data/write/bulk"
+  ],
+  "index_permissions": [
+    {
+      "index_patterns": [
+        "zeek-*",
+        "audit-k8s-*",
+        "falco-*"
+      ],
+      "allowed_actions": [
+        "create_index",
+        "write"
+      ]
+    }
+  ],
+  "tenant_permissions": []
+}

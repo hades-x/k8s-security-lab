@@ -1,0 +1,126 @@
+when:
+- event: push
+  branch: main
+skip_clone: true
+steps:
+- name: clone
+  image: alpine:3.23.4@sha256:5b10f432ef3da1b8d4c7eb6c487f2f5a8f096bc91145e68878dd4a5019afde11
+  environment:
+    LAB_CA:
+      from_secret: lab_ca
+  commands:
+  - apk add --no-cache git ca-certificates >/dev/null
+  - printf '%s' "$LAB_CA" > /usr/local/share/ca-certificates/lab.crt
+  - update-ca-certificates >/dev/null
+  - git init .
+  - git remote add origin https://forgejo.192.168.150.200.sslip.io/lab/demo-app.git
+  - git fetch --depth=1 origin "$CI_COMMIT_SHA"
+  - git checkout --detach FETCH_HEAD
+  backend_options:
+    kubernetes:
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+        allowPrivilegeEscalation: false
+        seccompProfile:
+          type: RuntimeDefault
+      resources:
+        requests:
+          cpu: 100m
+          memory: 64Mi
+        limits:
+          cpu: '1'
+          memory: 192Mi
+- name: unit-test
+  image: python:3.14.8-slim-bookworm@sha256:48b13b003dda20b16f9442b8475aa05fe21bf6579a8c881db92ffb4d8fd20f83
+  commands:
+  - python -m unittest discover -s tests -v
+  backend_options:
+    kubernetes:
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+        allowPrivilegeEscalation: false
+        seccompProfile:
+          type: RuntimeDefault
+      resources:
+        requests:
+          cpu: 100m
+          memory: 64Mi
+        limits:
+          cpu: '1'
+          memory: 128Mi
+- name: daemonless-build
+  image: gcr.io/kaniko-project/executor:v1.24.0-debug@sha256:2562c4fe551399514277ffff7dcca9a3b1628c4ea38cb017d7286dc6ea52f4cd
+  commands:
+  - /kaniko/executor --context "$PWD" --dockerfile "$PWD/Dockerfile" --destination
+    "zot.192.168.150.200.sslip.io/lab/demo-app:$CI_COMMIT_SHA" --build-arg "BUILD_REVISION=$CI_COMMIT_SHA"
+    --no-push --tar-path "$PWD/image.tar" --oci-layout-path "$PWD/image-oci" --digest-file
+    "$PWD/image.digest" --snapshot-mode=redo --use-new-run --cache=false
+  backend_options:
+    kubernetes:
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+        allowPrivilegeEscalation: false
+        seccompProfile:
+          type: RuntimeDefault
+      resources:
+        requests:
+          cpu: 100m
+          memory: 64Mi
+        limits:
+          cpu: '2'
+          memory: 768Mi
+- name: trivy-critical-gate
+  image: aquasec/trivy:0.75.0@sha256:af6acf9a6b85dfe389a1941505c0ce9efef52a4719635e1a962f022a3d855daa
+  commands:
+  - trivy image --input image.tar --scanners vuln --parallel 1 --severity CRITICAL
+    --ignore-unfixed --exit-code 1 --format json --output trivy.json
+  - trivy image --input image.tar --scanners vuln --parallel 1 --severity CRITICAL
+    --ignore-unfixed --exit-code 1
+  backend_options:
+    kubernetes:
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+        allowPrivilegeEscalation: false
+        seccompProfile:
+          type: RuntimeDefault
+      resources:
+        requests:
+          cpu: 100m
+          memory: 64Mi
+        limits:
+          cpu: '2'
+          memory: 768Mi
+- name: push-sign-gitops-dev
+  image: alpine:3.23.4@sha256:5b10f432ef3da1b8d4c7eb6c487f2f5a8f096bc91145e68878dd4a5019afde11
+  environment:
+    LAB_CA:
+      from_secret: lab_ca
+    ZOT_PASSWORD:
+      from_secret: zot_password
+    COSIGN_KEY:
+      from_secret: cosign_key
+    COSIGN_PASSWORD:
+      from_secret: cosign_password
+    FORGEJO_TOKEN:
+      from_secret: forgejo_token
+  commands:
+  - sh ci/publish.sh
+  backend_options:
+    kubernetes:
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+        allowPrivilegeEscalation: false
+        seccompProfile:
+          type: RuntimeDefault
+      resources:
+        requests:
+          cpu: 100m
+          memory: 64Mi
+        limits:
+          cpu: '1'
+          memory: 768Mi

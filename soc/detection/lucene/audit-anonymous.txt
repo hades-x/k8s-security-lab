@@ -1,0 +1,1 @@
+(user.username:system\:anonymous AND (verb:(get OR list))) OR (responseStatus.code:401 AND NOT _exists_:user.username AND (verb:(get OR list)))

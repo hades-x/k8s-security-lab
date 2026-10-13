@@ -1,0 +1,193 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: p6-default-deny
+  namespace: dev
+spec:
+  egress: []
+  ingress: []
+  podSelector:
+    matchLabels: {}
+  policyTypes:
+  - Ingress
+  - Egress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: p6-dns
+  namespace: dev
+spec:
+  egress:
+  - ports:
+    - port: 53
+      protocol: UDP
+    - port: 53
+      protocol: TCP
+    to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+  podSelector:
+    matchLabels: {}
+  policyTypes:
+  - Egress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: p6-web
+  namespace: dev
+spec:
+  egress:
+  - ports:
+    - port: 8080
+    to:
+    - podSelector:
+        matchLabels:
+          app: orders-api
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/name: traefik
+    ports:
+    - port: 8080
+  podSelector:
+    matchLabels:
+      app: web
+  policyTypes:
+  - Ingress
+  - Egress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: p6-api
+  namespace: dev
+spec:
+  egress:
+  - ports:
+    - port: 5432
+    to:
+    - podSelector:
+        matchLabels:
+          cnpg.io/cluster: demo-db
+  - ports:
+    - port: 6379
+    to:
+    - podSelector:
+        matchLabels:
+          app: valkey
+  - ports:
+    - port: 9093
+    to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kafka
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: web
+    ports:
+    - port: 8080
+  podSelector:
+    matchLabels:
+      app: orders-api
+  policyTypes:
+  - Ingress
+  - Egress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: p6-worker
+  namespace: dev
+spec:
+  egress:
+  - ports:
+    - port: 6379
+    to:
+    - podSelector:
+        matchLabels:
+          app: valkey
+  - ports:
+    - port: 9093
+    to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kafka
+  ingress: []
+  podSelector:
+    matchLabels:
+      app: orders-worker
+  policyTypes:
+  - Ingress
+  - Egress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: p6-valkey
+  namespace: dev
+spec:
+  egress: []
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: orders-api
+    - podSelector:
+        matchLabels:
+          app: orders-worker
+    ports:
+    - port: 6379
+  podSelector:
+    matchLabels:
+      app: valkey
+  policyTypes:
+  - Ingress
+  - Egress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: p6-postgres
+  namespace: dev
+spec:
+  egress:
+  - ports:
+    - port: 443
+    - port: 6443
+    to:
+    - ipBlock:
+        cidr: 10.43.0.1/32
+    - ipBlock:
+        cidr: 192.168.150.0/24
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: orders-api
+    ports:
+    - port: 5432
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: cnpg-system
+    ports:
+    - port: 8000
+    - port: 5432
+  podSelector:
+    matchLabels:
+      cnpg.io/cluster: demo-db
+  policyTypes:
+  - Ingress
+  - Egress

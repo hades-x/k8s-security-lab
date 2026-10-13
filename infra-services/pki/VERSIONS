@@ -1,0 +1,55 @@
+{
+  "cert-manager": {
+    "repo": "https://charts.jetstack.io",
+    "chart": "cert-manager",
+    "version": "v1.21.2",
+    "appVersion": "v1.21.2",
+    "package": "evidence/p3-prep/charts/cert-manager-v1.21.2.tgz",
+    "sha256": "73a56e1728edd6c99f1f31082618c3259d279a76b7ebd3d4bdc5475c2442d34a"
+  },
+  "step-ca": {
+    "repo": "https://smallstep.github.io/helm-charts",
+    "chart": "step-certificates",
+    "version": "1.30.1",
+    "appVersion": "0.30.2",
+    "package": "evidence/p3-prep/charts/step-certificates-1.30.1.tgz",
+    "sha256": "1a211cfa59eab3bea4712a7b344e8c8e8714ee784655b6ba36d9689870044c03",
+    "image": "docker.io/smallstep/step-ca:0.30.2@sha256:a2b17872915c193259b75a5474c398326f41bd199f0842093e52cf4182bc8270",
+    "imageSource": "https://hub.docker.com/v2/repositories/smallstep/step-ca/tags/0.30.2/"
+  },
+  "step": {
+    "version": "v0.31.0",
+    "url": "https://github.com/smallstep/cli/releases/tag/v0.31.0"
+  },
+  "gateway-api": {
+    "version": "v1.6.3",
+    "source": "https://github.com/kubernetes-sigs/gateway-api/releases/tag/v1.6.3",
+    "sha256": "356c2b8e286a964dc20995435659ad1095386329974793af10bbfe3eff977fe5"
+  },
+  "renderedImages": {
+    "docker.io/smallstep/step-ca:0.30.2@sha256:a2b17872915c193259b75a5474c398326f41bd199f0842093e52cf4182bc8270": {
+      "digest": "sha256:a2b17872915c193259b75a5474c398326f41bd199f0842093e52cf4182bc8270",
+      "source": "https://hub.docker.com/v2/repositories/smallstep/step-ca/tags/0.30.2/"
+    },
+    "quay.io/jetstack/cert-manager-cainjector:v1.21.2": {
+      "digest": "sha256:c85268c64f2e0e76684bf5fe8906caff34b82523561c6affe0fae3546bd87562",
+      "source": "https://quay.io/v2/jetstack/cert-manager-cainjector/manifests/v1.21.2",
+      "mediaType": "application/vnd.docker.distribution.manifest.list.v2+json"
+    },
+    "quay.io/jetstack/cert-manager-controller:v1.21.2": {
+      "digest": "sha256:70f532fd9cfde0b09d55687200942399d89838bc2d5d5b45152eb799a15912b8",
+      "source": "https://quay.io/v2/jetstack/cert-manager-controller/manifests/v1.21.2",
+      "mediaType": "application/vnd.docker.distribution.manifest.list.v2+json"
+    },
+    "quay.io/jetstack/cert-manager-startupapicheck:v1.21.2": {
+      "digest": "sha256:46e75b6866359ffb5d82624f41e3ed1c70b2994982702ced547ce5edb418a8f5",
+      "source": "https://quay.io/v2/jetstack/cert-manager-startupapicheck/manifests/v1.21.2",
+      "mediaType": "application/vnd.docker.distribution.manifest.list.v2+json"
+    },
+    "quay.io/jetstack/cert-manager-webhook:v1.21.2": {
+      "digest": "sha256:a60e2dac46dbb8a7f3df95c54ce941012f54c2fe022f0ee55aaa1ab40ed957ae",
+      "source": "https://quay.io/v2/jetstack/cert-manager-webhook/manifests/v1.21.2",
+      "mediaType": "application/vnd.docker.distribution.manifest.list.v2+json"
+    }
+  }
+}

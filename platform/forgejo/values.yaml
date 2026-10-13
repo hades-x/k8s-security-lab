@@ -1,0 +1,80 @@
+replicaCount: 1
+strategy:
+  type: Recreate
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: '1'
+    memory: 512Mi
+initContainers:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: '1'
+      memory: 512Mi
+persistence:
+  enabled: true
+  create: true
+  size: 2Gi
+  storageClass: longhorn
+  accessModes:
+  - ReadWriteOnce
+ingress:
+  enabled: true
+  className: traefik
+  hosts:
+  - host: forgejo.192.168.150.200.sslip.io
+    paths:
+    - path: /
+      pathType: Prefix
+      port: http
+  annotations:
+    cert-manager.io/cluster-issuer: lab-acme
+  tls:
+  - secretName: forgejo-tls
+    hosts:
+    - forgejo.192.168.150.200.sslip.io
+gitea:
+  admin:
+    existingSecret: forgejo-admin
+    username: lab-admin
+    email: lab-admin@k8slab.invalid
+    passwordMode: initialOnlyNoReset
+  config:
+    APP_NAME: K8S Lab Forgejo
+    database:
+      DB_TYPE: sqlite3
+    server:
+      ROOT_URL: https://forgejo.192.168.150.200.sslip.io/
+      DOMAIN: forgejo.192.168.150.200.sslip.io
+      SSH_DOMAIN: forgejo.192.168.150.200.sslip.io
+    service:
+      DISABLE_REGISTRATION: true
+      REQUIRE_SIGNIN_VIEW: false
+    cache:
+      ADAPTER: memory
+    webhook:
+      # Allow in-cluster CI only (SSRF guard kept for everything else)
+      ALLOWED_HOST_LIST: "external,ci.192.168.150.200.sslip.io,woodpecker-server.ci.svc.cluster.local"
+    session:
+      PROVIDER: memory
+    queue:
+      TYPE: level
+    oauth2_client:
+      ENABLE_AUTO_REGISTRATION: true
+      USERNAME: preferred_username
+      ACCOUNT_LINKING: login
+      REGISTER_EMAIL_CONFIRM: false
+extraVolumes:
+- name: lab-root
+  configMap:
+    name: lab-root
+extraVolumeMounts:
+- name: lab-root
+  mountPath: /etc/ssl/certs/lab-root.pem
+  subPath: root_ca.crt
+  readOnly: true

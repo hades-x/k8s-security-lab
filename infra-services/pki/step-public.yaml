@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: step-ca-config
+  namespace: pki
+data:
+  ca.json: "{\n  \"root\": \"/home/step/certs/root_ca.crt\",\n  \"crt\": \"/home/step/certs/intermediate_ca.crt\"\
+    ,\n  \"key\": \"/home/step/secrets/intermediate_ca_key\",\n  \"address\": \":9000\"\
+    ,\n  \"dnsNames\": [\n    \"step-ca.pki.svc.cluster.local\",\n    \"step-ca.pki.svc\"\
+    ,\n    \"step-ca.192.168.150.200.sslip.io\"\n  ],\n  \"db\": {\n    \"type\":\
+    \ \"badgerv2\",\n    \"dataSource\": \"/home/step/db\"\n  },\n  \"logger\": {\n\
+    \    \"format\": \"json\"\n  },\n  \"authority\": {\n    \"claims\": {\n     \
+    \ \"minTLSCertDuration\": \"5m\",\n      \"maxTLSCertDuration\": \"24h\",\n  \
+    \    \"defaultTLSCertDuration\": \"24h\"\n    },\n    \"provisioners\": [\n  \
+    \    {\n        \"type\": \"ACME\",\n        \"name\": \"acme\",\n        \"forceCN\"\
+    : true,\n        \"claims\": {\n          \"maxTLSCertDuration\": \"24h\"\n  \
+    \      }\n      }\n    ]\n  }\n}"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: step-ca-certs
+  namespace: pki
+data:
+  root_ca.crt: 'REGENERATE_LAB_TRUST_MATERIAL
+
+    '
+  intermediate_ca.crt: 'REGENERATE_LAB_TRUST_MATERIAL
+
+    '

@@ -1,0 +1,321 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: openldap
+  namespace: identity
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openldap
+  namespace: identity
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: openldap
+  template:
+    metadata:
+      labels:
+        app: openldap
+    spec:
+      containers:
+      - name: openldap
+        image: docker.io/vegardit/openldap:2.6.10@sha256:a6ef0b528b889880a861c44995c5d6c91a972216f1a878857689aa9789ee24d6
+        resources:
+          requests:
+            cpu: 50m
+            memory: 96Mi
+          limits:
+            cpu: 300m
+            memory: 192Mi
+        ports:
+        - containerPort: 389
+        env:
+        - name: LDAP_INIT_ORG_DN
+          value: dc=k8slab,dc=lab
+        - name: LDAP_INIT_ORG_NAME
+          value: K8S Lab
+        - name: LDAP_INIT_ROOT_USER_DN
+          value: uid=admin,dc=k8slab,dc=lab
+        - name: LDAP_INIT_ROOT_USER_PW_FILE
+          value: /run/secrets/ldap-admin-password
+        - name: LDAP_BACKUP_TIME
+          value: ''
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/ldap
+          subPath: data
+        - name: data
+          mountPath: /etc/ldap/slapd.d
+          subPath: config
+        - name: bootstrap
+          mountPath: /opt/ldifs/init_org_entries.ldif
+          subPath: entries.ldif
+          readOnly: true
+        - name: password
+          mountPath: /run/secrets
+          readOnly: true
+        readinessProbe:
+          tcpSocket:
+            port: 389
+          initialDelaySeconds: 20
+        livenessProbe:
+          tcpSocket:
+            port: 389
+          initialDelaySeconds: 60
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: openldap
+      - name: bootstrap
+        secret:
+          secretName: ldap-bootstrap
+      - name: password
+        secret:
+          secretName: ldap-admin
+      automountServiceAccountToken: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: openldap
+  namespace: identity
+spec:
+  selector:
+    app: openldap
+  ports:
+  - port: 389
+    targetPort: 389
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: keycloak
+  namespace: identity
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keycloak-realm
+  namespace: identity
+data:
+  lab-realm.json: '{"realm": "lab", "enabled": true, "sslRequired": "external", "registrationAllowed":
+    false, "resetPasswordAllowed": false, "groups": [{"name": "lab-admins"}, {"name":
+    "soc-analysts"}, {"name": "devs"}], "clients": [{"clientId": "grafana", "enabled":
+    true, "protocol": "openid-connect", "publicClient": false, "secret": "${GRAFANA_CLIENT_SECRET}",
+    "standardFlowEnabled": true, "directAccessGrantsEnabled": false, "redirectUris":
+    ["https://grafana.192.168.150.200.sslip.io/login/generic_oauth"], "webOrigins":
+    ["https://grafana.192.168.150.200.sslip.io"], "defaultClientScopes": ["profile",
+    "email", "groups"], "attributes": {"pkce.code.challenge.method": "S256"}}, {"clientId":
+    "argocd", "enabled": true, "protocol": "openid-connect", "publicClient": false,
+    "secret": "${ARGOCD_CLIENT_SECRET}", "standardFlowEnabled": true, "directAccessGrantsEnabled":
+    false, "redirectUris": ["https://argocd.192.168.150.200.sslip.io/auth/callback"],
+    "webOrigins": ["https://argocd.192.168.150.200.sslip.io"], "defaultClientScopes":
+    ["profile", "email", "groups"], "attributes": {"pkce.code.challenge.method": "S256"}},
+    {"clientId": "forgejo", "enabled": true, "protocol": "openid-connect", "publicClient":
+    false, "secret": "${FORGEJO_CLIENT_SECRET}", "standardFlowEnabled": true, "directAccessGrantsEnabled":
+    false, "redirectUris": ["https://forgejo.192.168.150.200.sslip.io/user/oauth2/keycloak/callback"],
+    "webOrigins": ["https://forgejo.192.168.150.200.sslip.io"], "defaultClientScopes":
+    ["profile", "email", "groups"], "attributes": {"pkce.code.challenge.method": "S256"}},
+    {"clientId": "opensearch-dashboards", "enabled": true, "protocol": "openid-connect",
+    "publicClient": false, "secret": "${OPENSEARCH_DASHBOARDS_CLIENT_SECRET}", "standardFlowEnabled":
+    true, "directAccessGrantsEnabled": false, "redirectUris": ["https://opensearch-dashboards.192.168.150.200.sslip.io/auth/openid/login"],
+    "webOrigins": ["https://opensearch-dashboards.192.168.150.200.sslip.io"], "defaultClientScopes":
+    ["profile", "email", "groups"], "attributes": {"pkce.code.challenge.method": "S256"}},
+    {"clientId": "lab-cli", "enabled": true, "protocol": "openid-connect", "publicClient":
+    true, "standardFlowEnabled": false, "directAccessGrantsEnabled": true, "defaultClientScopes":
+    ["profile", "email", "groups"]}], "clientScopes": [{"name": "groups", "protocol":
+    "openid-connect", "attributes": {"include.in.token.scope": "true"}, "protocolMappers":
+    [{"name": "groups", "protocol": "openid-connect", "protocolMapper": "oidc-group-membership-mapper",
+    "config": {"claim.name": "groups", "full.path": "false", "id.token.claim": "true",
+    "access.token.claim": "true", "userinfo.token.claim": "true"}}]}, {"name": "profile",
+    "protocol": "openid-connect", "attributes": {"include.in.token.scope": "true"},
+    "protocolMappers": [{"name": "username", "protocol": "openid-connect", "protocolMapper":
+    "oidc-usermodel-property-mapper", "config": {"user.attribute": "username", "claim.name":
+    "preferred_username", "jsonType.label": "String", "id.token.claim": "true", "access.token.claim":
+    "true", "userinfo.token.claim": "true"}}, {"name": "given name", "protocol": "openid-connect",
+    "protocolMapper": "oidc-usermodel-property-mapper", "config": {"user.attribute":
+    "firstName", "claim.name": "given_name", "jsonType.label": "String", "id.token.claim":
+    "true", "access.token.claim": "true", "userinfo.token.claim": "true"}}, {"name":
+    "family name", "protocol": "openid-connect", "protocolMapper": "oidc-usermodel-property-mapper",
+    "config": {"user.attribute": "lastName", "claim.name": "family_name", "jsonType.label":
+    "String", "id.token.claim": "true", "access.token.claim": "true", "userinfo.token.claim":
+    "true"}}]}, {"name": "email", "protocol": "openid-connect", "attributes": {"include.in.token.scope":
+    "true"}, "protocolMappers": [{"name": "email", "protocol": "openid-connect", "protocolMapper":
+    "oidc-usermodel-property-mapper", "config": {"user.attribute": "email", "claim.name":
+    "email", "jsonType.label": "String", "id.token.claim": "true", "access.token.claim":
+    "true", "userinfo.token.claim": "true"}}, {"name": "email verified", "protocol":
+    "openid-connect", "protocolMapper": "oidc-usermodel-property-mapper", "config":
+    {"user.attribute": "emailVerified", "claim.name": "email_verified", "jsonType.label":
+    "boolean", "id.token.claim": "true", "access.token.claim": "true", "userinfo.token.claim":
+    "true"}}]}], "components": {"org.keycloak.storage.UserStorageProvider": [{"id":
+    "lab-ldap", "name": "lab-ldap", "providerId": "ldap", "config": {"enabled": ["true"],
+    "priority": ["0"], "editMode": ["READ_ONLY"], "vendor": ["other"], "connectionUrl":
+    ["ldap://openldap.identity.svc.cluster.local:389"], "usersDn": ["ou=Users,dc=k8slab,dc=lab"],
+    "bindDn": ["uid=admin,dc=k8slab,dc=lab"], "bindCredential": ["${LDAP_BIND_PASSWORD}"],
+    "usernameLDAPAttribute": ["uid"], "rdnLDAPAttribute": ["uid"], "uuidLDAPAttribute":
+    ["entryUUID"], "userObjectClasses": ["inetOrgPerson"], "importEnabled": ["true"],
+    "syncRegistrations": ["false"], "pagination": ["true"], "searchScope": ["1"]},
+    "subComponents": {"org.keycloak.storage.ldap.mappers.LDAPStorageMapper": [{"name":
+    "groups", "providerId": "group-ldap-mapper", "config": {"groups.dn": ["ou=Groups,dc=k8slab,dc=lab"],
+    "group.name.ldap.attribute": ["cn"], "group.object.classes": ["groupOfNames"],
+    "preserve.group.inheritance": ["false"], "membership.ldap.attribute": ["member"],
+    "membership.attribute.type": ["DN"], "membership.user.ldap.attribute": ["uid"],
+    "mode": ["READ_ONLY"], "user.roles.retrieve.strategy": ["LOAD_GROUPS_BY_MEMBER_ATTRIBUTE"],
+    "groups.path": ["/"], "drop.non.existing.groups.during.sync": ["false"]}}, {"name":
+    "username", "providerId": "user-attribute-ldap-mapper", "config": {"user.model.attribute":
+    ["username"], "ldap.attribute": ["uid"], "read.only": ["true"], "always.read.value.from.ldap":
+    ["true"], "is.mandatory.in.ldap": ["true"]}}, {"name": "email", "providerId":
+    "user-attribute-ldap-mapper", "config": {"user.model.attribute": ["email"], "ldap.attribute":
+    ["mail"], "read.only": ["true"], "always.read.value.from.ldap": ["true"], "is.mandatory.in.ldap":
+    ["false"]}}, {"name": "first name", "providerId": "user-attribute-ldap-mapper",
+    "config": {"user.model.attribute": ["firstName"], "ldap.attribute": ["givenName"],
+    "read.only": ["true"], "always.read.value.from.ldap": ["true"], "is.mandatory.in.ldap":
+    ["false"]}}, {"name": "last name", "providerId": "user-attribute-ldap-mapper",
+    "config": {"user.model.attribute": ["lastName"], "ldap.attribute": ["sn"], "read.only":
+    ["true"], "always.read.value.from.ldap": ["true"], "is.mandatory.in.ldap": ["false"]}}]}}]}}'
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak
+  namespace: identity
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: keycloak
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      containers:
+      - name: keycloak
+        image: quay.io/keycloak/keycloak:26.8.0
+        args:
+        - start-dev
+        - --import-realm
+        resources:
+          requests:
+            cpu: 200m
+            memory: 384Mi
+          limits:
+            cpu: 1500m
+            memory: 640Mi
+        ports:
+        - containerPort: 8080
+        - containerPort: 9000
+        env:
+        - name: KC_DB
+          value: dev-file
+        - name: KC_HOSTNAME
+          value: https://keycloak.192.168.150.200.sslip.io
+        - name: KC_HTTP_ENABLED
+          value: 'true'
+        - name: KC_PROXY_HEADERS
+          value: xforwarded
+        - name: KC_HEALTH_ENABLED
+          value: 'true'
+        - name: KC_BOOTSTRAP_ADMIN_USERNAME
+          value: lab-kc-admin
+        - name: JAVA_OPTS_KC_HEAP
+          value: -Xms128m -Xmx384m
+        envFrom:
+        - secretRef:
+            name: keycloak-env
+        volumeMounts:
+        - name: data
+          mountPath: /opt/keycloak/data
+        - name: realm
+          mountPath: /opt/keycloak/data/import
+          readOnly: true
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 9000
+          initialDelaySeconds: 20
+        startupProbe:
+          httpGet:
+            path: /health/started
+            port: 9000
+          failureThreshold: 60
+          periodSeconds: 10
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: keycloak
+      - name: realm
+        configMap:
+          name: keycloak-realm
+      securityContext:
+        fsGroup: 1000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak
+  namespace: identity
+spec:
+  selector:
+    app: keycloak
+  ports:
+  - port: 8080
+    targetPort: 8080
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: keycloak
+  namespace: identity
+spec:
+  secretName: keycloak-tls
+  dnsNames:
+  - keycloak.192.168.150.200.sslip.io
+  duration: 24h
+  renewBefore: 8h
+  issuerRef:
+    name: lab-acme
+    kind: ClusterIssuer
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: keycloak
+  namespace: identity
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - keycloak.192.168.150.200.sslip.io
+    secretName: keycloak-tls
+  rules:
+  - host: keycloak.192.168.150.200.sslip.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: keycloak
+            port:
+              number: 8080

@@ -1,0 +1,1 @@
+verb:create AND objectRef.resource:clusterrolebindings AND objectRef.name:lab\-inert\-admin\-binding

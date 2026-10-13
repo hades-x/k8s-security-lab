@@ -1,0 +1,22 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata: {name: lab, namespace: demo}
+spec:
+  gatewayClassName: traefik
+  listeners:
+    - name: web
+      protocol: HTTP
+      port: 8000
+      allowedRoutes:
+        namespaces: {from: Same}
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata: {name: gateway-demo, namespace: demo}
+spec:
+  parentRefs: [{name: lab}]
+  hostnames: [gateway-demo.192.168.150.200.sslip.io]
+  rules:
+    - matches:
+        - path: {type: PathPrefix, value: /}
+      backendRefs: [{name: demo, port: 80}]

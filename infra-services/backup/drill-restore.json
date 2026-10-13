@@ -1,0 +1,15 @@
+{
+  "apiVersion": "velero.io/v1",
+  "kind": "Restore",
+  "metadata": {
+    "name": "drill-example",
+    "namespace": "velero"
+  },
+  "spec": {
+    "backupName": "drill-example",
+    "includedNamespaces": [
+      "drill"
+    ],
+    "restorePVs": true
+  }
+}

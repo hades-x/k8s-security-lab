@@ -1,0 +1,19 @@
+title: Unexpected Process Reads Service Account Token
+id: a61483b8-2bdc-5453-be32-0bd5fa6c3751
+status: experimental
+description: Lab-only detection. Validate false positives and mappings before non-lab
+  use.
+author: K8S-LAB preparation
+date: '2026-10-13'
+tags:
+- attack.t1552.007
+logsource:
+  product: falco
+  service: syscall
+detection:
+  selection:
+    rule: Lab ServiceAccount Token Read
+  condition: selection
+falsepositives:
+- Legitimate lab administration or synthetic traffic.
+level: medium

@@ -1,0 +1,39 @@
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "term": {
+            "user_agent": "LabBeacon/1.0"
+          }
+        },
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "now-5m"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "aggs": {
+    "source": {
+      "terms": {
+        "field": "id.orig_h",
+        "size": 100
+      },
+      "aggs": {
+        "minimum_samples": {
+          "bucket_selector": {
+            "buckets_path": {
+              "n": "_count"
+            },
+            "script": "params.n >= 6"
+          }
+        }
+      }
+    }
+  }
+}

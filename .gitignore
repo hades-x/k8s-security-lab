@@ -1,0 +1,17 @@
+.secrets/
+evidence/
+state/
+vms/
+bin/
+.venv*/
+__pycache__/
+*.pyc
+*.pcap
+*.pem
+*.crt
+*.key
+*.log
+.env
+vendor/
+vendor-skills/
+soc/opensearch/dashboards/*.ndjson

@@ -1,0 +1,6 @@
+# Resolved 2026-10-13. Ignore vector's unrelated vdev-* releases.
+VECTOR_VERSION=0.59.0
+VECTOR_IMAGE=timberio/vector:0.59.0-alpine@sha256:0e36bc2a290039e9b6a5e92f04bd2f133223506f72d09682c1df16c015172b7a
+VECTOR_BINARY_URL=https://github.com/vectordotdev/vector/releases/download/v0.59.0/vector-0.59.0-x86_64-unknown-linux-musl.tar.gz
+VECTOR_BINARY_SHA256=a8dbc43c18ae25d0b23a712c9262f3aad904e352b1db5e7db1d9c4aecab59496
+# https://github.com/vectordotdev/vector/releases/tag/v0.59.0

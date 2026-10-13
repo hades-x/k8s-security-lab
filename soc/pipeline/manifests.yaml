@@ -1,0 +1,548 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vector-zeek
+  namespace: kafka
+data:
+  vector.yaml: "data_dir: /var/lib/vector\napi:\n  enabled: true\n  address: 0.0.0.0:8686\n\
+    sources:\n  zeek:\n    type: file\n    include:\n    - /var/log/zeek/current/*.log\n\
+    \    read_from: beginning\n    max_line_bytes: 1048576\ntransforms:\n  parse_zeek:\n\
+    \    type: remap\n    inputs:\n    - zeek\n    drop_on_error: true\n    drop_on_abort:\
+    \ true\n    source: 'file = string!(.file)\n\n      . = object!(parse_json!(string!(.message)))\n\
+    \n      parts = split(file, \"/\")\n\n      .log_type = replace(string!(parts[-1]),\
+    \ r''\\.log$'', \"\")\n\n      if !includes([\"conn\", \"dns\", \"http\", \"notice\"\
+    , \"intel\"], .log_type) { abort\n      }\n\n      .node = get_env_var!(\"VECTOR_NODE_NAME\"\
+    )\n\n      .sensor = \"zeek-\" + .node\n\n      if exists(.id) && !is_object(.id)\
+    \ { .zeek_id = del(.id) }\n\n      # Zeek''s JSON keys are dotted: normalize into\
+    \ an id object for IP mappings.\n\n      if exists(.\"id.orig_h\") { .id.orig_h\
+    \ = del(.\"id.orig_h\") }\n\n      if exists(.\"id.resp_h\") { .id.resp_h = del(.\"\
+    id.resp_h\") }\n\n      if exists(.\"id.orig_p\") { .id.orig_p = del(.\"id.orig_p\"\
+    ) }\n\n      if exists(.\"id.resp_p\") { .id.resp_p = del(.\"id.resp_p\") }\n\n\
+    \      .\"@timestamp\" = from_unix_timestamp!(to_int(to_float!(.ts) * 1000.0),\
+    \ unit:\n      \"milliseconds\")\n\n      '\nsinks:\n  kafka:\n    type: kafka\n\
+    \    inputs:\n    - parse_zeek\n    bootstrap_servers: soc-kafka-bootstrap.kafka.svc.cluster.local:9093\n\
+    \    sasl:\n      enabled: true\n      mechanism: SCRAM-SHA-512\n      username:\
+    \ zeek-shipper\n      password: ${KAFKA_PASSWORD}\n    tls:\n      enabled: true\n\
+    \      ca_file: /etc/kafka-ca/ca.crt\n      verify_certificate: true\n      verify_hostname:\
+    \ true\n    topic: zeek-{{ log_type }}\n    encoding:\n      codec: json\n   \
+    \ compression: lz4\n    librdkafka_options:\n      enable.idempotence: 'false'\n\
+    \      acks: all\n      message.timeout.ms: '300000'\n      queue.buffering.max.kbytes:\
+    \ '16384'\n      queue.buffering.max.messages: '10000'\n    buffer:\n      type:\
+    \ disk\n      max_size: 268435488\n      when_full: block\n    acknowledgements:\n\
+    \      enabled: true\ntests:\n- name: conn dotted IP mapping\n  inputs:\n  - insert_at:\
+    \ parse_zeek\n    type: log\n    log_fields:\n      file: /var/log/zeek/current/conn.log\n\
+    \      message: '{\"ts\": 1760000000.125, \"uid\": \"C1\", \"id.orig_h\": \"192.168.150.11\"\
+    ,\n        \"id.resp_h\": \"192.168.150.12\", \"id.orig_p\": 12345, \"id.resp_p\"\
+    : 443}'\n  outputs:\n  - extract_from: parse_zeek\n    conditions:\n    - type:\
+    \ vrl\n      source: .log_type == \"conn\" && .id.orig_h == \"192.168.150.11\"\
+    \ && .id.orig_p\n        == 12345 && .node == \"validation-node\"\n- name: scalar\
+    \ intel id renamed\n  inputs:\n  - insert_at: parse_zeek\n    type: log\n    log_fields:\n\
+    \      file: /var/log/zeek/current/intel.log\n      message: '{\"ts\":1760000000,\"\
+    id\":\"misp-42\"}'\n  outputs:\n  - extract_from: parse_zeek\n    conditions:\n\
+    \    - type: vrl\n      source: .zeek_id == \"misp-42\" && !exists(.id) && .log_type\
+    \ == \"intel\"\n- name: unknown log dropped\n  inputs:\n  - insert_at: parse_zeek\n\
+    \    type: log\n    log_fields:\n      file: /var/log/zeek/current/files.log\n\
+    \      message: '{\"ts\":1760000000}'\n  no_outputs_from:\n  - parse_zeek\n- name:\
+    \ Malformed JSON dropped\n  inputs:\n  - insert_at: parse_zeek\n    type: log\n\
+    \    log_fields:\n      file: /var/log/zeek/current/conn.log\n      message: not-json\n\
+    \  no_outputs_from:\n  - parse_zeek\n"
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: vector-zeek
+  namespace: kafka
+spec:
+  selector:
+    matchLabels:
+      app: vector-zeek
+  template:
+    metadata:
+      labels:
+        app: vector-zeek
+      annotations:
+        soc.lab/config-sha256: c41de3341463559d0d5e3f6052d8a89da38e95ea6ef5d44adf9d743243973a43
+    spec:
+      automountServiceAccountToken: false
+      tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      terminationGracePeriodSeconds: 60
+      containers:
+      - name: vector
+        image: timberio/vector:0.59.0-alpine@sha256:0e36bc2a290039e9b6a5e92f04bd2f133223506f72d09682c1df16c015172b7a
+        args:
+        - --dangerously-allow-env-var-interpolation
+        - --config
+        - /etc/vector/vector.yaml
+        env:
+        - name: VECTOR_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: KAFKA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: zeek-shipper
+              key: password
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 25m
+          limits:
+            memory: 192Mi
+            cpu: 300m
+        securityContext:
+          runAsUser: 0
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        ports:
+        - name: api
+          containerPort: 8686
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: api
+          initialDelaySeconds: 30
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: api
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        volumeMounts:
+        - name: config
+          mountPath: /etc/vector
+          readOnly: true
+        - name: kafka-ca
+          mountPath: /etc/kafka-ca
+          readOnly: true
+        - name: data
+          mountPath: /var/lib/vector
+        - name: logs
+          mountPath: /var/log/zeek
+          readOnly: true
+      volumes:
+      - name: config
+        configMap:
+          name: vector-zeek
+      - name: kafka-ca
+        secret:
+          secretName: soc-cluster-ca-cert
+          items:
+          - key: ca.crt
+            path: ca.crt
+      - name: logs
+        hostPath:
+          path: /var/log/zeek
+          type: DirectoryOrCreate
+      - name: data
+        hostPath:
+          path: /var/lib/vector-soc/zeek
+          type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vector-audit
+  namespace: kafka
+data:
+  vector.yaml: "data_dir: /var/lib/vector\napi:\n  enabled: true\n  address: 0.0.0.0:8686\n\
+    sources:\n  audit:\n    type: file\n    include:\n    - /var/lib/rancher/k3s/server/logs/audit.log\n\
+    \    read_from: beginning\n    max_line_bytes: 4194304\ntransforms:\n  parse_audit:\n\
+    \    type: remap\n    inputs:\n    - audit\n    drop_on_error: true\n    source:\
+    \ \" . = object!(parse_json!(string!(.message)))\\nif .objectRef.resource\\\n\
+    \      \\ == \\\"secrets\\\" {\\n  del(.requestObject)\\n  del(.responseObject)\\\
+    n}\\n.node\\\n      \\ = get_env_var!(\\\"VECTOR_NODE_NAME\\\")\\n.sensor = \\\
+    \"k3s-audit-\\\" + .node\\n.log_type\\\n      \\ = \\\"audit-k8s\\\"\\n.\\\"@timestamp\\\
+    \" = parse_timestamp!(string!(.requestReceivedTimestamp),\\\n      \\ format:\
+    \ \\\"%+\\\")\\n\"\n  reduce_noise:\n    type: filter\n    inputs:\n    - parse_audit\n\
+    \    condition:\n      type: vrl\n      source: 'v = to_string(.verb) ?? \"\"\n\
+    \n        u = to_string(.user.username) ?? \"\"\n\n        r = to_string(.objectRef.resource)\
+    \ ?? \"\"\n\n        s = exists(.objectRef.subresource)\n\n        !includes([\"\
+    get\",\"list\",\"watch\"], v) || r == \"secrets\" || s || u == \"system:anonymous\"\
+    \n        || !starts_with(u, \"system:\")'\nsinks:\n  kafka:\n    type: kafka\n\
+    \    inputs:\n    - reduce_noise\n    bootstrap_servers: soc-kafka-bootstrap.kafka.svc.cluster.local:9093\n\
+    \    sasl:\n      enabled: true\n      mechanism: SCRAM-SHA-512\n      username:\
+    \ audit-shipper\n      password: ${KAFKA_PASSWORD}\n    tls:\n      enabled: true\n\
+    \      ca_file: /etc/kafka-ca/ca.crt\n      verify_certificate: true\n      verify_hostname:\
+    \ true\n    topic: audit-k8s\n    encoding:\n      codec: json\n    compression:\
+    \ lz4\n    librdkafka_options:\n      enable.idempotence: 'false'\n      acks:\
+    \ all\n      message.timeout.ms: '300000'\n      queue.buffering.max.kbytes: '16384'\n\
+    \      queue.buffering.max.messages: '10000'\n    buffer:\n      type: disk\n\
+    \      max_size: 268435488\n      when_full: block\n    acknowledgements:\n  \
+    \    enabled: true\ntests:\n- name: Secret objects removed\n  inputs:\n  - insert_at:\
+    \ parse_audit\n    type: log\n    log_fields:\n      message: '{\"objectRef\"\
+    :{\"resource\":\"secrets\"},\"requestObject\":{\"data\":{\"x\":\"redact-me\"}},\"\
+    responseObject\":{\"data\":{\"x\":\"redact-me\"}},\"requestReceivedTimestamp\"\
+    :\"2026-10-13T07:00:00Z\"}'\n  outputs:\n  - extract_from: parse_audit\n    conditions:\n\
+    \    - type: vrl\n      source: '!exists(.requestObject) && !exists(.responseObject)\
+    \ && .log_type ==\n        \"audit-k8s\"'\n- name: Non-secret request objects\
+    \ retained\n  inputs:\n  - insert_at: parse_audit\n    type: log\n    log_fields:\n\
+    \      message: '{\"objectRef\":{\"resource\":\"pods\"},\"requestObject\":{\"\
+    data\":{\"x\":\"redact-me\"}},\"responseObject\":{\"data\":{\"x\":\"redact-me\"\
+    }},\"requestReceivedTimestamp\":\"2026-10-13T07:00:00Z\"}'\n  outputs:\n  - extract_from:\
+    \ parse_audit\n    conditions:\n    - type: vrl\n      source: exists(.requestObject)\
+    \ && exists(.responseObject)\n"
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: vector-audit
+  namespace: kafka
+spec:
+  selector:
+    matchLabels:
+      app: vector-audit
+  template:
+    metadata:
+      labels:
+        app: vector-audit
+      annotations:
+        soc.lab/config-sha256: 1602d3db5740563233f32f566223e1d718f7f339ecb2201508600f89caf197cd
+    spec:
+      automountServiceAccountToken: false
+      tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      terminationGracePeriodSeconds: 60
+      containers:
+      - name: vector
+        image: timberio/vector:0.59.0-alpine@sha256:0e36bc2a290039e9b6a5e92f04bd2f133223506f72d09682c1df16c015172b7a
+        args:
+        - --dangerously-allow-env-var-interpolation
+        - --config
+        - /etc/vector/vector.yaml
+        env:
+        - name: VECTOR_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: KAFKA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: audit-shipper
+              key: password
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 25m
+          limits:
+            memory: 192Mi
+            cpu: 300m
+        securityContext:
+          runAsUser: 0
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        ports:
+        - name: api
+          containerPort: 8686
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: api
+          initialDelaySeconds: 30
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: api
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        volumeMounts:
+        - name: config
+          mountPath: /etc/vector
+          readOnly: true
+        - name: kafka-ca
+          mountPath: /etc/kafka-ca
+          readOnly: true
+        - name: data
+          mountPath: /var/lib/vector
+        - name: logs
+          mountPath: /var/lib/rancher/k3s/server/logs
+          readOnly: true
+      volumes:
+      - name: config
+        configMap:
+          name: vector-audit
+      - name: kafka-ca
+        secret:
+          secretName: soc-cluster-ca-cert
+          items:
+          - key: ca.crt
+            path: ca.crt
+      - name: logs
+        hostPath:
+          path: /var/lib/rancher/k3s/server/logs
+          type: DirectoryOrCreate
+      - name: data
+        hostPath:
+          path: /var/lib/vector-soc/audit
+          type: DirectoryOrCreate
+      nodeSelector:
+        node-role.kubernetes.io/control-plane: 'true'
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vector-indexer
+  namespace: kafka
+data:
+  vector.yaml: "data_dir: /var/lib/vector\napi:\n  enabled: true\n  address: 0.0.0.0:8686\n\
+    sources:\n  kafka:\n    type: kafka\n    bootstrap_servers: soc-kafka-bootstrap.kafka.svc.cluster.local:9093\n\
+    \    sasl:\n      enabled: true\n      mechanism: SCRAM-SHA-512\n      username:\
+    \ soc-indexer\n      password: ${KAFKA_PASSWORD}\n    tls:\n      enabled: true\n\
+    \      ca_file: /etc/kafka-ca/ca.crt\n      verify_certificate: true\n      verify_hostname:\
+    \ true\n    group_id: soc-indexer\n    topics:\n    - zeek-conn\n    - zeek-dns\n\
+    \    - zeek-http\n    - zeek-notice\n    - zeek-intel\n    - audit-k8s\n    -\
+    \ falco-alerts\n    auto_offset_reset: earliest\n    topic_key: kafka_topic\n\
+    \    decoding:\n      codec: json\n    librdkafka_options:\n      auto.commit.interval.ms:\
+    \ '1000'\n      queued.max.messages.kbytes: '32768'\n      fetch.message.max.bytes:\
+    \ '1048576'\ntransforms:\n  index_route:\n    type: remap\n    inputs:\n    -\
+    \ kafka\n    drop_on_error: true\n    drop_on_abort: true\n    source: |\n   \
+    \   topic = string!(.kafka_topic)\n      if !includes([\"zeek-conn\", \"zeek-dns\"\
+    , \"zeek-http\", \"zeek-notice\", \"zeek-intel\",\n                    \"audit-k8s\"\
+    , \"falco-alerts\"], topic) { abort }\n      .index_prefix = topic\n      # Arbitrary\
+    \ audit bodies have incompatible dotted label/FieldsV1 keys.\n      # Preserve\
+    \ non-secret bodies as JSON strings, not dynamic mapping trees.\n      if topic\
+    \ == \"audit-k8s\" {\n        if .objectRef.resource == \"secrets\" {\n      \
+    \    del(.requestObject)\n          del(.responseObject)\n        } else {\n \
+    \         if exists(.requestObject) { .request_object_json = encode_json(del(.requestObject))\
+    \ }\n          if exists(.responseObject) { .response_object_json = encode_json(del(.responseObject))\
+    \ }\n        }\n      }\n      if !exists(.\"@timestamp\") { .\"@timestamp\" =\
+    \ now() }\n  topic_routes:\n    type: route\n    inputs:\n    - index_route\n\
+    \    route:\n      zeek_conn: .kafka_topic == \"zeek-conn\"\n      zeek_dns: .kafka_topic\
+    \ == \"zeek-dns\"\n      zeek_http: .kafka_topic == \"zeek-http\"\n      zeek_notice:\
+    \ .kafka_topic == \"zeek-notice\"\n      zeek_intel: .kafka_topic == \"zeek-intel\"\
+    \n      audit_k8s: .kafka_topic == \"audit-k8s\"\n      falco_alerts: .kafka_topic\
+    \ == \"falco-alerts\"\nsinks:\n  zeek_conn:\n    type: elasticsearch\n    inputs:\n\
+    \    - topic_routes.zeek_conn\n    endpoints:\n    - https://soc.opensearch.svc.cluster.local:9200\n\
+    \    api_version: v7\n    mode: bulk\n    bulk:\n      action: index\n      index:\
+    \ zeek-conn-%Y.%m.%d\n    auth:\n      strategy: basic\n      user: soc-indexer\n\
+    \      password: ${OPENSEARCH_PASSWORD}\n    tls:\n      ca_file: /etc/opensearch-ca/ca.crt\n\
+    \      verify_certificate: true\n      verify_hostname: true\n    compression:\
+    \ none\n    buffer:\n      type: disk\n      max_size: 268435488\n      when_full:\
+    \ block\n    acknowledgements:\n      enabled: true\n    healthcheck:\n      enabled:\
+    \ true\n    suppress_type_name: true\n    request_retry_partial: true\n  zeek_dns:\n\
+    \    type: elasticsearch\n    inputs:\n    - topic_routes.zeek_dns\n    endpoints:\n\
+    \    - https://soc.opensearch.svc.cluster.local:9200\n    api_version: v7\n  \
+    \  mode: bulk\n    bulk:\n      action: index\n      index: zeek-dns-%Y.%m.%d\n\
+    \    auth:\n      strategy: basic\n      user: soc-indexer\n      password: ${OPENSEARCH_PASSWORD}\n\
+    \    tls:\n      ca_file: /etc/opensearch-ca/ca.crt\n      verify_certificate:\
+    \ true\n      verify_hostname: true\n    compression: none\n    buffer:\n    \
+    \  type: disk\n      max_size: 268435488\n      when_full: block\n    acknowledgements:\n\
+    \      enabled: true\n    healthcheck:\n      enabled: true\n    suppress_type_name:\
+    \ true\n    request_retry_partial: true\n  zeek_http:\n    type: elasticsearch\n\
+    \    inputs:\n    - topic_routes.zeek_http\n    endpoints:\n    - https://soc.opensearch.svc.cluster.local:9200\n\
+    \    api_version: v7\n    mode: bulk\n    bulk:\n      action: index\n      index:\
+    \ zeek-http-%Y.%m.%d\n    auth:\n      strategy: basic\n      user: soc-indexer\n\
+    \      password: ${OPENSEARCH_PASSWORD}\n    tls:\n      ca_file: /etc/opensearch-ca/ca.crt\n\
+    \      verify_certificate: true\n      verify_hostname: true\n    compression:\
+    \ none\n    buffer:\n      type: disk\n      max_size: 268435488\n      when_full:\
+    \ block\n    acknowledgements:\n      enabled: true\n    healthcheck:\n      enabled:\
+    \ true\n    suppress_type_name: true\n    request_retry_partial: true\n  zeek_notice:\n\
+    \    type: elasticsearch\n    inputs:\n    - topic_routes.zeek_notice\n    endpoints:\n\
+    \    - https://soc.opensearch.svc.cluster.local:9200\n    api_version: v7\n  \
+    \  mode: bulk\n    bulk:\n      action: index\n      index: zeek-notice-%Y.%m.%d\n\
+    \    auth:\n      strategy: basic\n      user: soc-indexer\n      password: ${OPENSEARCH_PASSWORD}\n\
+    \    tls:\n      ca_file: /etc/opensearch-ca/ca.crt\n      verify_certificate:\
+    \ true\n      verify_hostname: true\n    compression: none\n    buffer:\n    \
+    \  type: disk\n      max_size: 268435488\n      when_full: block\n    acknowledgements:\n\
+    \      enabled: true\n    healthcheck:\n      enabled: true\n    suppress_type_name:\
+    \ true\n    request_retry_partial: true\n  zeek_intel:\n    type: elasticsearch\n\
+    \    inputs:\n    - topic_routes.zeek_intel\n    endpoints:\n    - https://soc.opensearch.svc.cluster.local:9200\n\
+    \    api_version: v7\n    mode: bulk\n    bulk:\n      action: index\n      index:\
+    \ zeek-intel-%Y.%m.%d\n    auth:\n      strategy: basic\n      user: soc-indexer\n\
+    \      password: ${OPENSEARCH_PASSWORD}\n    tls:\n      ca_file: /etc/opensearch-ca/ca.crt\n\
+    \      verify_certificate: true\n      verify_hostname: true\n    compression:\
+    \ none\n    buffer:\n      type: disk\n      max_size: 268435488\n      when_full:\
+    \ block\n    acknowledgements:\n      enabled: true\n    healthcheck:\n      enabled:\
+    \ true\n    suppress_type_name: true\n    request_retry_partial: true\n  audit_k8s:\n\
+    \    type: elasticsearch\n    inputs:\n    - topic_routes.audit_k8s\n    endpoints:\n\
+    \    - https://soc.opensearch.svc.cluster.local:9200\n    api_version: v7\n  \
+    \  mode: bulk\n    bulk:\n      action: index\n      index: audit-k8s-%Y.%m.%d\n\
+    \    auth:\n      strategy: basic\n      user: soc-indexer\n      password: ${OPENSEARCH_PASSWORD}\n\
+    \    tls:\n      ca_file: /etc/opensearch-ca/ca.crt\n      verify_certificate:\
+    \ true\n      verify_hostname: true\n    compression: none\n    buffer:\n    \
+    \  type: disk\n      max_size: 268435488\n      when_full: block\n    acknowledgements:\n\
+    \      enabled: true\n    healthcheck:\n      enabled: true\n    suppress_type_name:\
+    \ true\n    request_retry_partial: true\n  falco_alerts:\n    type: elasticsearch\n\
+    \    inputs:\n    - topic_routes.falco_alerts\n    endpoints:\n    - https://soc.opensearch.svc.cluster.local:9200\n\
+    \    api_version: v7\n    mode: bulk\n    bulk:\n      action: index\n      index:\
+    \ falco-alerts-%Y.%m.%d\n    auth:\n      strategy: basic\n      user: soc-indexer\n\
+    \      password: ${OPENSEARCH_PASSWORD}\n    tls:\n      ca_file: /etc/opensearch-ca/ca.crt\n\
+    \      verify_certificate: true\n      verify_hostname: true\n    compression:\
+    \ none\n    buffer:\n      type: disk\n      max_size: 268435488\n      when_full:\
+    \ block\n    acknowledgements:\n      enabled: true\n    healthcheck:\n      enabled:\
+    \ true\n    suppress_type_name: true\n    request_retry_partial: true\ntests:\n\
+    - name: audit managedFields dot keys removed\n  inputs:\n  - insert_at: index_route\n\
+    \    type: log\n    log_fields:\n      kafka_topic: audit-k8s\n      requestObject:\n\
+    \        metadata:\n          managedFields:\n          - fieldsV1:\n        \
+    \      '.': {}\n        roleRef:\n          name: cluster-admin\n      responseObject:\n\
+    \        metadata:\n          managedFields:\n          - fieldsV1:\n        \
+    \      '.': {}\n  outputs:\n  - extract_from: index_route\n    conditions:\n \
+    \   - type: vrl\n      source: '!exists(.requestObject) && !exists(.responseObject)\
+    \ && contains!(.request_object_json, \"cluster-admin\") && contains!(.response_object_json,\
+    \ \"fieldsV1\")'\n- name: audit daily prefix\n  inputs:\n  - insert_at: index_route\n\
+    \    type: log\n    log_fields:\n      kafka_topic: audit-k8s\n      auditID:\
+    \ test\n  outputs:\n  - extract_from: index_route\n    conditions:\n    - type:\
+    \ vrl\n      source: .index_prefix == \"audit-k8s\" && exists(.\"@timestamp\"\
+    )\n- name: topic route zeek-conn\n  inputs:\n  - insert_at: topic_routes\n   \
+    \ type: log\n    log_fields:\n      kafka_topic: zeek-conn\n  outputs:\n  - extract_from:\
+    \ topic_routes.zeek_conn\n    conditions:\n    - type: vrl\n      source: .kafka_topic\
+    \ == \"zeek-conn\"\n- name: topic route zeek-dns\n  inputs:\n  - insert_at: topic_routes\n\
+    \    type: log\n    log_fields:\n      kafka_topic: zeek-dns\n  outputs:\n  -\
+    \ extract_from: topic_routes.zeek_dns\n    conditions:\n    - type: vrl\n    \
+    \  source: .kafka_topic == \"zeek-dns\"\n- name: topic route zeek-http\n  inputs:\n\
+    \  - insert_at: topic_routes\n    type: log\n    log_fields:\n      kafka_topic:\
+    \ zeek-http\n  outputs:\n  - extract_from: topic_routes.zeek_http\n    conditions:\n\
+    \    - type: vrl\n      source: .kafka_topic == \"zeek-http\"\n- name: topic route\
+    \ zeek-notice\n  inputs:\n  - insert_at: topic_routes\n    type: log\n    log_fields:\n\
+    \      kafka_topic: zeek-notice\n  outputs:\n  - extract_from: topic_routes.zeek_notice\n\
+    \    conditions:\n    - type: vrl\n      source: .kafka_topic == \"zeek-notice\"\
+    \n- name: topic route zeek-intel\n  inputs:\n  - insert_at: topic_routes\n   \
+    \ type: log\n    log_fields:\n      kafka_topic: zeek-intel\n  outputs:\n  - extract_from:\
+    \ topic_routes.zeek_intel\n    conditions:\n    - type: vrl\n      source: .kafka_topic\
+    \ == \"zeek-intel\"\n- name: topic route audit-k8s\n  inputs:\n  - insert_at:\
+    \ topic_routes\n    type: log\n    log_fields:\n      kafka_topic: audit-k8s\n\
+    \  outputs:\n  - extract_from: topic_routes.audit_k8s\n    conditions:\n    -\
+    \ type: vrl\n      source: .kafka_topic == \"audit-k8s\"\n- name: topic route\
+    \ falco-alerts\n  inputs:\n  - insert_at: topic_routes\n    type: log\n    log_fields:\n\
+    \      kafka_topic: falco-alerts\n  outputs:\n  - extract_from: topic_routes.falco_alerts\n\
+    \    conditions:\n    - type: vrl\n      source: .kafka_topic == \"falco-alerts\"\
+    \n"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vector-indexer
+  namespace: kafka
+spec:
+  selector:
+    matchLabels:
+      app: vector-indexer
+  template:
+    metadata:
+      labels:
+        app: vector-indexer
+      annotations:
+        soc.lab/config-sha256: 5d7517d3cafe4e230249ce324f620eb66794be41f82f601e78d8ab5e7bb06540
+    spec:
+      automountServiceAccountToken: false
+      tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      terminationGracePeriodSeconds: 60
+      containers:
+      - name: vector
+        image: timberio/vector:0.59.0-alpine@sha256:0e36bc2a290039e9b6a5e92f04bd2f133223506f72d09682c1df16c015172b7a
+        args:
+        - --dangerously-allow-env-var-interpolation
+        - --config
+        - /etc/vector/vector.yaml
+        env:
+        - name: VECTOR_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: KAFKA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: soc-indexer
+              key: password
+        - name: OPENSEARCH_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: soc-opensearch-indexer
+              key: password
+        resources:
+          requests:
+            memory: 512Mi
+            cpu: 50m
+          limits:
+            memory: 1Gi
+            cpu: 500m
+        securityContext:
+          runAsUser: 1000
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+        ports:
+        - name: api
+          containerPort: 8686
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: api
+          initialDelaySeconds: 30
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: api
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        volumeMounts:
+        - name: config
+          mountPath: /etc/vector
+          readOnly: true
+        - name: kafka-ca
+          mountPath: /etc/kafka-ca
+          readOnly: true
+        - name: data
+          mountPath: /var/lib/vector
+        - name: opensearch-ca
+          mountPath: /etc/opensearch-ca
+          readOnly: true
+      volumes:
+      - name: config
+        configMap:
+          name: vector-indexer
+      - name: kafka-ca
+        secret:
+          secretName: soc-cluster-ca-cert
+          items:
+          - key: ca.crt
+            path: ca.crt
+      - name: opensearch-ca
+        secret:
+          secretName: soc-opensearch-ca
+      - name: data
+        persistentVolumeClaim:
+          claimName: vector-indexer-buffer
+      securityContext:
+        fsGroup: 1000
+  replicas: 1
+  strategy:
+    type: Recreate
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vector-indexer-buffer
+  namespace: kafka
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 3Gi

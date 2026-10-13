@@ -1,0 +1,89 @@
+{
+  "type": "monitor",
+  "name": "Anonymous Kubernetes API Access Attempt",
+  "monitor_type": "query_level_monitor",
+  "enabled": false,
+  "schedule": {
+    "period": {
+      "interval": 1,
+      "unit": "MINUTES"
+    }
+  },
+  "inputs": [
+    {
+      "search": {
+        "indices": [
+          "audit-k8s-*"
+        ],
+        "query": {
+          "size": 0,
+          "query": {
+            "bool": {
+              "filter": [
+                {
+                  "bool": {
+                    "should": [
+                      {
+                        "term": {
+                          "user.username": "system:anonymous"
+                        }
+                      },
+                      {
+                        "bool": {
+                          "filter": [
+                            {
+                              "term": {
+                                "responseStatus.code": 401
+                              }
+                            }
+                          ],
+                          "must_not": [
+                            {
+                              "exists": {
+                                "field": "user.username"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ],
+                    "minimum_should_match": 1
+                  }
+                },
+                {
+                  "terms": {
+                    "verb": [
+                      "get",
+                      "list"
+                    ]
+                  }
+                },
+                {
+                  "range": {
+                    "@timestamp": {
+                      "gte": "now-5m",
+                      "lte": "now"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "triggers": [
+    {
+      "name": "Lab candidate hit",
+      "severity": "3",
+      "condition": {
+        "script": {
+          "source": "return ctx.results[0].hits.total.value > 0",
+          "lang": "painless"
+        }
+      },
+      "actions": []
+    }
+  ]
+}

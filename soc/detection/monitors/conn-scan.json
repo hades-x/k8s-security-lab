@@ -1,0 +1,109 @@
+{
+  "type": "monitor",
+  "name": "Synthetic Scan Connection Candidate",
+  "monitor_type": "query_level_monitor",
+  "enabled": false,
+  "schedule": {
+    "period": {
+      "interval": 1,
+      "unit": "MINUTES"
+    }
+  },
+  "inputs": [
+    {
+      "search": {
+        "indices": [
+          "zeek-conn-*"
+        ],
+        "query": {
+          "size": 0,
+          "query": {
+            "bool": {
+              "filter": [
+                {
+                  "range": {
+                    "id.resp_p": {
+                      "gte": 2000
+                    }
+                  }
+                },
+                {
+                  "range": {
+                    "id.resp_p": {
+                      "lte": 2019
+                    }
+                  }
+                },
+                {
+                  "term": {
+                    "proto": "tcp"
+                  }
+                },
+                {
+                  "terms": {
+                    "conn_state": [
+                      "REJ",
+                      "S0"
+                    ]
+                  }
+                },
+                {
+                  "range": {
+                    "@timestamp": {
+                      "gte": "now-5m",
+                      "lte": "now"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "aggs": {
+            "sources": {
+              "terms": {
+                "field": "id.orig_h",
+                "size": 100
+              },
+              "aggs": {
+                "targets": {
+                  "terms": {
+                    "field": "id.resp_h",
+                    "size": 100
+                  },
+                  "aggs": {
+                    "ports": {
+                      "cardinality": {
+                        "field": "id.resp_p"
+                      }
+                    },
+                    "scan_threshold": {
+                      "bucket_selector": {
+                        "buckets_path": {
+                          "p": "ports"
+                        },
+                        "script": "params.p >= 12"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "triggers": [
+    {
+      "name": "Lab candidate hit",
+      "severity": "3",
+      "condition": {
+        "script": {
+          "source": "for (def source : ctx.results[0].aggregations.sources.buckets) { if (source.targets.buckets.size() > 0) return true; } return false;",
+          "lang": "painless"
+        }
+      },
+      "actions": []
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: lab-host-isolation
+  annotations:
+    pod-policies.kyverno.io/autogen-controllers: none
+spec:
+  validationFailureAction: Audit
+  background: true
+  rules:
+  - name: no-privileged
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces: &id001
+          - demo
+          - dev
+          - staging
+          - prod
+          - scen-*
+    validate:
+      message: no-privileged is required outside explicit sensor/system exemptions
+      pattern: &id003
+        spec:
+          containers:
+          - name: '*'
+            =(securityContext):
+              =(privileged): false
+          =(initContainers):
+          - name: '*'
+            =(securityContext):
+              =(privileged): false
+          =(ephemeralContainers):
+          - name: '*'
+            =(securityContext):
+              =(privileged): false
+    exclude:
+      any:
+      - resources:
+          namespaces: &id002
+          - kube-system
+          - longhorn-system
+          - cilium
+          - soc-sensors
+          - falco
+          - audits
+          - scenario-s3-audit
+  - name: no-hostpath
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces: *id001
+    validate:
+      message: no-hostpath is required outside explicit sensor/system exemptions
+      pattern: &id004
+        spec:
+          =(volumes):
+          - X(hostPath): 'null'
+    exclude:
+      any:
+      - resources:
+          namespaces: *id002
+  - name: no-hostnetwork
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces: *id001
+    validate:
+      message: no-hostnetwork is required outside explicit sensor/system exemptions
+      pattern: &id005
+        spec:
+          =(hostNetwork): false
+    exclude:
+      any:
+      - resources:
+          namespaces: *id002
+  - name: demo-safe-defaults
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - demo
+          selector:
+            matchLabels:
+              app: demo
+    mutate:
+      patchStrategicMerge:
+        spec:
+          automountServiceAccountToken: false
+          securityContext:
+            +(seccompProfile):
+              type: RuntimeDefault
+          containers:
+          - (name): nginx
+            securityContext:
+              readOnlyRootFilesystem: true
+            volumeMounts:
+            - name: hardening-tmp
+              mountPath: /tmp
+            - name: hardening-cache
+              mountPath: /var/cache/nginx
+            - name: hardening-run
+              mountPath: /var/run
+          volumes:
+          - name: hardening-tmp
+            emptyDir: {}
+          - name: hardening-cache
+            emptyDir: {}
+          - name: hardening-run
+            emptyDir: {}
+  - name: deployment-no-privileged
+    match:
+      any:
+      - resources:
+          kinds:
+          - Deployment
+          namespaces:
+          - demo
+          - dev
+          - staging
+          - prod
+          - scen-*
+    validate:
+      message: no-privileged is required outside explicit sensor/system exemptions
+      pattern:
+        spec:
+          template: *id003
+    exclude:
+      any:
+      - resources:
+          namespaces:
+          - kube-system
+          - longhorn-system
+          - cilium
+          - soc-sensors
+          - falco
+          - audits
+          - scenario-s3-audit
+  - name: deployment-no-hostpath
+    match:
+      any:
+      - resources:
+          kinds:
+          - Deployment
+          namespaces:
+          - demo
+          - dev
+          - staging
+          - prod
+          - scen-*
+    validate:
+      message: no-hostpath is required outside explicit sensor/system exemptions
+      pattern:
+        spec:
+          template: *id004
+    exclude:
+      any:
+      - resources:
+          namespaces:
+          - kube-system
+          - longhorn-system
+          - cilium
+          - soc-sensors
+          - falco
+          - audits
+          - scenario-s3-audit
+  - name: deployment-no-hostnetwork
+    match:
+      any:
+      - resources:
+          kinds:
+          - Deployment
+          namespaces:
+          - demo
+          - dev
+          - staging
+          - prod
+          - scen-*
+    validate:
+      message: no-hostnetwork is required outside explicit sensor/system exemptions
+      pattern:
+        spec:
+          template: *id005
+    exclude:
+      any:
+      - resources:
+          namespaces:
+          - kube-system
+          - longhorn-system
+          - cilium
+          - soc-sensors
+          - falco
+          - audits
+          - scenario-s3-audit

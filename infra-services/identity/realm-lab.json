@@ -1,0 +1,423 @@
+{
+  "realm": "lab",
+  "enabled": true,
+  "sslRequired": "external",
+  "registrationAllowed": false,
+  "resetPasswordAllowed": false,
+  "groups": [
+    {
+      "name": "lab-admins"
+    },
+    {
+      "name": "soc-analysts"
+    },
+    {
+      "name": "devs"
+    }
+  ],
+  "clients": [
+    {
+      "clientId": "grafana",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "secret": "${GRAFANA_CLIENT_SECRET}",
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": [
+        "https://grafana.192.168.150.200.sslip.io/login/generic_oauth"
+      ],
+      "webOrigins": [
+        "https://grafana.192.168.150.200.sslip.io"
+      ],
+      "defaultClientScopes": [
+        "profile",
+        "email",
+        "groups"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256"
+      }
+    },
+    {
+      "clientId": "argocd",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "secret": "${ARGOCD_CLIENT_SECRET}",
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": [
+        "https://argocd.192.168.150.200.sslip.io/auth/callback"
+      ],
+      "webOrigins": [
+        "https://argocd.192.168.150.200.sslip.io"
+      ],
+      "defaultClientScopes": [
+        "profile",
+        "email",
+        "groups"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256"
+      }
+    },
+    {
+      "clientId": "forgejo",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "secret": "${FORGEJO_CLIENT_SECRET}",
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": [
+        "https://forgejo.192.168.150.200.sslip.io/user/oauth2/keycloak/callback"
+      ],
+      "webOrigins": [
+        "https://forgejo.192.168.150.200.sslip.io"
+      ],
+      "defaultClientScopes": [
+        "profile",
+        "email",
+        "groups"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256"
+      }
+    },
+    {
+      "clientId": "opensearch-dashboards",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "secret": "${OPENSEARCH_DASHBOARDS_CLIENT_SECRET}",
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": [
+        "https://opensearch-dashboards.192.168.150.200.sslip.io/auth/openid/login"
+      ],
+      "webOrigins": [
+        "https://opensearch-dashboards.192.168.150.200.sslip.io"
+      ],
+      "defaultClientScopes": [
+        "profile",
+        "email",
+        "groups"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256"
+      }
+    },
+    {
+      "clientId": "lab-cli",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "standardFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "defaultClientScopes": [
+        "profile",
+        "email",
+        "groups"
+      ]
+    }
+  ],
+  "clientScopes": [
+    {
+      "name": "groups",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true"
+      },
+      "protocolMappers": [
+        {
+          "name": "groups",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-group-membership-mapper",
+          "config": {
+            "claim.name": "groups",
+            "full.path": "false",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "profile",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true"
+      },
+      "protocolMappers": [
+        {
+          "name": "username",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-property-mapper",
+          "config": {
+            "user.attribute": "username",
+            "claim.name": "preferred_username",
+            "jsonType.label": "String",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        },
+        {
+          "name": "given name",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-property-mapper",
+          "config": {
+            "user.attribute": "firstName",
+            "claim.name": "given_name",
+            "jsonType.label": "String",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        },
+        {
+          "name": "family name",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-property-mapper",
+          "config": {
+            "user.attribute": "lastName",
+            "claim.name": "family_name",
+            "jsonType.label": "String",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "email",
+      "protocol": "openid-connect",
+      "attributes": {
+        "include.in.token.scope": "true"
+      },
+      "protocolMappers": [
+        {
+          "name": "email",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-property-mapper",
+          "config": {
+            "user.attribute": "email",
+            "claim.name": "email",
+            "jsonType.label": "String",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        },
+        {
+          "name": "email verified",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-property-mapper",
+          "config": {
+            "user.attribute": "emailVerified",
+            "claim.name": "email_verified",
+            "jsonType.label": "boolean",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        }
+      ]
+    }
+  ],
+  "components": {
+    "org.keycloak.storage.UserStorageProvider": [
+      {
+        "id": "lab-ldap",
+        "name": "lab-ldap",
+        "providerId": "ldap",
+        "providerType": "org.keycloak.storage.UserStorageProvider",
+        "config": {
+          "enabled": [
+            "true"
+          ],
+          "priority": [
+            "0"
+          ],
+          "editMode": [
+            "READ_ONLY"
+          ],
+          "vendor": [
+            "other"
+          ],
+          "connectionUrl": [
+            "ldap://openldap.identity.svc.cluster.local:389"
+          ],
+          "usersDn": [
+            "ou=Users,dc=k8slab,dc=lab"
+          ],
+          "bindDn": [
+            "uid=admin,dc=k8slab,dc=lab"
+          ],
+          "bindCredential": [
+            "${LDAP_BIND_PASSWORD}"
+          ],
+          "usernameLDAPAttribute": [
+            "uid"
+          ],
+          "rdnLDAPAttribute": [
+            "uid"
+          ],
+          "uuidLDAPAttribute": [
+            "entryUUID"
+          ],
+          "userObjectClasses": [
+            "inetOrgPerson"
+          ],
+          "importEnabled": [
+            "true"
+          ],
+          "syncRegistrations": [
+            "false"
+          ],
+          "pagination": [
+            "true"
+          ],
+          "searchScope": [
+            "1"
+          ]
+        },
+        "subComponents": {
+          "org.keycloak.storage.ldap.mappers.LDAPStorageMapper": [
+            {
+              "name": "groups",
+              "providerId": "group-ldap-mapper",
+              "providerType": "org.keycloak.storage.ldap.mappers.LDAPStorageMapper",
+              "config": {
+                "groups.dn": [
+                  "ou=Groups,dc=k8slab,dc=lab"
+                ],
+                "group.name.ldap.attribute": [
+                  "cn"
+                ],
+                "group.object.classes": [
+                  "groupOfNames"
+                ],
+                "preserve.group.inheritance": [
+                  "false"
+                ],
+                "membership.ldap.attribute": [
+                  "member"
+                ],
+                "membership.attribute.type": [
+                  "DN"
+                ],
+                "membership.user.ldap.attribute": [
+                  "uid"
+                ],
+                "mode": [
+                  "READ_ONLY"
+                ],
+                "user.roles.retrieve.strategy": [
+                  "LOAD_GROUPS_BY_MEMBER_ATTRIBUTE"
+                ],
+                "groups.path": [
+                  "/"
+                ],
+                "drop.non.existing.groups.during.sync": [
+                  "false"
+                ]
+              }
+            },
+            {
+              "name": "username",
+              "providerId": "user-attribute-ldap-mapper",
+              "providerType": "org.keycloak.storage.ldap.mappers.LDAPStorageMapper",
+              "config": {
+                "user.model.attribute": [
+                  "username"
+                ],
+                "ldap.attribute": [
+                  "uid"
+                ],
+                "read.only": [
+                  "true"
+                ],
+                "always.read.value.from.ldap": [
+                  "true"
+                ],
+                "is.mandatory.in.ldap": [
+                  "true"
+                ]
+              }
+            },
+            {
+              "name": "email",
+              "providerId": "user-attribute-ldap-mapper",
+              "providerType": "org.keycloak.storage.ldap.mappers.LDAPStorageMapper",
+              "config": {
+                "user.model.attribute": [
+                  "email"
+                ],
+                "ldap.attribute": [
+                  "mail"
+                ],
+                "read.only": [
+                  "true"
+                ],
+                "always.read.value.from.ldap": [
+                  "true"
+                ],
+                "is.mandatory.in.ldap": [
+                  "false"
+                ]
+              }
+            },
+            {
+              "name": "first name",
+              "providerId": "user-attribute-ldap-mapper",
+              "providerType": "org.keycloak.storage.ldap.mappers.LDAPStorageMapper",
+              "config": {
+                "user.model.attribute": [
+                  "firstName"
+                ],
+                "ldap.attribute": [
+                  "givenName"
+                ],
+                "read.only": [
+                  "true"
+                ],
+                "always.read.value.from.ldap": [
+                  "true"
+                ],
+                "is.mandatory.in.ldap": [
+                  "false"
+                ]
+              }
+            },
+            {
+              "name": "last name",
+              "providerId": "user-attribute-ldap-mapper",
+              "providerType": "org.keycloak.storage.ldap.mappers.LDAPStorageMapper",
+              "config": {
+                "user.model.attribute": [
+                  "lastName"
+                ],
+                "ldap.attribute": [
+                  "sn"
+                ],
+                "read.only": [
+                  "true"
+                ],
+                "always.read.value.from.ldap": [
+                  "true"
+                ],
+                "is.mandatory.in.ldap": [
+                  "false"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

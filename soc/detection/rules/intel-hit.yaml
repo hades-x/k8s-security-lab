@@ -1,0 +1,21 @@
+title: MISP Synthetic Indicator Seen By Zeek
+id: 96b8005d-26d3-514c-8a7c-bc0bcd025288
+status: experimental
+description: Lab-only detection. Validate false positives and mappings before non-lab
+  use.
+author: K8S-LAB preparation
+date: '2026-10-13'
+tags:
+- attack.t1071.004
+logsource:
+  product: zeek
+  service: intel
+detection:
+  selection:
+    seen.indicator:
+    - ioc.evil-c2.lab.test
+    - 192.168.150.22
+  condition: selection
+falsepositives:
+- Legitimate lab administration or synthetic traffic.
+level: medium

@@ -1,0 +1,59 @@
+{
+  "type": "monitor",
+  "name": "MISP Synthetic Indicator Seen By Zeek",
+  "monitor_type": "query_level_monitor",
+  "enabled": false,
+  "schedule": {
+    "period": {
+      "interval": 1,
+      "unit": "MINUTES"
+    }
+  },
+  "inputs": [
+    {
+      "search": {
+        "indices": [
+          "zeek-intel-*"
+        ],
+        "query": {
+          "size": 0,
+          "query": {
+            "bool": {
+              "filter": [
+                {
+                  "terms": {
+                    "seen.indicator": [
+                      "ioc.evil-c2.lab.test",
+                      "192.168.150.22"
+                    ]
+                  }
+                },
+                {
+                  "range": {
+                    "@timestamp": {
+                      "gte": "now-5m",
+                      "lte": "now"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "triggers": [
+    {
+      "name": "Lab candidate hit",
+      "severity": "3",
+      "condition": {
+        "script": {
+          "source": "return ctx.results[0].hits.total.value > 0",
+          "lang": "painless"
+        }
+      },
+      "actions": []
+    }
+  ]
+}

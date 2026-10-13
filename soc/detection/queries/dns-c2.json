@@ -1,0 +1,22 @@
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "wildcard": {
+            "query": "*.evil-c2.lab.test"
+          }
+        },
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "now-5m",
+              "lte": "now"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

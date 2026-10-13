@@ -1,0 +1,284 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: good
+  namespace: demo
+spec:
+  automountServiceAccountToken: false
+  containers:
+  - name: app
+    image: docker.io/library/busybox:1.37.0@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e
+    securityContext:
+      privileged: false
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        cpu: 100m
+        memory: 64Mi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bad-no-privileged
+  namespace: demo
+spec:
+  automountServiceAccountToken: false
+  containers:
+  - name: app
+    image: docker.io/library/busybox:1.37.0@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e
+    securityContext:
+      privileged: true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        cpu: 100m
+        memory: 64Mi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bad-no-hostpath
+  namespace: demo
+spec:
+  automountServiceAccountToken: false
+  containers:
+  - name: app
+    image: docker.io/library/busybox:1.37.0@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e
+    securityContext:
+      privileged: false
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        cpu: 100m
+        memory: 64Mi
+  volumes:
+  - name: host
+    hostPath:
+      path: /
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bad-no-hostnetwork
+  namespace: demo
+spec:
+  automountServiceAccountToken: false
+  containers:
+  - name: app
+    image: docker.io/library/busybox:1.37.0@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e
+    securityContext:
+      privileged: false
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        cpu: 100m
+        memory: 64Mi
+  hostNetwork: true
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bad-requests-limits
+  namespace: demo
+spec:
+  automountServiceAccountToken: false
+  containers:
+  - name: app
+    image: docker.io/library/busybox:1.37.0@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e
+    securityContext:
+      privileged: false
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bad-registries
+  namespace: demo
+spec:
+  automountServiceAccountToken: false
+  containers:
+  - name: app
+    image: evil.invalid/payload:1.0
+    securityContext:
+      privileged: false
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        cpu: 100m
+        memory: 64Mi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bad-no-latest-or-implicit
+  namespace: demo
+spec:
+  automountServiceAccountToken: false
+  containers:
+  - name: app
+    image: docker.io/library/busybox:latest
+    securityContext:
+      privileged: false
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        cpu: 100m
+        memory: 64Mi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bad-no-automount
+  namespace: demo
+spec:
+  containers:
+  - name: app
+    image: docker.io/library/busybox:1.37.0@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e
+    securityContext:
+      privileged: false
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        cpu: 100m
+        memory: 64Mi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bad-initcontainers
+  namespace: demo
+spec:
+  automountServiceAccountToken: false
+  containers:
+  - name: app
+    image: docker.io/library/busybox:1.37.0@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e
+    securityContext:
+      privileged: false
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        cpu: 100m
+        memory: 64Mi
+  initContainers:
+  - name: debug
+    image: docker.io/library/busybox:1.37.0@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e
+    securityContext:
+      privileged: true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        cpu: 100m
+        memory: 64Mi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bad-ephemeralcontainers
+  namespace: demo
+spec:
+  automountServiceAccountToken: false
+  containers:
+  - name: app
+    image: docker.io/library/busybox:1.37.0@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e
+    securityContext:
+      privileged: false
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        cpu: 100m
+        memory: 64Mi
+  ephemeralContainers:
+  - name: debug
+    image: docker.io/library/busybox:1.37.0@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e
+    securityContext:
+      privileged: true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        cpu: 100m
+        memory: 64Mi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bad-implicit
+  namespace: demo
+spec:
+  automountServiceAccountToken: false
+  containers:
+  - name: app
+    image: docker.io/library/busybox
+    securityContext:
+      privileged: false
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        cpu: 100m
+        memory: 64Mi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bad-latest-digest
+  namespace: demo
+spec:
+  automountServiceAccountToken: false
+  containers:
+  - name: app
+    image: docker.io/library/busybox:latest@sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    securityContext:
+      privileged: false
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        cpu: 100m
+        memory: 64Mi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: exempt-privileged
+  namespace: soc-sensors
+spec:
+  automountServiceAccountToken: false
+  containers:
+  - name: app
+    image: docker.io/library/busybox:1.37.0@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e
+    securityContext:
+      privileged: true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        cpu: 100m
+        memory: 64Mi

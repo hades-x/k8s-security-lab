@@ -1,0 +1,40 @@
+fullnameOverride: falcosidekick
+replicaCount: 1
+image:
+  tag: 2.35.0@sha256:216ddb75229dcbf78cf57b1cf2140bd1b9092fcd72e4fd20b4d3057395d6765b
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: '1'
+    memory: 128Mi
+config:
+  kafka:
+    hostport: soc-kafka-bootstrap.kafka.svc:9093
+    topic: falco-alerts
+    sasl: SCRAM_SHA512
+    tls: true
+    username: falcosidekick
+    requiredacks: ALL
+    compression: NONE
+    balancer: round_robin
+    topiccreation: false
+  extraEnv:
+  - name: KAFKA_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: falcosidekick-kafka
+        key: password
+  - name: SSL_CERT_FILE
+    value: /kafka-ca/ca.crt
+extraVolumes:
+- name: kafka-ca
+  secret:
+    secretName: soc-kafka-ca
+extraVolumeMounts:
+- name: kafka-ca
+  mountPath: /kafka-ca
+  readOnly: true
+webui:
+  enabled: false

@@ -1,0 +1,14 @@
+config:
+  opensearch_dashboards.yml: 'opensearch_security.auth.type: openid
+
+    opensearch_security.openid.connect_url: https://keycloak.192.168.150.200.sslip.io/realms/lab/.well-known/openid-configuration
+
+    opensearch_security.openid.client_id: opensearch-dashboards
+
+    opensearch_security.openid.client_secret: ${OPENSEARCH_DASHBOARDS_CLIENT_SECRET}
+
+    opensearch_security.openid.base_redirect_url: https://opensearch-dashboards.192.168.150.200.sslip.io
+
+    opensearch_security.openid.root_ca: /etc/lab/root_ca.crt
+
+    '

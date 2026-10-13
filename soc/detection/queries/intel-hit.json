@@ -1,0 +1,25 @@
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "terms": {
+            "seen.indicator": [
+              "ioc.evil-c2.lab.test",
+              "192.168.150.22"
+            ]
+          }
+        },
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "now-5m",
+              "lte": "now"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,23 @@
+_meta:
+  type: config
+  config_version: 2
+config:
+  dynamic:
+    authc:
+      openid_auth_domain:
+        http_enabled: true
+        transport_enabled: false
+        order: 0
+        http_authenticator:
+          type: openid
+          challenge: false
+          config:
+            subject_key: preferred_username
+            roles_key: groups
+            openid_connect_url: https://keycloak.192.168.150.200.sslip.io/realms/lab/.well-known/openid-configuration
+            openid_connect_idp:
+              enable_ssl: true
+              verify_hostnames: true
+              pemtrustedcas_filepath: /etc/lab/root_ca.crt
+        authentication_backend:
+          type: noop

@@ -1,0 +1,32 @@
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "term": {
+            "verb": "create"
+          }
+        },
+        {
+          "term": {
+            "objectRef.resource": "pods"
+          }
+        },
+        {
+          "term": {
+            "objectRef.namespace": "soc-detection"
+          }
+        },
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "now-5m",
+              "lte": "now"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

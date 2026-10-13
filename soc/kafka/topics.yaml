@@ -1,0 +1,111 @@
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  name: zeek-conn
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: soc
+spec:
+  partitions: 3
+  replicas: 3
+  config:
+    min.insync.replicas: 2
+    retention.ms: 86400000
+    retention.bytes: 268435456
+    segment.bytes: 67108864
+---
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  name: zeek-dns
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: soc
+spec:
+  partitions: 3
+  replicas: 3
+  config:
+    min.insync.replicas: 2
+    retention.ms: 86400000
+    retention.bytes: 268435456
+    segment.bytes: 67108864
+---
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  name: zeek-http
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: soc
+spec:
+  partitions: 3
+  replicas: 3
+  config:
+    min.insync.replicas: 2
+    retention.ms: 86400000
+    retention.bytes: 268435456
+    segment.bytes: 67108864
+---
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  name: zeek-notice
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: soc
+spec:
+  partitions: 3
+  replicas: 3
+  config:
+    min.insync.replicas: 2
+    retention.ms: 86400000
+    retention.bytes: 268435456
+    segment.bytes: 67108864
+---
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  name: zeek-intel
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: soc
+spec:
+  partitions: 3
+  replicas: 3
+  config:
+    min.insync.replicas: 2
+    retention.ms: 86400000
+    retention.bytes: 268435456
+    segment.bytes: 67108864
+---
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  name: audit-k8s
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: soc
+spec:
+  partitions: 3
+  replicas: 3
+  config:
+    min.insync.replicas: 2
+    retention.ms: 86400000
+    retention.bytes: 268435456
+    segment.bytes: 67108864
+---
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaTopic
+metadata:
+  name: falco-alerts
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: soc
+spec:
+  partitions: 3
+  replicas: 3
+  config:
+    min.insync.replicas: 2
+    retention.ms: 86400000
+    retention.bytes: 268435456
+    segment.bytes: 67108864

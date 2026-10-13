@@ -1,0 +1,4 @@
+falco docker.io/falcosecurity/falco:0.45.0@sha256:788f1129c542171813083d4afc61b16730a47dde8c23d9c39370acef996349b6
+falcosidekick docker.io/falcosecurity/falcosidekick:2.35.0@sha256:216ddb75229dcbf78cf57b1cf2140bd1b9092fcd72e4fd20b4d3057395d6765b
+falco chart 9.2.0
+falcosidekick chart 0.14.0

@@ -1,0 +1,64 @@
+global:
+  domain: argocd.192.168.150.200.sslip.io
+configs:
+  params:
+    server.insecure: true
+  cm:
+    url: https://argocd.192.168.150.200.sslip.io
+    oidc.config: "clientID: argocd\nclientSecret: $oidc.keycloak.clientSecret\nissuer:\
+      \ https://keycloak.192.168.150.200.sslip.io/realms/lab\nname: Keycloak\nrequestedScopes:\n\
+      - openid\n- profile\n- email\n- groups\nrootCA: 'REGENERATE_LAB_TRUST_MATERIAL\n\n\
+      \  '\nenablePKCEAuthentication: true\n"
+  rbac:
+    policy.csv: 'g, lab-admins, role:admin
+
+      '
+    policy.default: role:readonly
+    scopes: '[groups]'
+server:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: '1'
+      memory: 512Mi
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    annotations:
+      cert-manager.io/cluster-issuer: lab-acme
+    tls: true
+controller:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: '1'
+      memory: 1Gi
+repoServer:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: '1'
+      memory: 512Mi
+redis:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
+dex:
+  enabled: false
+notifications:
+  enabled: false
+applicationSet:
+  enabled: false

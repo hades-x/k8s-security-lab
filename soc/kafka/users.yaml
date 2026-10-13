@@ -1,0 +1,159 @@
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaUser
+metadata:
+  name: zeek-shipper
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: soc
+spec:
+  authentication:
+    type: scram-sha-512
+  authorization:
+    type: simple
+    acls:
+    - resource:
+        type: topic
+        name: zeek-
+        patternType: prefix
+      operations:
+      - Write
+      - Describe
+      host: '*'
+  quotas:
+    producerByteRate: 1048576
+    consumerByteRate: 1024
+    requestPercentage: 25
+---
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaUser
+metadata:
+  name: audit-shipper
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: soc
+spec:
+  authentication:
+    type: scram-sha-512
+  authorization:
+    type: simple
+    acls:
+    - resource:
+        type: topic
+        name: audit-k8s
+        patternType: literal
+      operations:
+      - Write
+      - Describe
+      host: '*'
+  quotas:
+    producerByteRate: 1048576
+    consumerByteRate: 1024
+    requestPercentage: 25
+---
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaUser
+metadata:
+  name: falcosidekick
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: soc
+spec:
+  authentication:
+    type: scram-sha-512
+  authorization:
+    type: simple
+    acls:
+    - resource:
+        type: topic
+        name: falco-alerts
+        patternType: literal
+      operations:
+      - Write
+      - Describe
+      host: '*'
+  quotas:
+    producerByteRate: 1048576
+    consumerByteRate: 1024
+    requestPercentage: 25
+---
+apiVersion: kafka.strimzi.io/v1
+kind: KafkaUser
+metadata:
+  name: soc-indexer
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: soc
+spec:
+  authentication:
+    type: scram-sha-512
+  authorization:
+    type: simple
+    acls:
+    - resource:
+        type: topic
+        name: zeek-conn
+        patternType: literal
+      operations:
+      - Read
+      - Describe
+      host: '*'
+    - resource:
+        type: topic
+        name: zeek-dns
+        patternType: literal
+      operations:
+      - Read
+      - Describe
+      host: '*'
+    - resource:
+        type: topic
+        name: zeek-http
+        patternType: literal
+      operations:
+      - Read
+      - Describe
+      host: '*'
+    - resource:
+        type: topic
+        name: zeek-notice
+        patternType: literal
+      operations:
+      - Read
+      - Describe
+      host: '*'
+    - resource:
+        type: topic
+        name: zeek-intel
+        patternType: literal
+      operations:
+      - Read
+      - Describe
+      host: '*'
+    - resource:
+        type: topic
+        name: audit-k8s
+        patternType: literal
+      operations:
+      - Read
+      - Describe
+      host: '*'
+    - resource:
+        type: topic
+        name: falco-alerts
+        patternType: literal
+      operations:
+      - Read
+      - Describe
+      host: '*'
+    - resource:
+        type: group
+        name: soc-indexer
+        patternType: literal
+      operations:
+      - Read
+      - Describe
+      host: '*'
+  quotas:
+    producerByteRate: 1024
+    consumerByteRate: 4194304
+    requestPercentage: 25

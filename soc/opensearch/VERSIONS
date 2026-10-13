@@ -1,0 +1,12 @@
+# Resolved 2026-10-13; chart and operator app versions are distinct.
+OPERATOR_CHART_VERSION=3.0.14
+OPERATOR_VERSION=3.0.0
+OPENSEARCH_VERSION=3.9.0
+OPENSEARCH_IMAGE=opensearchproject/opensearch:3.9.0@sha256:adfa61f85025d06b4aeb562e7e74fde7e31c437039c93c3862c17e9acebd6c7c
+DASHBOARDS_IMAGE=opensearchproject/opensearch-dashboards:3.9.0@sha256:4bdb8ded547ce7f4c379a10261f1b4aad58726900c215be570a7d1fe86f2a7d8
+OPERATOR_IMAGE=opensearchproject/opensearch-operator:3.0.0@sha256:99d4fb8144cd3555dcf0c2f5a9f89b310c43293227f2244e0aad05f7343d10d9
+BUSYBOX_IMAGE=docker.io/library/busybox:1.37.0@sha256:bdf57e528e45e4433820e045b29b4597825a1c9e38353532d90a01445013f82e
+CHART_URL=https://github.com/opensearch-project/opensearch-k8s-operator/releases/download/opensearch-operator-3.0.14/opensearch-operator-3.0.14.tgz
+CHART_SHA256=0327d449ab61e112e0c13d54408bef396706c500cbf9211da965aa3ae94f9a68
+# https://opensearch-project.github.io/opensearch-k8s-operator/index.yaml
+# https://github.com/opensearch-project/OpenSearch/releases/tag/3.9.0

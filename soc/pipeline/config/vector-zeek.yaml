@@ -1,0 +1,126 @@
+data_dir: /var/lib/vector
+api:
+  enabled: true
+  address: 0.0.0.0:8686
+sources:
+  zeek:
+    type: file
+    include:
+    - /var/log/zeek/current/*.log
+    read_from: beginning
+    max_line_bytes: 1048576
+transforms:
+  parse_zeek:
+    type: remap
+    inputs:
+    - zeek
+    drop_on_error: true
+    drop_on_abort: true
+    source: 'file = string!(.file)
+
+      . = object!(parse_json!(string!(.message)))
+
+      parts = split(file, "/")
+
+      .log_type = replace(string!(parts[-1]), r''\.log$'', "")
+
+      if !includes(["conn", "dns", "http", "notice", "intel"], .log_type) { abort
+      }
+
+      .node = get_env_var!("VECTOR_NODE_NAME")
+
+      .sensor = "zeek-" + .node
+
+      if exists(.id) && !is_object(.id) { .zeek_id = del(.id) }
+
+      # Zeek''s JSON keys are dotted: normalize into an id object for IP mappings.
+
+      if exists(."id.orig_h") { .id.orig_h = del(."id.orig_h") }
+
+      if exists(."id.resp_h") { .id.resp_h = del(."id.resp_h") }
+
+      if exists(."id.orig_p") { .id.orig_p = del(."id.orig_p") }
+
+      if exists(."id.resp_p") { .id.resp_p = del(."id.resp_p") }
+
+      ."@timestamp" = from_unix_timestamp!(to_int(to_float!(.ts) * 1000.0), unit:
+      "milliseconds")
+
+      '
+sinks:
+  kafka:
+    type: kafka
+    inputs:
+    - parse_zeek
+    bootstrap_servers: soc-kafka-bootstrap.kafka.svc.cluster.local:9093
+    sasl:
+      enabled: true
+      mechanism: SCRAM-SHA-512
+      username: zeek-shipper
+      password: ${KAFKA_PASSWORD}
+    tls:
+      enabled: true
+      ca_file: /etc/kafka-ca/ca.crt
+      verify_certificate: true
+      verify_hostname: true
+    topic: zeek-{{ log_type }}
+    encoding:
+      codec: json
+    compression: lz4
+    librdkafka_options:
+      enable.idempotence: 'false'
+      acks: all
+      message.timeout.ms: '300000'
+      queue.buffering.max.kbytes: '16384'
+      queue.buffering.max.messages: '10000'
+    buffer:
+      type: disk
+      max_size: 268435488
+      when_full: block
+    acknowledgements:
+      enabled: true
+tests:
+- name: conn dotted IP mapping
+  inputs:
+  - insert_at: parse_zeek
+    type: log
+    log_fields:
+      file: /var/log/zeek/current/conn.log
+      message: '{"ts": 1760000000.125, "uid": "C1", "id.orig_h": "192.168.150.11",
+        "id.resp_h": "192.168.150.12", "id.orig_p": 12345, "id.resp_p": 443}'
+  outputs:
+  - extract_from: parse_zeek
+    conditions:
+    - type: vrl
+      source: .log_type == "conn" && .id.orig_h == "192.168.150.11" && .id.orig_p
+        == 12345 && .node == "validation-node"
+- name: scalar intel id renamed
+  inputs:
+  - insert_at: parse_zeek
+    type: log
+    log_fields:
+      file: /var/log/zeek/current/intel.log
+      message: '{"ts":1760000000,"id":"misp-42"}'
+  outputs:
+  - extract_from: parse_zeek
+    conditions:
+    - type: vrl
+      source: .zeek_id == "misp-42" && !exists(.id) && .log_type == "intel"
+- name: unknown log dropped
+  inputs:
+  - insert_at: parse_zeek
+    type: log
+    log_fields:
+      file: /var/log/zeek/current/files.log
+      message: '{"ts":1760000000}'
+  no_outputs_from:
+  - parse_zeek
+- name: Malformed JSON dropped
+  inputs:
+  - insert_at: parse_zeek
+    type: log
+    log_fields:
+      file: /var/log/zeek/current/conn.log
+      message: not-json
+  no_outputs_from:
+  - parse_zeek

@@ -1,0 +1,15 @@
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: quarantine
+  namespace: demo
+spec:
+  endpointSelector:
+    matchLabels:
+      quarantine: 'true'
+  ingressDeny:
+  - fromEntities:
+    - all
+  egressDeny:
+  - toEntities:
+    - all

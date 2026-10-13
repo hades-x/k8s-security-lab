@@ -1,0 +1,37 @@
+crds:
+  enabled: true
+config:
+  apiVersion: controller.config.cert-manager.io/v1alpha1
+  kind: ControllerConfiguration
+  enableGatewayAPI: true
+resources:
+  requests:
+    cpu: 50m
+    memory: 48Mi
+  limits:
+    cpu: 300m
+    memory: 96Mi
+webhook:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 32Mi
+    limits:
+      cpu: 300m
+      memory: 64Mi
+cainjector:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 32Mi
+    limits:
+      cpu: 300m
+      memory: 64Mi
+startupapicheck:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 16Mi
+    limits:
+      cpu: 300m
+      memory: 48Mi

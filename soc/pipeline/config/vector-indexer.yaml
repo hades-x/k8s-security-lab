@@ -1,0 +1,395 @@
+data_dir: /var/lib/vector
+api:
+  enabled: true
+  address: 0.0.0.0:8686
+sources:
+  kafka:
+    type: kafka
+    bootstrap_servers: soc-kafka-bootstrap.kafka.svc.cluster.local:9093
+    sasl:
+      enabled: true
+      mechanism: SCRAM-SHA-512
+      username: soc-indexer
+      password: ${KAFKA_PASSWORD}
+    tls:
+      enabled: true
+      ca_file: /etc/kafka-ca/ca.crt
+      verify_certificate: true
+      verify_hostname: true
+    group_id: soc-indexer
+    topics:
+    - zeek-conn
+    - zeek-dns
+    - zeek-http
+    - zeek-notice
+    - zeek-intel
+    - audit-k8s
+    - falco-alerts
+    auto_offset_reset: earliest
+    topic_key: kafka_topic
+    decoding:
+      codec: json
+    librdkafka_options:
+      auto.commit.interval.ms: '1000'
+      queued.max.messages.kbytes: '32768'
+      fetch.message.max.bytes: '1048576'
+transforms:
+  index_route:
+    type: remap
+    inputs:
+    - kafka
+    drop_on_error: true
+    drop_on_abort: true
+    source: |
+      topic = string!(.kafka_topic)
+      if !includes(["zeek-conn", "zeek-dns", "zeek-http", "zeek-notice", "zeek-intel",
+                    "audit-k8s", "falco-alerts"], topic) { abort }
+      .index_prefix = topic
+      # Arbitrary audit bodies have incompatible dotted label/FieldsV1 keys.
+      # Preserve non-secret bodies as JSON strings, not dynamic mapping trees.
+      if topic == "audit-k8s" {
+        if .objectRef.resource == "secrets" {
+          del(.requestObject)
+          del(.responseObject)
+        } else {
+          if exists(.requestObject) { .request_object_json = encode_json(del(.requestObject)) }
+          if exists(.responseObject) { .response_object_json = encode_json(del(.responseObject)) }
+        }
+      }
+      if !exists(."@timestamp") { ."@timestamp" = now() }
+  topic_routes:
+    type: route
+    inputs:
+    - index_route
+    route:
+      zeek_conn: .kafka_topic == "zeek-conn"
+      zeek_dns: .kafka_topic == "zeek-dns"
+      zeek_http: .kafka_topic == "zeek-http"
+      zeek_notice: .kafka_topic == "zeek-notice"
+      zeek_intel: .kafka_topic == "zeek-intel"
+      audit_k8s: .kafka_topic == "audit-k8s"
+      falco_alerts: .kafka_topic == "falco-alerts"
+sinks:
+  zeek_conn:
+    type: elasticsearch
+    inputs:
+    - topic_routes.zeek_conn
+    endpoints:
+    - https://soc.opensearch.svc.cluster.local:9200
+    api_version: v7
+    mode: bulk
+    bulk:
+      action: index
+      index: zeek-conn-%Y.%m.%d
+    auth:
+      strategy: basic
+      user: soc-indexer
+      password: ${OPENSEARCH_PASSWORD}
+    tls:
+      ca_file: /etc/opensearch-ca/ca.crt
+      verify_certificate: true
+      verify_hostname: true
+    compression: none
+    buffer:
+      type: disk
+      max_size: 268435488
+      when_full: block
+    acknowledgements:
+      enabled: true
+    healthcheck:
+      enabled: true
+    suppress_type_name: true
+    request_retry_partial: true
+  zeek_dns:
+    type: elasticsearch
+    inputs:
+    - topic_routes.zeek_dns
+    endpoints:
+    - https://soc.opensearch.svc.cluster.local:9200
+    api_version: v7
+    mode: bulk
+    bulk:
+      action: index
+      index: zeek-dns-%Y.%m.%d
+    auth:
+      strategy: basic
+      user: soc-indexer
+      password: ${OPENSEARCH_PASSWORD}
+    tls:
+      ca_file: /etc/opensearch-ca/ca.crt
+      verify_certificate: true
+      verify_hostname: true
+    compression: none
+    buffer:
+      type: disk
+      max_size: 268435488
+      when_full: block
+    acknowledgements:
+      enabled: true
+    healthcheck:
+      enabled: true
+    suppress_type_name: true
+    request_retry_partial: true
+  zeek_http:
+    type: elasticsearch
+    inputs:
+    - topic_routes.zeek_http
+    endpoints:
+    - https://soc.opensearch.svc.cluster.local:9200
+    api_version: v7
+    mode: bulk
+    bulk:
+      action: index
+      index: zeek-http-%Y.%m.%d
+    auth:
+      strategy: basic
+      user: soc-indexer
+      password: ${OPENSEARCH_PASSWORD}
+    tls:
+      ca_file: /etc/opensearch-ca/ca.crt
+      verify_certificate: true
+      verify_hostname: true
+    compression: none
+    buffer:
+      type: disk
+      max_size: 268435488
+      when_full: block
+    acknowledgements:
+      enabled: true
+    healthcheck:
+      enabled: true
+    suppress_type_name: true
+    request_retry_partial: true
+  zeek_notice:
+    type: elasticsearch
+    inputs:
+    - topic_routes.zeek_notice
+    endpoints:
+    - https://soc.opensearch.svc.cluster.local:9200
+    api_version: v7
+    mode: bulk
+    bulk:
+      action: index
+      index: zeek-notice-%Y.%m.%d
+    auth:
+      strategy: basic
+      user: soc-indexer
+      password: ${OPENSEARCH_PASSWORD}
+    tls:
+      ca_file: /etc/opensearch-ca/ca.crt
+      verify_certificate: true
+      verify_hostname: true
+    compression: none
+    buffer:
+      type: disk
+      max_size: 268435488
+      when_full: block
+    acknowledgements:
+      enabled: true
+    healthcheck:
+      enabled: true
+    suppress_type_name: true
+    request_retry_partial: true
+  zeek_intel:
+    type: elasticsearch
+    inputs:
+    - topic_routes.zeek_intel
+    endpoints:
+    - https://soc.opensearch.svc.cluster.local:9200
+    api_version: v7
+    mode: bulk
+    bulk:
+      action: index
+      index: zeek-intel-%Y.%m.%d
+    auth:
+      strategy: basic
+      user: soc-indexer
+      password: ${OPENSEARCH_PASSWORD}
+    tls:
+      ca_file: /etc/opensearch-ca/ca.crt
+      verify_certificate: true
+      verify_hostname: true
+    compression: none
+    buffer:
+      type: disk
+      max_size: 268435488
+      when_full: block
+    acknowledgements:
+      enabled: true
+    healthcheck:
+      enabled: true
+    suppress_type_name: true
+    request_retry_partial: true
+  audit_k8s:
+    type: elasticsearch
+    inputs:
+    - topic_routes.audit_k8s
+    endpoints:
+    - https://soc.opensearch.svc.cluster.local:9200
+    api_version: v7
+    mode: bulk
+    bulk:
+      action: index
+      index: audit-k8s-%Y.%m.%d
+    auth:
+      strategy: basic
+      user: soc-indexer
+      password: ${OPENSEARCH_PASSWORD}
+    tls:
+      ca_file: /etc/opensearch-ca/ca.crt
+      verify_certificate: true
+      verify_hostname: true
+    compression: none
+    buffer:
+      type: disk
+      max_size: 268435488
+      when_full: block
+    acknowledgements:
+      enabled: true
+    healthcheck:
+      enabled: true
+    suppress_type_name: true
+    request_retry_partial: true
+  falco_alerts:
+    type: elasticsearch
+    inputs:
+    - topic_routes.falco_alerts
+    endpoints:
+    - https://soc.opensearch.svc.cluster.local:9200
+    api_version: v7
+    mode: bulk
+    bulk:
+      action: index
+      index: falco-alerts-%Y.%m.%d
+    auth:
+      strategy: basic
+      user: soc-indexer
+      password: ${OPENSEARCH_PASSWORD}
+    tls:
+      ca_file: /etc/opensearch-ca/ca.crt
+      verify_certificate: true
+      verify_hostname: true
+    compression: none
+    buffer:
+      type: disk
+      max_size: 268435488
+      when_full: block
+    acknowledgements:
+      enabled: true
+    healthcheck:
+      enabled: true
+    suppress_type_name: true
+    request_retry_partial: true
+tests:
+- name: audit managedFields dot keys removed
+  inputs:
+  - insert_at: index_route
+    type: log
+    log_fields:
+      kafka_topic: audit-k8s
+      requestObject:
+        metadata:
+          managedFields:
+          - fieldsV1:
+              '.': {}
+        roleRef:
+          name: cluster-admin
+      responseObject:
+        metadata:
+          managedFields:
+          - fieldsV1:
+              '.': {}
+  outputs:
+  - extract_from: index_route
+    conditions:
+    - type: vrl
+      source: '!exists(.requestObject) && !exists(.responseObject) && contains!(.request_object_json, "cluster-admin") && contains!(.response_object_json, "fieldsV1")'
+- name: audit daily prefix
+  inputs:
+  - insert_at: index_route
+    type: log
+    log_fields:
+      kafka_topic: audit-k8s
+      auditID: test
+  outputs:
+  - extract_from: index_route
+    conditions:
+    - type: vrl
+      source: .index_prefix == "audit-k8s" && exists(."@timestamp")
+- name: topic route zeek-conn
+  inputs:
+  - insert_at: topic_routes
+    type: log
+    log_fields:
+      kafka_topic: zeek-conn
+  outputs:
+  - extract_from: topic_routes.zeek_conn
+    conditions:
+    - type: vrl
+      source: .kafka_topic == "zeek-conn"
+- name: topic route zeek-dns
+  inputs:
+  - insert_at: topic_routes
+    type: log
+    log_fields:
+      kafka_topic: zeek-dns
+  outputs:
+  - extract_from: topic_routes.zeek_dns
+    conditions:
+    - type: vrl
+      source: .kafka_topic == "zeek-dns"
+- name: topic route zeek-http
+  inputs:
+  - insert_at: topic_routes
+    type: log
+    log_fields:
+      kafka_topic: zeek-http
+  outputs:
+  - extract_from: topic_routes.zeek_http
+    conditions:
+    - type: vrl
+      source: .kafka_topic == "zeek-http"
+- name: topic route zeek-notice
+  inputs:
+  - insert_at: topic_routes
+    type: log
+    log_fields:
+      kafka_topic: zeek-notice
+  outputs:
+  - extract_from: topic_routes.zeek_notice
+    conditions:
+    - type: vrl
+      source: .kafka_topic == "zeek-notice"
+- name: topic route zeek-intel
+  inputs:
+  - insert_at: topic_routes
+    type: log
+    log_fields:
+      kafka_topic: zeek-intel
+  outputs:
+  - extract_from: topic_routes.zeek_intel
+    conditions:
+    - type: vrl
+      source: .kafka_topic == "zeek-intel"
+- name: topic route audit-k8s
+  inputs:
+  - insert_at: topic_routes
+    type: log
+    log_fields:
+      kafka_topic: audit-k8s
+  outputs:
+  - extract_from: topic_routes.audit_k8s
+    conditions:
+    - type: vrl
+      source: .kafka_topic == "audit-k8s"
+- name: topic route falco-alerts
+  inputs:
+  - insert_at: topic_routes
+    type: log
+    log_fields:
+      kafka_topic: falco-alerts
+  outputs:
+  - extract_from: topic_routes.falco_alerts
+    conditions:
+    - type: vrl
+      source: .kafka_topic == "falco-alerts"

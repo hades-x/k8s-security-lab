@@ -1,0 +1,58 @@
+{
+  "apiVersion": "v1",
+  "kind": "Pod",
+  "metadata": {
+    "name": "client",
+    "namespace": "scen-e05-source",
+    "labels": {
+      "phase-e-run": "e05-example",
+      "app": "client"
+    }
+  },
+  "spec": {
+    "automountServiceAccountToken": false,
+    "restartPolicy": "Never",
+    "nodeSelector": {
+      "kubernetes.io/hostname": "lab-s1"
+    },
+    "activeDeadlineSeconds": 1200,
+    "securityContext": {
+      "runAsNonRoot": true,
+      "runAsUser": 1000,
+      "seccompProfile": {
+        "type": "RuntimeDefault"
+      }
+    },
+    "containers": [
+      {
+        "name": "client",
+        "image": "docker.io/library/python:3.13.9-alpine3.22@sha256:e5fa639e49b85986c4481e28faa2564b45aa8021413f31026c3856e5911618b1",
+        "imagePullPolicy": "IfNotPresent",
+        "command": [
+          "python3",
+          "-c",
+          "import time; time.sleep(1200)"
+        ],
+        "resources": {
+          "requests": {
+            "cpu": "10m",
+            "memory": "32Mi"
+          },
+          "limits": {
+            "cpu": "100m",
+            "memory": "96Mi"
+          }
+        },
+        "securityContext": {
+          "allowPrivilegeEscalation": false,
+          "readOnlyRootFilesystem": true,
+          "capabilities": {
+            "drop": [
+              "ALL"
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "range": {
+            "id.resp_p": {
+              "gte": 2000
+            }
+          }
+        },
+        {
+          "range": {
+            "id.resp_p": {
+              "lte": 2019
+            }
+          }
+        },
+        {
+          "term": {
+            "proto": "tcp"
+          }
+        },
+        {
+          "terms": {
+            "conn_state": [
+              "REJ",
+              "S0"
+            ]
+          }
+        },
+        {
+          "range": {
+            "@timestamp": {
+              "gte": "now-5m",
+              "lte": "now"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "aggs": {
+    "sources": {
+      "terms": {
+        "field": "id.orig_h",
+        "size": 100
+      },
+      "aggs": {
+        "targets": {
+          "terms": {
+            "field": "id.resp_h",
+            "size": 100
+          },
+          "aggs": {
+            "ports": {
+              "cardinality": {
+                "field": "id.resp_p"
+              }
+            },
+            "scan_threshold": {
+              "bucket_selector": {
+                "buckets_path": {
+                  "p": "ports"
+                },
+                "script": "params.p >= 12"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

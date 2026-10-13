@@ -1,0 +1,55 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: pcap-replay
+  namespace: soc-sensors
+spec:
+  schedule: '*/15 * * * *'
+  suspend: true
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      backoffLimit: 0
+      activeDeadlineSeconds: 180
+      ttlSecondsAfterFinished: 600
+      template:
+        spec:
+          containers:
+          - name: replay
+            image: docker.io/library/alpine:3.22.2@sha256:4b7ce07002c69e8f3d704a9c5d6fd3053be500b7f1c69fc0d80990c2ad8dd412
+            command:
+            - /bin/sh
+            - -ec
+            - apk add --no-cache tcpreplay=4.5.1-r0; test -e /sys/class/net/zeektap0-in; exec
+              tcpreplay --intf1=zeektap0-in --multiplier=5 /pcaps/lab-scenarios.pcap
+            securityContext:
+              runAsUser: 0
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                - ALL
+                add:
+                - NET_RAW
+            resources:
+              requests:
+                cpu: 50m
+                memory: 32Mi
+              limits:
+                cpu: '1'
+                memory: 128Mi
+            volumeMounts:
+            - name: pcaps
+              mountPath: /pcaps
+              readOnly: true
+          hostNetwork: true
+          dnsPolicy: ClusterFirstWithHostNet
+          automountServiceAccountToken: false
+          nodeSelector:
+            kubernetes.io/hostname: lab-a2
+          restartPolicy: Never
+          volumes:
+          - name: pcaps
+            configMap:
+              name: lab-pcaps

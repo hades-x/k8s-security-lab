@@ -1,0 +1,24 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: lab-image-registries
+  annotations:
+    pod-policies.kyverno.io/autogen-controllers: none
+spec:
+  validationFailureAction: Audit
+  background: true
+  rules:
+  - name: registries
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+    validate:
+      message: Image registry/repository must be explicitly allowed
+      foreach:
+      - list: request.object.spec.[containers, initContainers, ephemeralContainers][]
+        pattern:
+          image: zot.192.168.150.200.sslip.io/* | zot.zot.svc/* | docker.io/library/*
+            | docker.io/nicolaka/netshoot:* | ghcr.io/* | quay.io/* | registry.k8s.io/*
+  failurePolicy: Ignore

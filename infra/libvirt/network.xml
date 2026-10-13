@@ -1,0 +1,15 @@
+<network>
+  <name>k8slab</name>
+  <forward mode='nat' dev='REPLACE_WITH_LAB_UPLINK'/>
+  <bridge name='virbr-k8slab' stp='on' delay='0'/>
+  <ip address='192.168.150.1' netmask='255.255.255.0'>
+    <dhcp>
+      <range start='192.168.150.100' end='192.168.150.150'/>
+      <host mac='52:54:00:15:00:11' name='lab-s1' ip='192.168.150.11'/>
+      <host mac='52:54:00:15:00:12' name='lab-s2' ip='192.168.150.12'/>
+      <host mac='52:54:00:15:00:13' name='lab-s3' ip='192.168.150.13'/>
+      <host mac='52:54:00:15:00:21' name='lab-a1' ip='192.168.150.21'/>
+      <host mac='52:54:00:15:00:22' name='lab-a2' ip='192.168.150.22'/>
+    </dhcp>
+  </ip>
+</network>

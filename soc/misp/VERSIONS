@@ -1,0 +1,6 @@
+misp-core ghcr.io/misp/misp-docker/misp-core:v2.5.50@sha256:739e67f21564b8f34ff9541d70e1b622f85042e9765f22a487738c8f3b61edee
+misp-nginx ghcr.io/misp/misp-docker/misp-nginx:v2.5.50@sha256:6c74fe480195bf05fc8c99a687e46dc32e199316a6e826a1f986a74895e1251b
+mariadb docker.io/library/mariadb:11.8.6@sha256:78a5047d3ba33975f183f183c2464cc7f1eab13ec8667e57cc9a5821d6da7577
+valkey docker.io/valkey/valkey:9.1.2@sha256:418652cfb58ef879d4978c33553735d7147016032d5aefaa14c828e611eb9dfd
+python docker.io/library/python:3.13.9-alpine3.22@sha256:e5fa639e49b85986c4481e28faa2564b45aa8021413f31026c3856e5911618b1
+misp-docker source commit ca251d6990a77fe9095c6cfbefac699d3dbcf467

@@ -1,0 +1,31 @@
+title: Anonymous Kubernetes API Access Attempt
+id: cca5684e-6e30-5fcb-bacb-5b19fb77ffec
+status: experimental
+description: Lab-only detection. Validate false positives and mappings before non-lab
+  use. Rejected unauthenticated requests may carry an empty user object, not
+  system:anonymous; include 401 with missing username without changing API auth.
+author: K8S-LAB preparation
+date: '2026-10-13'
+tags:
+- attack.t1078
+logsource:
+  product: kubernetes
+  service: audit
+detection:
+  selection:
+    user.username: system:anonymous
+    verb:
+    - get
+    - list
+  selection_rejected_unauthenticated:
+    responseStatus.code: 401
+    user.username|exists: false
+    verb:
+    - get
+    - list
+  condition: selection or selection_rejected_unauthenticated
+falsepositives:
+- Unauthenticated health probes; an attempt is not proof of successful access.
+- Invalid or expired credentials are rejected unauthenticated attempts, not proof
+  of malicious anonymous access.
+level: medium

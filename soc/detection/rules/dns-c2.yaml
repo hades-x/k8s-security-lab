@@ -1,0 +1,19 @@
+title: DNS Query To Synthetic Command And Control Domain
+id: 1f014ba6-f820-589c-9b69-1f26a659f030
+status: experimental
+description: Lab-only detection. Validate false positives and mappings before non-lab
+  use.
+author: K8S-LAB preparation
+date: '2026-10-13'
+tags:
+- attack.t1071.004
+logsource:
+  product: zeek
+  service: dns
+detection:
+  selection:
+    query|endswith: .evil-c2.lab.test
+  condition: selection
+falsepositives:
+- Legitimate lab administration or synthetic traffic.
+level: medium

@@ -1,0 +1,98 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: misp-intel-exporter
+  namespace: soc-sensors
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: misp-intel-exporter
+  namespace: soc-sensors
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - configmaps
+  resourceNames:
+  - zeek-intel
+  verbs:
+  - get
+  - patch
+  - update
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: misp-intel-exporter
+  namespace: soc-sensors
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: misp-intel-exporter
+subjects:
+- kind: ServiceAccount
+  name: misp-intel-exporter
+  namespace: soc-sensors
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: misp-intel-refresh
+  namespace: soc-sensors
+spec:
+  schedule: '*/5 * * * *'
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      activeDeadlineSeconds: 120
+      backoffLimit: 1
+      ttlSecondsAfterFinished: 600
+      template:
+        spec:
+          serviceAccountName: misp-intel-exporter
+          restartPolicy: Never
+          containers:
+          - name: export
+            image: docker.io/library/python:3.13.9-alpine3.22@sha256:e5fa639e49b85986c4481e28faa2564b45aa8021413f31026c3856e5911618b1
+            command:
+            - python3
+            - /scripts/misp-to-zeek-intel.py
+            - --output
+            - /tmp/misp.intel
+            - --key-file
+            - /creds/api-key
+            - --update-configmap
+            env:
+            - name: MISP_URL
+              value: http://misp.misp.svc:8080
+            resources:
+              requests:
+                cpu: 20m
+                memory: 32Mi
+              limits:
+                cpu: '1'
+                memory: 96Mi
+            securityContext:
+              runAsNonRoot: true
+              runAsUser: 1000
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                - ALL
+            volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+              readOnly: true
+            - name: creds
+              mountPath: /creds
+              readOnly: true
+          volumes:
+          - name: scripts
+            configMap:
+              name: misp-export-scripts
+          - name: creds
+            secret:
+              secretName: misp-export-credentials

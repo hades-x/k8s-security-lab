@@ -1,0 +1,14 @@
+# Disabled historical runtime paths
+
+The public candidate preserves implementation for study without claiming these historical scripts are currently safe reusable automation. Disabled paths refuse **before external commands, runtime state reads or namespace/snapshot mutation**, even when the ordinary runtime authorization is present. Tests verify the scenario actions cannot reach their mocked command/state helpers and that blocking markers are present. The source snapshot itself is unchanged.
+
+| Disabled surface | Code-confirmed reason | Required adaptation |
+|---|---|---|
+| `scenarios/run-all.sh`, five sets of generate/detect/respond/verify/cleanup wrappers, and runner action functions | Namespace GET failure could be treated as absence then followed by apply; failed post-delete GET could masquerade as cleanup success; detect writes a SIEM monitor and persists an alert, previously without LAB_TRIGGER | Explicit successful NotFound versus failure, create not adopt, UID/run fencing, fail-closed post-delete discovery, trigger consent for **all** actions, paired external read-back tests |
+| Four `docs/exercices/*/run.sh` and `cleanup.sh`, `_lib/common.sh` | Shared phase-f label is insufficient to fence a concurrent/prior owner; separate exercise/scenario locks do not serialize each other | Refuse preexisting namespaces, exact UID/run checks, shared lock, signal/crash/cleanup negative tests; lifecycle Node mutation needs separate explicit scope |
+| `docs/exercices/04-control-plane/snapshot-lib.sh` | Coarse ownership marker could cause deletion of every same-prefix snapshot, including a concurrently created snapshot | Store and authenticate exact run-owned name before deletion; reject unknown catalogue entries; demonstrate preservation of unrelated same-prefix objects; no restore claim |
+| `soc/detection/install-security-analytics.py` | Added eighteenth rule has no monitor JSON input; read occurs before its error handling; old 17-rule assertions are not a correct catalogue | Explicit per-rule input catalogue and capability checks, missing-input validation before API contact, native pipeline proof distinct from the proven Alerting fallback |
+
+The old function bodies remain visibly historical/unreachable after the blocking statements so future adaptations can be reviewed against the original implementation. Their presence is not test evidence. Do not remove a block just to make a demo run; first reproduce each failure with isolated fixtures and provide an independently reviewed repair.
+
+The four FICHEs and scenario explanations describe historical/expected learning behavior. Individual manifests can be read without executing anything. Any future manual apply/exec, traffic generation, cordon, snapshot or cleanup requires an operator-owned disposable lab and exact resource ownership checks; these documents do not authorize it.

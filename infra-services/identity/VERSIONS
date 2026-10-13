@@ -1,0 +1,11 @@
+{
+  "openldap": {
+    "version": "2.6.10",
+    "image": "docker.io/vegardit/openldap:2.6.10@sha256:a6ef0b528b889880a861c44995c5d6c91a972216f1a878857689aa9789ee24d6",
+    "source": "https://hub.docker.com/v2/repositories/vegardit/openldap/tags"
+  },
+  "keycloak": {
+    "version": "26.8.0",
+    "url": "https://github.com/keycloak/keycloak/releases/tag/26.8.0"
+  }
+}
